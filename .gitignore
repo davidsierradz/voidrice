@@ -1,0 +1,10 @@
+manjaro/
+.cache/
+.ssh/
+.local/share/
+.mozilla/
+.npm-global/
+.npm/
+.config/nvim/autoload/
+.config/nvim/plugged/
+.config/Postman/
