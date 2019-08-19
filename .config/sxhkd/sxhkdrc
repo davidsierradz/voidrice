@@ -3,30 +3,30 @@ super + Return
 	$TERMINAL
 super + d
 	dmenu_run
-super + r
-	$TERMINAL -e $FILE
+#super + r
+#	$TERMINAL -e $FILE
 super + e
-	$TERMINAL -e neomutt
-super + m
-	$TERMINAL -e ncmpcpp
-super + n
-	$TERMINAL -e newsboat
+	$TERMINAL neomutt
+#super + m
+#	$TERMINAL ncmpcpp
+#super + n
+#	$TERMINAL newsboat
 super + i
-	$TERMINAL -e htop
+	$TERMINAL htop
 super + y
-	$TERMINAL -e calcurse -D ~/.config/calcurse
+	$TERMINAL calcurse -D ~/.config/calcurse
 super + shift + a
-	$TERMINAL -e pulsemixer; pkill -RTMIN+10 i3blocks
-super + shift + c
-	camtoggle
-super + shift + e
-	tutorialvids
+	$TERMINAL pulsemixer; pkill -RTMIN+10 i3blocks
+#super + shift + c
+#	camtoggle
+#super + shift + e
+#	tutorialvids
 super + w
 	webby | xargs -r $BROWSER
 super + shift + w
 	$BROWSER
-super + shift + g
-	gimp
+#super + shift + g
+#	gimp
 
 # Et cetera...
 super + grave
