@@ -792,8 +792,12 @@ c.content.mute = True
 ## Type: List of File, or File
 # c.content.user_stylesheets = []
 
-css = '~/.config/qutebrowser/solarized-dark-all-sites.css'
-config.bind('<Alt-Shift-D>', f'config-cycle -t content.user_stylesheets {css} "" ;; config-cycle -t colors.webpage.bg #002b36 white')
+#css = '~/dotfiles/qutebrowser/solarized-dark-all-sites.css'
+css1 = '~/.config/qutebrowser/dark.css'
+css_white1 = '~/.config/qutebrowser/white.css'
+css2 = '~/.config/qutebrowser/dark2.css'
+css_white2 = '~/.config/qutebrowser/white2.css'
+config.bind('<Alt-Shift-D>', f'config-cycle -t content.user_stylesheets {css1} {css2} {css_white1} {css_white2} "" ;; config-cycle -t colors.webpage.bg "black" "black" "#fbf1c7" "#fbf1c7" "white"')
 
 ## Enable WebGL.
 ## Type: Bool
