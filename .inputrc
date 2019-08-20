@@ -1,4 +1,16 @@
 $include /etc/inputrc
+
+set colored-stats On
+set visible-stats On
+set mark-symlinked-directories On
+set colored-completion-prefix On
+set menu-complete-display-prefix On
+
+set completion-ignore-case On
+set show-all-if-ambiguous On
+set show-all-if-unmodified On
+set menu-complete-display-prefix On
+
 set editing-mode vi
 $if mode=vi
 
@@ -10,10 +22,21 @@ set keymap vi-command
 # these are for vi-command mode
 Control-l: clear-screen
 Control-a: beginning-of-line
+Control-p: history-search-backward
+Control-n: history-search-forward
 
 set keymap vi-insert
 # these are for vi-insert mode
 Control-l: clear-screen
+Control-p: history-search-backward
+Control-n: history-search-forward
+TAB: menu-complete
+"\e[Z": menu-complete-backward
+
 Control-a: beginning-of-line
+Control-e: end-of-line
+Control-k: kill-line
+Control-u: backward-kill-line
+Control-b: backward-word
 
 $endif

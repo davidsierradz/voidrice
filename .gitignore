@@ -1,4 +1,6 @@
 manjaro/
+notes/
+code/
 .cache/
 .ssh/
 .local/share/
@@ -8,3 +10,5 @@ manjaro/
 .config/nvim/autoload/
 .config/nvim/plugged/
 .config/Postman/
+.config/qutebrowser/bookmarks/
+.config/qutebrowser/quickmarks

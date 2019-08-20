@@ -12,6 +12,7 @@ settings:
     '*://*.docs.mongodb.com/*': true
     '*://*.drive.google.com/*': true
     '*://*.forum.manjaro.org/*': true
+    '*://*.gitlab.com/*': true
     '*://*.hub.docker.com/*': true
     '*://*.registro.pse.com.co/*': true
     '*://*.www.npmjs.com/*': true

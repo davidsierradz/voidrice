@@ -841,7 +841,7 @@ augroup MyColors
   autocmd ColorScheme * call MyHighlights()
 augroup END
 
-set background=light
+set background=dark
 colorscheme plain
 set nohlsearch
 "--------------------------------End Colors------------------------------------"
