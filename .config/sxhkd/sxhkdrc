@@ -29,8 +29,8 @@ super + shift + w
 #	gimp
 
 # Et cetera...
-super + grave
-	dmenuunicode
+#super + grave
+#	dmenuunicode
 super + Scroll_Lock
 	killall screenkey || screenkey
 super + Insert
@@ -66,9 +66,9 @@ XF86AudioPrev
 XF86AudioStop
 	lmc toggle
 XF86MonBrightnessDown
-	sudo xbacklight -dec 5
+	sudo xbacklight -dec "2.5"
 XF86MonBrightnessUp
-	sudo xbacklight -inc 5
+	sudo xbacklight -inc "2.5"
 
 
 # Recording
@@ -95,11 +95,11 @@ super + {comma,period}
 super + shift + less
 	lmc replay
 # Increase volume
-super + {equal,plus}
-	lmc up {5,15}
+#super + {equal,plus}
+#	lmc up {5,15}
 # Decrease volume
-super {_,shift +} + minus
-	lmc down {5,15}
+#super {_,shift +} + minus
+#	lmc down {5,15}
 # Seek foward in song
 super + {_,shift +} bracketright
 	lmc forward {10,120}

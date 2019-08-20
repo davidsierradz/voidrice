@@ -72,8 +72,6 @@ Plug 'machakann/vim-highlightedyank'
 
 "-------------Integrations-------------- {{{
 " FZF.
-" Already installed on Manjaro-i3.
-Plug '~/.fzf'
 Plug 'junegunn/fzf.vim'
 
 " Editorconfig.
@@ -258,6 +256,9 @@ set nojoinspaces
 
 " Special chars.
 set listchars=tab:→\ ,eol:₋,extends:⟩,precedes:⟨,trail:·,space:·
+
+" Dont show current mode in command line.
+set noshowmode
 
 " Disable text wrap.
 set nowrap
@@ -580,11 +581,11 @@ imap <C-g><C-g> <Plug>(PearTreeJump)
 ""/ Ultisnips.vim {{{
 "/
 
-set runtimepath+=~/dotfiles/snips
+set runtimepath+=~/.config/nvim/snips
 
 let g:UltiSnipsExpandTrigger        = "<Plug>(ultisnips_expand)"
-let g:UltiSnipsJumpForwardTrigger   = "<M-j>"
-let g:UltiSnipsJumpBackwardTrigger  = "<M-k>"
+let g:UltiSnipsJumpForwardTrigger   = "<M-n>"
+let g:UltiSnipsJumpBackwardTrigger  = "<M-p>"
 let g:UltiSnipsRemoveSelectModeMappings = 0
 
 " Expand the snippet.
@@ -725,8 +726,8 @@ xmap P <plug>(SubversiveSubstitute)
 ""/ vim-unimpaired {{{
 "/
 " Go previous or next buffer with <Alt-{j,k}>.
-nmap <M-j> <Plug>unimpairedBPrevious
-nmap <M-k> <Plug>unimpairedBNext
+" nmap <M-j> <Plug>unimpairedBPrevious
+" nmap <M-k> <Plug>unimpairedBNext
 "}}}
 ""/ vim-yoink {{{
 "/

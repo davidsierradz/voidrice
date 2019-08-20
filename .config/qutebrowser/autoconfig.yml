@@ -13,7 +13,10 @@ settings:
     '*://*.drive.google.com/*': true
     '*://*.forum.manjaro.org/*': true
     '*://*.gitlab.com/*': true
+    '*://*.hckrnews.com/*': true
     '*://*.hub.docker.com/*': true
+    '*://*.news.ycombinator.com/*': true
     '*://*.registro.pse.com.co/*': true
     '*://*.www.npmjs.com/*': true
     '*://*.www.reddit.com/*': true
+    '*://*.www.twitch.tv/*': true
