@@ -15,6 +15,7 @@ settings:
     '*://*.gitlab.com/*': true
     '*://*.hckrnews.com/*': true
     '*://*.hub.docker.com/*': true
+    '*://*.liquipedia.net/*': true
     '*://*.news.ycombinator.com/*': true
     '*://*.registro.pse.com.co/*': true
     '*://*.www.npmjs.com/*': true
