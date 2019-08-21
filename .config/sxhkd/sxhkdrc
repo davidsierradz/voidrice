@@ -66,9 +66,9 @@ XF86AudioPrev
 XF86AudioStop
 	lmc toggle
 XF86MonBrightnessDown
-	sudo xbacklight -dec "2.5"
+	xbacklight -dec 1
 XF86MonBrightnessUp
-	sudo xbacklight -inc "2.5"
+	xbacklight -inc 1
 
 
 # Recording
