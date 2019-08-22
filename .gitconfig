@@ -1,3 +1,5 @@
 [user]
 	email = davidsierradz@gmail.com
 	name = davidsierradz
+[alias]
+	lg = log --graph --date=relative --abbrev=8 --color --decorate --pretty=format:\"%Cred%h%C(yellow)%d %C(bold blue)%an %Creset%s %Cgreen(%ad)%Creset\" --date-order

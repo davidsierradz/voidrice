@@ -8,6 +8,8 @@
 [ -z "$1" ] && exit
 
 script=$1
+term_args=$2
+script_args=$3
 shift
 if xwininfo -tree -root | grep "(\"dropdown_$script\" ";
 then
@@ -15,5 +17,5 @@ then
 	i3 "[instance=\"dropdown_$script\"] scratchpad show; [instance=\"dropdown_$script\"] move position center"
 else
 	echo "Window not detected... spawning."
-	i3 "exec --no-startup-id $TERMINAL --name dropdown_$script $@ $script"
+	i3 "exec --no-startup-id $TERMINAL --name dropdown_$script $term_args -- $script $script_args"
 fi
