@@ -4,7 +4,6 @@ notes/
 code/
 .cache/
 .ssh/
-.local/share/
 .mozilla/
 .npm-global/
 .npm/
@@ -14,3 +13,9 @@ code/
 .config/qutebrowser/bookmarks/
 .config/qutebrowser/quickmarks
 .bash_history
+.local/share/*
+!.local/share/larbs
+!.local/share/applications
+!.local/share/fonts
+.local/share/fonts/*
+!.local/share/fonts/02-iosevka-term-2.2.1
