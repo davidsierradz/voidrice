@@ -2,4 +2,15 @@
 	email = davidsierradz@gmail.com
 	name = davidsierradz
 [alias]
-	lg = log --graph --date=relative --abbrev=8 --color --decorate --pretty=format:\"%Cred%h%C(yellow)%d %C(bold blue)%an %Creset%s %Cgreen(%ad)%Creset\" --date-order
+	lg = log --graph --date-order --date=format-local:'%F %R' --full-history --color --decorate --pretty=format:'%x08%x09%C(red)%h %C(cyan)%ad %C(bold blue)%aN%C(reset)%C(bold yellow)%d %C(reset)%s'
+  lga = log --graph --date-order --date=format-local:'%F %R' --full-history --all --color --decorate --pretty=format:'%x08%x09%C(red)%h %C(cyan)%ad %C(bold blue)%aN%C(reset)%C(bold yellow)%d %C(reset)%s'
+  co = checkout
+  st = status
+  ss = status -s -b
+  b = branch
+  sh = show
+  p = push
+  l = pull
+  m = merge
+  d = diff
+  f = fetch

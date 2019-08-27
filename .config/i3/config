@@ -264,7 +264,7 @@ bindsym $mod+Shift+s               sticky toggle
 bindsym $mod+t                     split toggle
 #bindsym $mod+Shift+t              gaps inner current set 15; gaps outer current set 15
 
-bindsym $mod+u                     exec --no-startup-id ddspawn 'tmuxdd' '-1'
+bindsym $mod+u                     exec --no-startup-id ddspawn 'bash' '-1'
 bindsym $mod+Shift+u               exec --no-startup-id i3resize down
 
 #bindsym $mod+v                    exec --no-startup-id $term -e $EDITOR -c "VimwikiIndex"
