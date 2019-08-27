@@ -34,3 +34,22 @@ complete -F _yarn y
 command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d" # Use neovim for vim if present.
 
 vf() { fzf | xargs -r -I % $EDITOR % ;}
+
+# terminal-scheme dark|light
+function terminal-scheme() {
+  nvim_config_file=~/.config/nvim/init.vim
+  sed -i "s/\(^set background=\).*/\1$1/g" $nvim_config_file
+  wiki_config_file=~/.config/nvim/wiki-init.vim
+  sed -i "s/\(^set background=\).*/\1$1/g" $wiki_config_file
+  # bat_config_file=~/dotfiles/bat/config
+  # if [[ $1 == 'light' ]]; then
+  #   echo '--theme="OneHalfLight"' > $bat_config_file
+  # else
+  #   echo '--theme="OneHalfDark"' > $bat_config_file
+  # fi
+  kitty_config_file=~/.config/kitty/kitty.conf
+  sed -i "s#^\(include\s\./kitty-themes/gruvbox_*\).*#\1$1.conf#g" $kitty_config_file
+  kitty @ set-colors --all --configured  ~/.config/kitty/kitty-themes/gruvbox_$1.conf
+  rofi_config_file=~/.config/rofi/config
+  sed -i "s#^\(rofi.theme: /usr/share/rofi/themes/gruvbox-*\).*#\1$1-soft.rasi#g" $rofi_config_file
+}

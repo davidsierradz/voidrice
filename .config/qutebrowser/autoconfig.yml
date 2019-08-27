@@ -12,6 +12,7 @@ settings:
     '*://*.docs.mongodb.com/*': true
     '*://*.drive.google.com/*': true
     '*://*.forum.manjaro.org/*': true
+    '*://*.gist.github.com/*': true
     '*://*.gitlab.com/*': true
     '*://*.hckrnews.com/*': true
     '*://*.hub.docker.com/*': true
@@ -21,3 +22,5 @@ settings:
     '*://*.www.npmjs.com/*': true
     '*://*.www.reddit.com/*': true
     '*://*.www.twitch.tv/*': true
+  content.notifications:
+    https://www.reddit.com: false

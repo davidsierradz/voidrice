@@ -10,3 +10,5 @@ unclutter &		# Remove mouse when idle
 xcompmgr &		# xcompmgr for transparency
 dunst &			# dunst for notifications
 mpdupdate &
+libinput-gestures-setup start &
+greenclip daemon &

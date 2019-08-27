@@ -199,7 +199,7 @@ bindcode $mod+Ctrl+49              workspace $ws9
 
 
 
-bindsym $mod+a                     exec --no-startup-id ddspawn 'dropdowncalc' '-o font_size=20'
+bindsym $mod+a                     exec --no-startup-id ddspawn 'dropdowncalc' '-o font_size=20 -1'
 #bindsym $mod+a                    focus parent
 
 #bindsym $mod+b                    bar mode toggle
@@ -264,11 +264,11 @@ bindsym $mod+Shift+s               sticky toggle
 bindsym $mod+t                     split toggle
 #bindsym $mod+Shift+t              gaps inner current set 15; gaps outer current set 15
 
-bindsym $mod+u                     exec --no-startup-id ddspawn 'tmuxdd'
+bindsym $mod+u                     exec --no-startup-id ddspawn 'tmuxdd' '-1'
 bindsym $mod+Shift+u               exec --no-startup-id i3resize down
 
 #bindsym $mod+v                    exec --no-startup-id $term -e $EDITOR -c "VimwikiIndex"
-bindsym $mod+v                     exec --no-startup-id ddspawn 'nvim' '-o font_size=12 -d ~/notes' '-u /home/neuromante/.config/nvim/wiki-init.vim -c VimwikiIndex'
+bindsym $mod+v                     exec --no-startup-id ddspawn 'nvim' '-o font_size=12 -1 -d ~/notes' '-u /home/neuromante/.config/nvim/wiki-init.vim -c VimwikiIndex'
 
 bindsym $mod+Ctrl+x --release      exec --no-startup-id xkill
 

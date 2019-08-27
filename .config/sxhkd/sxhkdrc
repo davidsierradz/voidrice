@@ -1,22 +1,26 @@
 # Basic binds
 super + Return
-	$TERMINAL
+	$TERMINAL -1
+#super + d
+#	dmenu_run
 super + d
-	dmenu_run
+	rofi -m primary -location 2 -show run
 #super + r
 #	$TERMINAL -e $FILE
 super + e
-	$TERMINAL neomutt
+	$TERMINAL -1 neomutt
 #super + m
 #	$TERMINAL ncmpcpp
 #super + n
 #	$TERMINAL newsboat
 super + i
-	$TERMINAL htop
+	$TERMINAL -1 htop
 super + y
-	$TERMINAL calcurse -D ~/.config/calcurse
+	$TERMINAL -1 calcurse -D ~/.config/calcurse
 super + shift + a
-	$TERMINAL pulsemixer; pkill -RTMIN+10 i3blocks
+	$TERMINAL -1 pulsemixer; pkill -RTMIN+10 i3blocks
+super + shift + m
+	rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
 #super + shift + c
 #	camtoggle
 #super + shift + e
@@ -141,6 +145,6 @@ super + F11
 	ducksearch
 # Network Manager interface
 super + F12
-	$TERMINAL -e sudo -A nmtui
+	$TERMINAL -1 -e sudo -A nmtui
 
 

@@ -1,0 +1,7 @@
+rofi.theme: /usr/share/rofi/themes/gruvbox-dark-soft.rasi
+rofi.modi: combi,run,window
+rofi.matching: normal
+rofi.kb-remove-to-eol: Control+Shift+k
+rofi.kb-accept-entry: Control+m,Return,KP_Enter
+rofi.kb-row-up: Up,Control+k,ISO_Left_Tab
+rofi.kb-row-down: Down,Control+j
