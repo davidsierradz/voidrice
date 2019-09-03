@@ -5,6 +5,8 @@
 export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
 export PATH="$PATH:/home/neuromante/.npm-global/bin/"
 export EDITOR="nvim"
+export VISUAL=$EDITOR
+export USE_EDITOR=$EDITOR
 export TERMINAL="kitty"
 export BROWSER="qutebrowser"
 export READER="zathura"
@@ -14,6 +16,9 @@ export REFER="$HOME/Documents/referbib"
 export SUDO_ASKPASS="$HOME/.local/bin/tools/dmenupass"
 export NOTMUCH_CONFIG="$HOME/.config/notmuch-config"
 export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
+# More responsive toggle from normal to insert mode in vi-mode.
+# We need a value not so low, to give surround commands time to fire.
+export KEYTIMEOUT=40
 
 # less/man colors
 export LESS=-R

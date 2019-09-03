@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 case $BLOCK_BUTTON in
-	1) $TERMINAL -e nmtui ;;
+	1) $TERMINAL ddspawn 'nmtui' ;;
 	3) pgrep -x dunst >/dev/null && notify-send "🌐 Internet module" "\- Click to connect
 📡: no wifi connection
 📶: wifi connection with quality

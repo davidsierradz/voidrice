@@ -1,54 +1,63 @@
-stty -ixon # Disable ctrl-s and ctrl-q.
+# Path to your oh-my-zsh installation.
+ZSH=/usr/share/oh-my-zsh
 
-# HISTCONTROL=ignoreboth
-# HISTFILE=~/.histfile
-# HISTSIZE= HISTFILESIZE= # Infinite history.
-# SAVEHIST=100000
+ZSH_THEME="simple"
 
-HISTFILE="$HOME/.zsh_history"
-HISTSIZE=10000000
-SAVEHIST=10000000
-setopt BANG_HIST                 # Treat the '!' character specially during expansion.
-setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
-setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
-setopt SHARE_HISTORY             # Share history between all sessions.
-setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
-setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
-setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
-setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
-setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space.
-setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
-setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
-setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
-WORDCHARS=''
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
 
-PROMPT_COMMAND='history -a'
+# Uncomment the following line to disable bi-weekly auto-update checks.
+DISABLE_AUTO_UPDATE="true"
+
+# Uncomment the following line to enable command auto-correction.
+ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+COMPLETION_WAITING_DOTS="true"
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(common-aliases docker docker-compose git vi-mode yarn zsh-autopair zsh-autosuggestions zsh-completions zsh-system-clipboard zsh-syntax-highlighting)
+
+# User configuration
+DEFAULT_USER=neuromante
+
+ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
+if [[ ! -d $ZSH_CACHE_DIR ]]; then
+  mkdir $ZSH_CACHE_DIR
+fi
+
+source $ZSH/oh-my-zsh.sh
+
+### CUSTOM
 
 [ -f "$HOME/.config/shortcutrc" ] && source "$HOME/.config/shortcutrc" # Load shortcut aliases
 [ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
 
-[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
-[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
-[ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ] && source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-[ -f /usr/share/zsh/plugins/zsh-autopair/autopair.zsh ] && source /usr/share/zsh/plugins/zsh-autopair/autopair.zsh
-[ -f /usr/share/zsh/plugins/zsh-system-clipboard/zsh-system-clipboard.plugin.zsh ] && source /usr/share/zsh/plugins/zsh-system-clipboard/zsh-system-clipboard.plugin.zsh
-# [ -f /usr/share/git/completion/git-completion.zsh ] && source /usr/share/git/completion/git-completion.zsh
+# Fuzzy find all files to send to git add.
+gafzf() {
+    git add $(git status --untracked-files=all --porcelain=v1 | grep --perl-regexp "^ M|MM| D|\?{2}" | awk '{$1=""; print $0}' | fzf --height 90% --reverse --multi "$@")
+}
 
-# Lines configured by zsh-newuser-install
-setopt appendhistory autocd extendedglob
-unsetopt beep
-bindkey -v
-# End of lines configured by zsh-newuser-install
+# Using xargs to pass arguments to git patch for some reason is
+# interpreting \n as n inside the interactive patch section, why?
+# For now add another command:
+gapafzf() {
+    git add --patch $(git status -s | awk '{$1=""; print $0}' | fzf --height 50% --reverse --multi "$@")
+}
 
-autoload -U up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
+dpsfzf() {
+    docker ps --all | fzf --height 50% --reverse --multi | awk '{$2=""; print $1}'
+}
+
+# dircolors
+#eval "$(dircolors /home/neuromante/dotfiles/dir_colors/dircolors.256dark)"
 
 # Use backwards search in vi-mode (arrows?).
 bindkey '^[[A' up-line-or-beginning-search
 bindkey '^[[B' down-line-or-beginning-search
-
 
 # Ctrl-S to insert sudo in front of command in normal mode.
 function prepend-sudo { # Insert "sudo " at the beginning of the line
@@ -60,6 +69,7 @@ function prepend-sudo { # Insert "sudo " at the beginning of the line
 }
 zle -N prepend-sudo
 bindkey -M vicmd '^s' prepend-sudo
+
 # Ctrl-S to insert sudo in front of command in insert mode.
 sudo_ (){
     BUFFER="sudo $BUFFER"
@@ -76,6 +86,12 @@ bindkey -M viins "^k" kill-line
 bindkey -M viins "^b" backward-char
 bindkey -M viins "^f" forward-char
 bindkey -M viins "^u" kill-whole-line
+
+# Reload completions.
+autoload -U compinit && compinit
+
+# enable completition for hidden files.
+_comp_options+=(globdots)
 
 # zsh autosugestions plugin settings
 
@@ -120,6 +136,53 @@ bindkey '^[w' backward-kill-word
 # Press <M-s> to switch current char with last one.
 bindkey '^[s' transpose-chars
 
+# go - cd into the directory of the selected file
+go() {
+   local file
+   local dir
+   file=$(fzf +m -q "$1") && dir=$(dirname "$file") && cd "$dir"
+}
+
+# fa - including hidden directories
+fa() {
+  local dir
+  dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
+}
+
+# Use C-y to open history and run the command.
+fzf-history-widget-accept() {
+  fzf-history-widget
+  zle accept-line
+}
+
+zle     -N   fzf-history-widget-accept
+bindkey '^y' fzf-history-widget-accept
+
+# ALT-D - Paste the selected directory path into the command line
+__fseldir() {
+    local cmd="command find -L . -mindepth 1 \\( -path '*/\\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
+        -o -type d -print 2> /dev/null | cut -b3-"
+    setopt localoptions pipefail 2> /dev/null
+    eval "$cmd" | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse $FZF_DEFAULT_OPTS $FZF_ALT_C_OPTS" $(__fzfcmd) -m "$@" | while read item; do
+    echo -n "${(q)item} "
+    done
+    local ret=$?
+    echo
+}
+
+fzf-dirr-widget() {
+    LBUFFER="${LBUFFER}$(__fseldir)"
+    local ret=$?
+    zle reset-prompt
+    return $ret
+}
+
+zle     -N   fzf-dirr-widget
+bindkey '\ed' fzf-dirr-widget
+
+[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
+[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
+
 # Vim Surround see: https://github.com/zsh-users/zsh/blob/master/Functions/Zle/surround
 autoload -Uz surround
 zle -N delete-surround surround
@@ -146,9 +209,6 @@ for m in visual viopp; do
    done
 done
 
-autoload -U edit-command-line
-zle -N edit-command-line
-
 bindkey -M vicmd ' ' edit-command-line
 bindkey -M vicmd 'v' visual-mode
 bindkey '^xe' edit-command-line
@@ -163,8 +223,6 @@ bindkey "^[OA" up-line-or-beginning-search
 bindkey "^[OB" down-line-or-beginning-search
 bindkey -M vicmd "k" up-line-or-beginning-search
 bindkey -M vicmd "j" down-line-or-beginning-search
-
-zmodload zsh/complist
 
 # Shift-Tab to go back in menus.
 bindkey -M menuselect '^[[Z' reverse-menu-complete
@@ -195,71 +253,75 @@ preexec() {
     echo -ne '\e[5 q'
 }
 
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/neuromante/.zshrc'
+# Use like this: git log -- file GHFZF file
+gh() {
+    myVar=$(</dev/stdin)
+    originalFile=$1
 
-autoload -Uz compinit promptinit
-compinit
-promptinit
+    echo -e $myVar | fzf --ansi --no-sort --reverse --multi --bind 'ctrl-s:toggle-sort' \
+        --header 'Press CTRL-S to toggle sort' \
+        --preview "grep -o \"[a-f0-9]\{7,\}\" <<< {} | xargs -I % sh -c \"git show % --color=always -- $originalFile\" | head -"$LINES |
+        grep -o "[a-f0-9]\{7,\}"
 
-case $TERM in
-  termite|*xterm*|rxvt|rxvt-unicode|rxvt-256color|rxvt-unicode-256color|(dt|k|E)term)
-    precmd () {
-      print -Pn "\e]0;[%n@%M][%~]%#\a"
-    } 
-    preexec () { print -Pn "\e]0;[%n@%M][%~]%# ($1)\a" }
-    ;;
-  screen|screen-256color)
-    precmd () { 
-      print -Pn "\e]83;title \"$1\"\a" 
-      print -Pn "\e]0;$TERM - (%L) [%n@%M]%# [%~]\a" 
-    }
-    preexec () { 
-      print -Pn "\e]83;title \"$1\"\a" 
-      print -Pn "\e]0;$TERM - (%L) [%n@%M]%# [%~] ($1)\a" 
-    }
-    ;; 
-esac
-
-
-autoload -U colors && colors
-setopt prompt_subst
-
-# Checks if working tree is dirty
-function parse_git_dirty() {
-  local STATUS
-  local -a FLAGS
-  FLAGS=('--porcelain' '--ignore-submodules=dirty')
-  if [[ "$(command git config --get oh-my-zsh.hide-dirty)" != "1" ]]; then
-    if [[ "$DISABLE_UNTRACKED_FILES_DIRTY" == "true" ]]; then
-      FLAGS+='--untracked-files=no'
-    fi
-    STATUS=$(command git status ${FLAGS} 2> /dev/null | tail -n1)
-  fi
-  if [[ -n $STATUS ]]; then
-    echo "$ZSH_THEME_GIT_PROMPT_DIRTY"
-  else
-    echo "$ZSH_THEME_GIT_PROMPT_CLEAN"
-  fi
 }
 
-# Outputs current branch info in prompt format
-function git_prompt_info() {
-  local ref
-  if [[ "$(command git config --get oh-my-zsh.hide-status 2>/dev/null)" != "1" ]]; then
-    ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
-      ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
-          echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX"
-        fi
-      }
+alias -g GHFZF='| gh'
 
-ZSH_THEME_GIT_PROMPT_PREFIX="("
-ZSH_THEME_GIT_PROMPT_SUFFIX=")"
-ZSH_THEME_GIT_PROMPT_DIRTY=" ✗"
-ZSH_THEME_GIT_PROMPT_CLEAN=" ✔"
+alias -g lastbranch='$(cat .git/lastbranch)'
 
-PROMPT='%(!.%{$fg[red]%}.%{$fg[green]%})%~%{$fg_bold[blue]%}$(git_prompt_info)%{$reset_color%} '
-RPROMPT='[%F{yellow}%?%f]'
+# Terminal color scheme
+# function terminal-scheme() {
+#   alacritty_config_file=~/dotfiles/alacritty/alacritty.yml
+#   sed -i "s/\(^colors: \*\).*/\1$1/g" $alacritty_config_file
+#   nvim_config_file=~/dotfiles/neovim/init-mini.vim
+#   sed -i "s/\(^set background=\).*/\1$1/g" $nvim_config_file
+#   wiki_config_file=~/dotfiles/neovim/wiki-init.vim
+#   sed -i "s/\(^set background=\).*/\1$1/g" $wiki_config_file
+#   vim_config_file=~/dotfiles/vim/.vimrc-mini
+#   sed -i "s/\(^source \/home\/neuromante\/dotfiles\/vim\/flattened_\).*/\1$1.vim/g" $vim_config_file
+#   bat_config_file=~/dotfiles/bat/config
+#   if [[ $1 == 'light' ]]; then
+#     echo '--theme="OneHalfLight"' > $bat_config_file
+#   else
+#     echo '--theme="OneHalfDark"' > $bat_config_file
+#   fi
+#   kitty_config_file=~/dotfiles/kitty/kitty.conf
+#   sed -i "s#^\(include\s\./kitty-themes/gruvbox_*\).*#\1$1.conf#g" $kitty_config_file
+#   kitty @ set-colors ~/dotfiles/kitty/kitty-themes/gruvbox_$1.conf
+# }
 
-# End of lines added by compinstall
-# [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+function ol() {
+  ag -il --nocolor --nogroup --path-to-ignore ~/.agignore --skip-vcs-ignores --hidden -g "" \
+    | fzf --bind "::execute(awk '{print \"+\"NR\" \"FILENAME}' {} | fzf)+abort" \
+    | xargs bash -c '</dev/tty nvim "$@"' ignoreme
+}
+
+# Completion for kitty
+# kitty + complete setup zsh | source /dev/stdin
+# History size.
+
+HISTSIZE=10000000
+SAVEHIST=10000000
+
+setopt NO_FLOW_CONTROL
+setopt BANG_HIST                 # Treat the '!' character specially during expansion.
+setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
+setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
+setopt SHARE_HISTORY             # Share history between all sessions.
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
+setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
+setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
+setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space.
+setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
+setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
+setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
+unsetopt beep
+unsetopt correct_all
+setopt correct
+
+# When offering typo corrections, do not propose anything which starts with an underscore (such as many of Zsh's shell functions)
+CORRECT_IGNORE='_*'
+
+# Disable ctrl-s and ctrl-q (in tty?).
+stty -ixon

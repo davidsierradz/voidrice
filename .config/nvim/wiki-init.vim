@@ -38,6 +38,9 @@ Plug 'svermeulen/vim-cutlass'
 " Super-powered writing things.
 Plug 'reedes/vim-pencil'
 Plug 'reedes/vim-lexical'
+
+" Small vim scripts for writing IPA and other special characters.
+"Plug 'LukeSmithxyz/vimling'
 "}}}
 
 "--------------Interface---------------- {{{
@@ -135,7 +138,7 @@ set title
 " Set <Space> as leader key.
 let mapleader = " "
 
-set foldlevel=1
+set foldlevel=2
 
 " Enable persistent undo so that undo history persists across vim sessions.
 set undofile
@@ -399,11 +402,11 @@ let g:pencil#softDetectThreshold = 130
 ""/ Ultisnips.vim {{{
 "/
 
-set runtimepath+=~/dotfiles/snips
+set runtimepath+=~/.config/nvim/snips
 
 let g:UltiSnipsExpandTrigger        = "<Plug>(ultisnips_expand)"
-let g:UltiSnipsJumpForwardTrigger   = "<M-j>"
-let g:UltiSnipsJumpBackwardTrigger  = "<M-k>"
+let g:UltiSnipsJumpForwardTrigger   = "<M-n>"
+let g:UltiSnipsJumpBackwardTrigger  = "<M-p>"
 let g:UltiSnipsRemoveSelectModeMappings = 0
 
 " Expand the snippet.
@@ -453,10 +456,15 @@ highlight link HighlightedyankRegion ErrorMsg
 ""/ vim-matchup {{{
 "/
 
+let g:matchup_matchparen_enabled = 0
+
 " To enable the delete surrounding (ds%) and change surrounding (cs%) maps.
 let g:matchup_surround_enabled = 1
 
 let g:matchup_matchparen_status_offscreen = 0
+
+"let g:matchup_matchparen_deferred = 1
+"let g:matchup_matchparen_hi_surround_always = 1
 
 nmap <silent> <F7> <plug>(matchup-hi-surround)
 "}}}
@@ -491,8 +499,8 @@ xmap P <plug>(SubversiveSubstitute)
 ""/ vim-unimpaired {{{
 "/
 " Go previous or next buffer with <Alt-{j,k}>.
-nmap <M-j> <Plug>unimpairedBPrevious
-nmap <M-k> <Plug>unimpairedBNext
+" nmap <M-j> <Plug>unimpairedBPrevious
+" nmap <M-k> <Plug>unimpairedBNext
 "}}}
 ""/ vim-yoink {{{
 "/
@@ -598,4 +606,4 @@ set background=dark
 colorscheme pencil
 "--------------------------------End Colors------------------------------------"
 "}}}
-" vim: set fdm=marker fmr={{{,}}} :
+" vim: set fdm=marker fmr={{{,}}} fdl=0 :

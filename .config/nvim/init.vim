@@ -51,9 +51,6 @@ Plug 'tpope/vim-commentary'
 
 " Set the 'path' option for miscellaneous file types.
 Plug 'kkoomen/gfi.vim'
-
-" Small vim scripts for writing IPA and other special characters.
-"Plug 'LukeSmithxyz/vimling'
 "}}}
 
 "--------------Interface---------------- {{{

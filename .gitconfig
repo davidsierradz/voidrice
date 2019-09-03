@@ -14,3 +14,5 @@
   m = merge
   d = diff
   f = fetch
+  c = commit
+  rb = rebase

@@ -406,7 +406,7 @@ c.colors.tabs.selected.odd.bg = '#cb4b16'
 ## Background color for webpages if unset (or empty to use the theme's
 ## color).
 ## Type: QtColor
-# c.colors.webpage.bg = 'white'
+c.colors.webpage.bg = 'white'
 
 ## Number of commands to save in the command history. 0: no history / -1:
 ## unlimited
@@ -790,7 +790,7 @@ c.content.mute = True
 
 ## List of user stylesheet filenames to use.
 ## Type: List of File, or File
-# c.content.user_stylesheets = []
+c.content.user_stylesheets = ''
 
 #css = '~/dotfiles/qutebrowser/solarized-dark-all-sites.css'
 css1 = '~/.config/qutebrowser/dark.css'

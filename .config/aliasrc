@@ -52,6 +52,13 @@ function terminal-scheme() {
   sed -i "s/\(^set background=\).*/\1$1/g" $nvim_config_file
   wiki_config_file=~/.config/nvim/wiki-init.vim
   sed -i "s/\(^set background=\).*/\1$1/g" $wiki_config_file
+  for i in $( nvr --serverlist ); do
+    if [[ $1 == 'light' ]]; then
+      nvr --servername $i  --remote-send ':set background=light<cr>'
+    else
+      nvr --servername $i  --remote-send ':set background=dark<cr>'
+    fi
+  done
   # bat_config_file=~/dotfiles/bat/config
   # if [[ $1 == 'light' ]]; then
   #   echo '--theme="OneHalfLight"' > $bat_config_file
@@ -63,4 +70,19 @@ function terminal-scheme() {
   kitty @ set-colors --all --configured  ~/.config/kitty/kitty-themes/gruvbox_$1.conf
   rofi_config_file=~/.config/rofi/config
   sed -i "s#^\(rofi.theme: /usr/share/rofi/themes/gruvbox-*\).*#\1$1-soft.rasi#g" $rofi_config_file
+  qute_config_file=~/.config/qutebrowser/config.py
+  if [[ $1 == 'light' ]]; then
+    sed -i "s#^\(c\.content\.user_stylesheets = \).*#\1''#" $qute_config_file
+    sed -i "s#^\(c\.colors\.webpage\.bg = \).*#\1'white'#" $qute_config_file
+  else
+    sed -i "s#^\(c\.content\.user_stylesheets = \).*#\1~/.config/qutebrowser/dark2.css#" $qute_config_file
+    sed -i "s#^\(c\.colors\.webpage\.bg = \).*#\1'black'#" $qute_config_file
+  fi
+  if xwininfo -tree -root | grep ' ("qutebrowser" ' > /dev/null 2>&1; then
+    if [[ $1 == 'light' ]]; then
+      qutebrowser ':set content.user_stylesheets "" ;; set colors.webpage.bg "white"' > /dev/null 2>&1
+    else
+      qutebrowser ':set content.user_stylesheets ~/.config/qutebrowser/dark2.css ;; set colors.webpage.bg "black"' > /dev/null 2>&1
+    fi
+  fi
 }

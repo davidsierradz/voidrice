@@ -8,7 +8,7 @@ url='https://github.com/kutsan/zsh-system-clipboard.git'
 arch=('any')
 groups=('modified')
 license=(GPL)
-depends=('zsh')
+depends=('zsh' 'oh-my-zsh-git')
 makedepends=('git')
 provides=('zsh-system-clipboard')
 source=("${_name}::${url//https/git}")
@@ -20,6 +20,13 @@ pkgver() {
 }
 
 package() {
-    install -d "${pkgdir}/usr/share/zsh/plugins/${_name}"
-    install -Dm644 "${srcdir}/${_name}/zsh-system-clipboard.plugin.zsh" "${pkgdir}/usr/share/zsh/plugins/${_name}/"
+    cd "${srcdir}/${_name}"
+
+    rm "zsh-system-clipboard.plugin.zsh"
+    touch "zsh-system-clipboard.plugin.zsh"
+    echo 'source ${0:A:h}/zsh-system-clipboard.zsh' > "zsh-system-clipboard.plugin.zsh"
+
+    install -d "${pkgdir}/usr/share/oh-my-zsh/custom/plugins/${_name}"
+    install -Dm644 "zsh-system-clipboard.zsh" "${pkgdir}/usr/share/oh-my-zsh/custom/plugins/${_name}"
+    install -Dm644 "zsh-system-clipboard.plugin.zsh" "${pkgdir}/usr/share/oh-my-zsh/custom/plugins/${_name}"
 }
