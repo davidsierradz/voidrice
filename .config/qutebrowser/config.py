@@ -657,12 +657,11 @@ c.content.javascript.enabled = False
 js_whitelist = [
         "*://localhost/*",
         "*://127.0.0.1/*",
-        "*://github.com/*",
+        "*://*.github.com/*",
         "*://news.ycombinator.com/*",
         "*://*.youtube.com/*",
         "*://translate.google.com/*",
         "*://*.qutebrowser.org/*",
-        "*://hckrnews.com/*",
         ]
 
 for site in js_whitelist:

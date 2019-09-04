@@ -9,16 +9,16 @@ super + shift + d
 	rofi -modi lpass:rofi-lpass -location 2 -show lpass
 #super + r
 #	$TERMINAL -e $FILE
-super + e
-	$TERMINAL -1 neomutt
+#super + e
+#	$TERMINAL -1 neomutt
 #super + m
 #	$TERMINAL ncmpcpp
 #super + n
 #	$TERMINAL newsboat
-super + i
-	$TERMINAL -1 htop
-super + y
-	$TERMINAL -1 calcurse -D ~/.config/calcurse
+#super + i
+#	$TERMINAL -1 htop
+#super + y
+#	$TERMINAL -1 calcurse -D ~/.config/calcurse
 super + shift + a
 	$TERMINAL -1 pulsemixer; pkill -RTMIN+10 i3blocks
 super + shift + m
@@ -27,18 +27,18 @@ super + shift + m
 #	camtoggle
 #super + shift + e
 #	tutorialvids
-super + w
-	webby | xargs -r $BROWSER
-super + shift + w
-	$BROWSER
+#super + w
+#	webby | xargs -r $BROWSER
+#super + shift + w
+#	$BROWSER
 #super + shift + g
 #	gimp
 
 # Et cetera...
 #super + grave
 #	dmenuunicode
-super + Scroll_Lock
-	killall screenkey || screenkey
+#super + Scroll_Lock
+#	killall screenkey || screenkey
 super + Insert
 	showclip
 super + shift + x
