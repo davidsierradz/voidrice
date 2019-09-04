@@ -1,0 +1,5 @@
+#!/bin/bash
+PKGS="$HOME/PKGs/zsh-autopair/ $HOME/PKGs/zsh-autosuggestions-git/ $HOME/PKGs/zsh-completions-git/ $HOME/PKGs/zsh-syntax-highlighting-git/ $HOME/PKGs/zsh-system-clipboard/"
+for i in $PKGS; do
+  cd "$i" && makepkg --noconfirm -scif
+done

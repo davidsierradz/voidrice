@@ -80,7 +80,7 @@ function terminal-scheme() {
   fi
   if xwininfo -tree -root | grep ' ("qutebrowser" ' > /dev/null 2>&1; then
     if [[ $1 == 'light' ]]; then
-      qutebrowser ':set content.user_stylesheets "" ;; set colors.webpage.bg "white"' > /dev/null 2>&1
+      qutebrowser ':set content.user_stylesheets [] ;; set colors.webpage.bg "white"' > /dev/null 2>&1
     else
       qutebrowser ':set content.user_stylesheets ~/.config/qutebrowser/dark2.css ;; set colors.webpage.bg "black"' > /dev/null 2>&1
     fi

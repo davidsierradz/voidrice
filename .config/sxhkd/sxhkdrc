@@ -5,6 +5,8 @@ super + Return
 #	dmenu_run
 super + d
 	rofi -m primary -location 2 -show run
+super + shift + d
+	rofi -modi lpass:rofi-lpass -location 2 -show lpass
 #super + r
 #	$TERMINAL -e $FILE
 super + e
