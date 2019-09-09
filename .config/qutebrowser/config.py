@@ -789,7 +789,7 @@ c.content.mute = True
 
 ## List of user stylesheet filenames to use.
 ## Type: List of File, or File
-c.content.user_stylesheets = ''
+c.content.user_stylesheets = []
 
 #css = '~/dotfiles/qutebrowser/solarized-dark-all-sites.css'
 css1 = '~/.config/qutebrowser/dark.css'

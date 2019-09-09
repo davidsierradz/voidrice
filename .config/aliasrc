@@ -37,6 +37,8 @@ alias ka="killall" \
     alias -g X='| xsel -bi'
     alias -g B='| /usr/bin/bat --style="plain"'
     alias -g L='| /usr/bin/less'
+    alias -g F='| fx'
+    alias -g N='&& dunstify "done"'
   elif [ -n "$BASH_VERSION" ]; then
     _xfunc git __git_complete g _git
     complete -F _yarn y

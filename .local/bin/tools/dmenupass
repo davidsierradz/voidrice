@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-dmenu -password -p "$1"
+rofi -lines 0 -dmenu -password -p "$1"
