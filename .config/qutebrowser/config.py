@@ -796,7 +796,7 @@ css1 = '~/.config/qutebrowser/dark.css'
 css_white1 = '~/.config/qutebrowser/white.css'
 css2 = '~/.config/qutebrowser/dark2.css'
 css_white2 = '~/.config/qutebrowser/white2.css'
-config.bind('<Alt-Shift-D>', f'config-cycle -t content.user_stylesheets {css1} {css2} {css_white1} {css_white2} "" ;; config-cycle -t colors.webpage.bg "black" "black" "#fbf1c7" "#fbf1c7" "white"')
+config.bind('<Alt-Shift-D>', f'config-cycle -t content.user_stylesheets {css1} {css2} {css_white1} {css_white2} [] ;; config-cycle -t colors.webpage.bg "black" "black" "#fbf1c7" "#fbf1c7" "white"')
 
 ## Enable WebGL.
 ## Type: Bool

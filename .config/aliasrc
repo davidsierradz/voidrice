@@ -72,7 +72,7 @@ function terminal-scheme() {
   sed -i "s#^\(rofi.theme: /usr/share/rofi/themes/gruvbox-*\).*#\1$1-soft.rasi#g" $rofi_config_file
   qute_config_file=~/.config/qutebrowser/config.py
   if [[ $1 == 'light' ]]; then
-    sed -i "s#^\(c\.content\.user_stylesheets = \).*#\1''#" $qute_config_file
+    sed -i "s#^\(c\.content\.user_stylesheets = \).*#\1[]#" $qute_config_file
     sed -i "s#^\(c\.colors\.webpage\.bg = \).*#\1'white'#" $qute_config_file
   else
     sed -i "s#^\(c\.content\.user_stylesheets = \).*#\1'~/.config/qutebrowser/dark2.css'#" $qute_config_file
@@ -84,5 +84,11 @@ function terminal-scheme() {
     else
       qutebrowser ':set --temp content.user_stylesheets "~/.config/qutebrowser/dark2.css" ;; set --temp colors.webpage.bg "black"' > /dev/null 2>&1
     fi
+  fi
+  zathura_config_file=~/.config/zathura/zathurarc
+  if [[ $1 == 'light' ]]; then
+    sed -i "s/\(^set recolor \).*/\1false/g" $zathura_config_file
+  else
+    sed -i "s/\(^set recolor \).*/\1true/g" $zathura_config_file
   fi
 }

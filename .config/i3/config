@@ -269,7 +269,7 @@ bindsym $mod+$mod1+Shift+q         [con_id="__focused__" instance="^(?!dropdown_
 
 bindsym $mod+r                     mode "$mode_resize"
 bindsym $mod+Shift+r               exec --no-startup-id winresize
-#bindsym $mod+Shift+r              restart
+bindsym $mod+$mod1+Shift+r         restart
 
 #bindsym $mod+s                    gaps inner current plus 5
 #bindsym $mod+Shift+s              gaps inner current minus 5

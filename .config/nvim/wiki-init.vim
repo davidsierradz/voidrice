@@ -377,6 +377,7 @@ let g:pear_tree_pairs = {
 let g:pear_tree_repeatable_expand = 0
 
 imap <C-g><C-g> <Plug>(PearTreeJump)
+imap <M-CR> <Plug>(PearTreeExpand)
 "}}}
 ""/ Pencil {{{
 "/
@@ -395,7 +396,7 @@ let g:pencil#textwidth = 74
 let g:pencil#joinspaces = 0
 let g:pencil#cursorwrap = 0
 let g:pencil#conceallevel = 3
-let g:pencil#concealcursor = 'c'
+let g:pencil#concealcursor = 'nc'
 let g:pencil#softDetectSample = 20
 let g:pencil#softDetectThreshold = 130
 "}}}
