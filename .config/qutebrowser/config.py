@@ -878,44 +878,44 @@ config.bind('<Alt-Shift-D>', f'config-cycle -t content.user_stylesheets {css1} {
 
 ## Font used in the completion categories.
 ## Type: Font
-c.fonts.completion.category = 'bold 10pt DejaVu Sans Mono'
+c.fonts.completion.category = 'bold 10pt Noto Sans Mono'
 
 ## Font used in the completion widget.
 ## Type: Font
-c.fonts.completion.entry = '10pt DejaVu Sans Mono'
+c.fonts.completion.entry = '10pt Noto Sans Mono'
 
 ## Font used for the debugging console.
 ## Type: QtFont
-c.fonts.debug_console = '10pt DejaVu Sans Mono'
+c.fonts.debug_console = '10pt Noto Sans Mono'
 
 ## Font used for the downloadbar.
 ## Type: Font
-c.fonts.downloads = '10pt DejaVu Sans Mono'
+c.fonts.downloads = '10pt Noto Sans Mono'
 
 ## Font used for the hints.
 ## Type: Font
-c.fonts.hints = 'bold 10pt DejaVu Sans Mono'
+c.fonts.hints = 'bold 10pt Noto Sans Mono'
 
 ## Font used in the keyhint widget.
 ## Type: Font
-c.fonts.keyhint = '10pt DejaVu Sans Mono'
+c.fonts.keyhint = '10pt Noto Sans Mono'
 
 ## Font used for error messages.
 ## Type: Font
-c.fonts.messages.error = '10pt DejaVu Sans Mono'
+c.fonts.messages.error = '10pt Noto Sans Mono'
 
 ## Font used for info messages.
 ## Type: Font
-c.fonts.messages.info = '10pt DejaVu Sans Mono'
+c.fonts.messages.info = '10pt Noto Sans Mono'
 
 ## Font used for warning messages.
 ## Type: Font
-c.fonts.messages.warning = '10pt DejaVu Sans Mono'
+c.fonts.messages.warning = '10pt Noto Sans Mono'
 
 ## Default monospace fonts. Whenever "monospace" is used in a font
 ## setting, it's replaced with the fonts listed here.
 ## Type: Font
-c.fonts.monospace = '"DejaVu Sans Mono","xos4 Terminus", Terminus, Monospace, Monaco, "Bitstream Vera Sans Mono", "Andale Mono", "Courier New", Courier, "Liberation Mono", monospace, Fixed, Consolas, Terminal'
+c.fonts.monospace = '"Noto Sans Mono","xos4 Terminus", Terminus, Monospace, Monaco, "Bitstream Vera Sans Mono", "Andale Mono", "Courier New", Courier, "Liberation Mono", monospace, Fixed, Consolas, Terminal'
 
 ## Font used for prompts.
 ## Type: Font
@@ -923,11 +923,11 @@ c.fonts.prompts = '10pt sans-serif'
 
 ## Font used in the statusbar.
 ## Type: Font
-c.fonts.statusbar = '10pt DejaVu Sans Mono'
+c.fonts.statusbar = '10pt Noto Sans Mono'
 
 ## Font used in the tab bar.
 ## Type: QtFont
-c.fonts.tabs = '10pt DejaVu Sans Mono'
+c.fonts.tabs = '10pt Noto Sans Mono'
 
 ## Font family for cursive fonts.
 ## Type: FontFamily
@@ -939,15 +939,15 @@ c.fonts.tabs = '10pt DejaVu Sans Mono'
 
 ## Font family for fixed fonts.
 ## Type: FontFamily
-# c.fonts.web.family.fixed = ''
+c.fonts.web.family.fixed = 'Noto Sans Mono'
 
 ## Font family for sans-serif fonts.
 ## Type: FontFamily
-# c.fonts.web.family.sans_serif = ''
+c.fonts.web.family.sans_serif = 'Noto Sans'
 
 ## Font family for serif fonts.
 ## Type: FontFamily
-# c.fonts.web.family.serif = ''
+c.fonts.web.family.serif = 'Noto Serif'
 
 ## Font family for standard fonts.
 ## Type: FontFamily
