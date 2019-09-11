@@ -1,10 +1,8 @@
+#--------------------------------Oh-My-ZSH-------------------------------------# {{{
 # Path to your oh-my-zsh installation.
 ZSH=/usr/share/oh-my-zsh
 
 ZSH_THEME="simple"
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 DISABLE_AUTO_UPDATE="true"
@@ -16,10 +14,7 @@ ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(common-aliases docker docker-compose git gitfast vi-mode yarn zsh-autopair zsh-autosuggestions zsh-completions zsh-system-clipboard zsh-syntax-highlighting)
+plugins=(common-aliases docker docker-compose git gitfast yarn zsh-autopair zsh-autosuggestions zsh-completions zsh-system-clipboard zsh-syntax-highlighting)
 
 # User configuration
 DEFAULT_USER=neuromante
@@ -30,53 +25,61 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
 fi
 
 source $ZSH/oh-my-zsh.sh
+#--------------------------------End Oh-My-ZSH---------------------------------#
+#}}}
 
-### CUSTOM
+#--------------------------------VI Settings-----------------------------------# {{{
+# Updates editor information when the keymap changes.
+# function zle-keymap-select() {
+#   # update keymap variable for the prompt
+#   VI_KEYMAP=$KEYMAP
+#   zle reset-prompt
+#   zle -R
+# }
+# zle -N zle-keymap-select
 
-[ -f "$HOME/.config/shortcutrc" ] && source "$HOME/.config/shortcutrc" # Load shortcut aliases
-[ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
+# function vi-accept-line() {
+#   VI_KEYMAP=main
+#   zle accept-line
+# }
+# zle -N vi-accept-line
 
-# Fuzzy find all files to send to git add.
-gafzf() {
-    git add $(git status --untracked-files=all --porcelain=v1 | grep --perl-regexp "^ M|MM| D|\?{2}" | awk '{$1=""; print $0}' | fzf --height 90% --reverse --multi "$@")
-}
+bindkey -v
 
-# Using xargs to pass arguments to git patch for some reason is
-# interpreting \n as n inside the interactive patch section, why?
-# For now add another command:
-gapafzf() {
-    git add --patch $(git status -s | awk '{$1=""; print $0}' | fzf --height 50% --reverse --multi "$@")
-}
+# use custom accept-line widget to update $VI_KEYMAP
+# bindkey -M vicmd '^J' vi-accept-line
+# bindkey -M vicmd '^M' vi-accept-line
 
-dpsfzf() {
-    docker ps --all | fzf --height 50% --reverse --multi | awk '{$2=""; print $1}'
-}
+# allow v to edit the command line (standard behaviour)
+# autoload -Uz edit-command-line
+# zle -N edit-command-line
+# bindkey -M vicmd 'v' edit-command-line
 
-# dircolors
-#eval "$(dircolors /home/neuromante/dotfiles/dir_colors/dircolors.256dark)"
+# allow ctrl-p, ctrl-n for navigate history (standard behaviour)
+# bindkey '^P' up-history
+# bindkey '^N' down-history
 
-# Use backwards search in vi-mode (arrows?).
-bindkey '^[[A' up-line-or-beginning-search
-bindkey '^[[B' down-line-or-beginning-search
+# allow ctrl-h, ctrl-w, ctrl-? for char and word deletion (standard behaviour)
+# bindkey '^?' backward-delete-char
+# bindkey '^h' backward-delete-char
+# bindkey '^w' backward-kill-word
 
-# Ctrl-S to insert sudo in front of command in normal mode.
-function prepend-sudo { # Insert "sudo " at the beginning of the line
-    if [[ $BUFFER != "sudo "* ]]; then
-        BUFFER="sudo $BUFFER"; CURSOR+=5
-        zle -K viins
-        xdotool key ctrl+e
-    fi
-}
-zle -N prepend-sudo
-bindkey -M vicmd '^s' prepend-sudo
+# allow ctrl-r and ctrl-s to search the history
+# bindkey '^r' history-incremental-search-backward
+# bindkey '^s' history-incremental-search-forward
 
-# Ctrl-S to insert sudo in front of command in insert mode.
-sudo_ (){
-    BUFFER="sudo $BUFFER"
-    CURSOR=$#BUFFER
-}
-zle -N sudo_
-bindkey "^s" sudo_
+# allow ctrl-a and ctrl-e to move to beginning/end of line
+bindkey '^a' beginning-of-line
+bindkey '^e' end-of-line
+
+# if mode indicator wasn't setup by theme, define default
+# if [[ "$MODE_INDICATOR" == "" ]]; then
+#   MODE_INDICATOR="%{$fg_bold[red]%}<%{$fg[red]%}<<%{$reset_color%}"
+# fi
+
+# function vi_mode_prompt_info() {
+#   echo "${${VI_KEYMAP/vicmd/$MODE_INDICATOR}/(main|viins)/}"
+# }
 
 # More bindkeys for insert vi-mode.
 bindkey -M viins '^P' up-line-or-beginning-search
@@ -86,61 +89,70 @@ bindkey -M viins "^k" kill-line
 bindkey -M viins "^b" backward-char
 bindkey -M viins "^f" forward-char
 bindkey -M viins "^u" kill-whole-line
+#--------------------------------End VI Settings-------------------------------#
+#}}}
 
-# Reload completions.
-autoload -U compinit && compinit
+#--------------------------------Sourcings-------------------------------------# {{{
+[ -f "$HOME/.config/shortcutrc" ] && source "$HOME/.config/shortcutrc" # Load shortcut aliases
+[ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
+[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
+[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
+#--------------------------------End Sourcings---------------------------------#
+#}}}
 
-# enable completition for hidden files.
-_comp_options+=(globdots)
+#--------------------------------Functions-------------------------------------# {{{
+# Fuzzy find all files to send to git add.
+gafzf() {
+  git add $(git status --untracked-files=all --porcelain=v1 | grep --perl-regexp "^ M|MM| D|\?{2}" | awk '{$1=""; print $0}' | fzf --height 90% --reverse --multi "$@")
+}
 
-# zsh autosugestions plugin settings
+# Using xargs to pass arguments to git patch for some reason is
+# interpreting \n as n inside the interactive patch section, why?
+# For now add another command:
+gapafzf() {
+  git add --patch $(git status -s | awk '{$1=""; print $0}' | fzf --height 50% --reverse --multi "$@")
+}
 
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=1'
-ZSH_AUTOSUGGEST_STRATEGY=match_prev_cmd
+dpsfzf() {
+  docker ps --all | fzf --height 50% --reverse --multi | awk '{$2=""; print $1}'
+}
 
-# Remove forward-char widgets from ACCEPT
-ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${(@)ZSH_AUTOSUGGEST_ACCEPT_WIDGETS:#forward-char}")
-ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${(@)ZSH_AUTOSUGGEST_ACCEPT_WIDGETS:#vi-forward-char}")
+# Ctrl-S to insert sudo in front of command in normal mode.
+function prepend-sudo { # Insert "sudo " at the beginning of the line
+  if [[ $BUFFER != "sudo "* ]]; then
+    BUFFER="sudo $BUFFER"; CURSOR+=5
+    zle -K viins
+    xdotool key ctrl+e
+  fi
+}
+zle -N prepend-sudo
 
-# Add forward-char widgets to PARTIAL_ACCEPT
-ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(forward-char)
-ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(vi-forward-char)
-
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-
-# Press <C-Space> to autocomplete and execute command.
-bindkey '^ ' autosuggest-execute
+# Ctrl-S to insert sudo in front of command in insert mode.
+sudo_ (){
+  BUFFER="sudo $BUFFER"
+  CURSOR=$#BUFFER
+}
+zle -N sudo_
 
 # Press <C-q> to autocomplete the next WORD.
 function _emacs-forward-capital-word {
-    local WORDCHARS="*?_-.:[]~=&;!#$%^(){}<>\\/\"'|@"
-    zle emacs-forward-word
+  local WORDCHARS="*?_-.:[]~=&;!#$%^(){}<>\\/\"'|@"
+  zle emacs-forward-word
 }
 zle -N _emacs-forward-capital-word
-bindkey '^q' _emacs-forward-capital-word
-
-# Press <M-q> to autocomplete the next word.
-bindkey '^[q' forward-word
 
 # Press <C-w> to delete the current WORD.
 function _backward-kill-capital-word {
-    local WORDCHARS="*?_-.:[]~=&;!#$%^(){}<>\\/\"'|@"
-    zle backward-kill-word
+  local WORDCHARS="*?_-.:[]~=&;!#$%^(){}<>\\/\"'|@"
+  zle backward-kill-word
 }
 zle -N _backward-kill-capital-word
-bindkey '^w' _backward-kill-capital-word
-
-# Press <M-w> to delete the current word.
-bindkey '^[w' backward-kill-word
-
-# Press <M-s> to switch current char with last one.
-bindkey '^[s' transpose-chars
 
 # go - cd into the directory of the selected file
 go() {
-   local file
-   local dir
-   file=$(fzf +m -q "$1") && dir=$(dirname "$file") && cd "$dir"
+  local file
+  local dir
+  file=$(fzf +m -q "$1") && dir=$(dirname "$file") && cd "$dir"
 }
 
 # fa - including hidden directories
@@ -154,34 +166,151 @@ fzf-history-widget-accept() {
   fzf-history-widget
   zle accept-line
 }
-
-zle     -N   fzf-history-widget-accept
-bindkey '^y' fzf-history-widget-accept
+zle -N fzf-history-widget-accept
 
 # ALT-D - Paste the selected directory path into the command line
 __fseldir() {
-    local cmd="command find -L . -mindepth 1 \\( -path '*/\\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
-        -o -type d -print 2> /dev/null | cut -b3-"
-    setopt localoptions pipefail 2> /dev/null
-    eval "$cmd" | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse $FZF_DEFAULT_OPTS $FZF_ALT_C_OPTS" $(__fzfcmd) -m "$@" | while read item; do
-    echo -n "${(q)item} "
-    done
-    local ret=$?
-    echo
+  local cmd="command find -L . -mindepth 1 \\( -path '*/\\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
+    -o -type d -print 2> /dev/null | cut -b3-"
+  setopt localoptions pipefail 2> /dev/null
+  eval "$cmd" | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse $FZF_DEFAULT_OPTS $FZF_ALT_C_OPTS" $(__fzfcmd) -m "$@" | while read item; do
+  echo -n "${(q)item} "
+  done
+  local ret=$?
+  echo
 }
 
 fzf-dirr-widget() {
-    LBUFFER="${LBUFFER}$(__fseldir)"
-    local ret=$?
-    zle reset-prompt
-    return $ret
+  LBUFFER="${LBUFFER}$(__fseldir)"
+  local ret=$?
+  zle reset-prompt
+  return $ret
+}
+zle -N fzf-dirr-widget
+
+# Use like this: git log -- file GHFZF file
+gh() {
+  myVar=$(</dev/stdin)
+  originalFile=$1
+  echo -e $myVar | fzf --ansi --no-sort --reverse --multi --bind 'ctrl-s:toggle-sort' \
+    --header 'Press CTRL-S to toggle sort' \
+    --preview "grep -o \"[a-f0-9]\{7,\}\" <<< {} | xargs -I % sh -c \"git show % --color=always -- $originalFile\" | head -"$LINES |
+    grep -o "[a-f0-9]\{7,\}"
 }
 
-zle     -N   fzf-dirr-widget
-bindkey '\ed' fzf-dirr-widget
+function ol() {
+  ag -il --nocolor --nogroup --path-to-ignore ~/.agignore --skip-vcs-ignores --hidden -g "" \
+    | fzf --bind "::execute(awk '{print \"+\"NR\" \"FILENAME}' {} | fzf)+abort" \
+    | xargs bash -c '</dev/tty nvim "$@"' ignoreme
+}
 
-[ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
-[ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
+function select_cursor() {
+  case $KEYMAP in
+    # Block cursor in normal and visual mode
+    vicmd) echo -ne "\e[2 q";;
+    # Line cursor in insert mode
+    main|viins) echo -ne "\e[5 q";;
+    # Else Block cursor
+    *) echo -ne "\e[2 q";;
+  esac
+}
+
+# Updates editor information when the keymap changes.
+function zle-keymap-select() {
+  zle reset-prompt
+  zle -R
+  select_cursor
+}
+zle -N zle-keymap-select
+
+function zle-line-init() {
+  echoti smkx
+  zle reset-prompt
+  select_cursor
+}
+zle -N zle-line-init
+
+# Reset to block cursor when executing a command,
+# else it would be line cursor
+function zle-line-finish() {
+  echoti rmkx
+  echo -ne "\e[2 q"
+}
+zle -N zle-line-finish
+
+# From spectrum.zsh
+# FX=(
+#   reset     "%{[00m%}"
+#   bold      "%{[01m%}" no-bold      "%{[22m%}"
+#   italic    "%{[03m%}" no-italic    "%{[23m%}"
+#   underline "%{[04m%}" no-underline "%{[24m%}"
+#   blink     "%{[05m%}" no-blink     "%{[25m%}"
+#   reverse   "%{[07m%}" no-reverse   "%{[27m%}"
+#   )
+function vi_mode_prompt_info() {
+  if [[ -z "$NORMAL_MODE_INDICATOR" ]]; then
+    NORMAL_MODE_INDICATOR="%{$FX[bold]$FG[012]%}NORMAL%{$FX[reset]%}"
+  fi
+  if [[ -z "$INSERT_MODE_INDICATOR" ]]; then
+    INSERT_MODE_INDICATOR="%{$FX[bold]$FG[008]%}INSERT%{$FX[reset]%}"
+  fi
+  if [[ -z "$VISUAL_MODE_INDICATOR" ]]; then
+    VISUAL_MODE_INDICATOR="%{$FX[bold]$FG[214]%}VISUAL%{$FX[reset]%}"
+  fi
+  case $KEYMAP in
+    vivis|vivli|visual|viopp) echo -n "$VISUAL_MODE_INDICATOR";;
+    vicmd) echo -n "$NORMAL_MODE_INDICATOR";;
+    main|viins) echo -n "$INSERT_MODE_INDICATOR";;
+  esac
+}
+
+function check_last_exit_code() {
+  local LAST_EXIT_CODE=$?
+  if [[ $LAST_EXIT_CODE -ne 0 ]]; then
+    local EXIT_CODE_PROMPT=' '
+    EXIT_CODE_PROMPT+="%{$fg[red]%}-%{$reset_color%}"
+    EXIT_CODE_PROMPT+="%{$fg_bold[red]%}$LAST_EXIT_CODE%{$reset_color%}"
+    EXIT_CODE_PROMPT+="%{$fg[red]%}-%{$reset_color%}"
+    echo "$EXIT_CODE_PROMPT|"
+  fi
+}
+#--------------------------------End Functions---------------------------------#
+#}}}
+
+#--------------------------------Aliases---------------------------------------# {{{
+alias -g GHFZF='| gh'
+alias -g lastbranch='$(cat .git/lastbranch)'
+#--------------------------------End Aliases-----------------------------------#
+#}}}
+
+#--------------------------------KeyBindings-----------------------------------# {{{
+# Use backwards search in vi-mode (arrows?).
+bindkey '^[[A' up-line-or-beginning-search
+bindkey '^[[B' down-line-or-beginning-search
+
+bindkey -M vicmd '^s' prepend-sudo
+
+bindkey "^s" sudo_
+
+# Press <C-Space> to autocomplete and execute command.
+bindkey '^ ' autosuggest-execute
+
+bindkey '^q' _emacs-forward-capital-word
+
+# Press <M-q> to autocomplete the next word.
+bindkey '^[q' forward-word
+
+bindkey '^w' _backward-kill-capital-word
+
+# Press <M-w> to delete the current word.
+bindkey '^[w' backward-kill-word
+
+# Press <M-s> to switch current char with last one.
+bindkey '^[s' transpose-chars
+
+bindkey '^y' fzf-history-widget-accept
+
+bindkey '^[d' fzf-dirr-widget
 
 # Vim Surround see: https://github.com/zsh-users/zsh/blob/master/Functions/Zle/surround
 autoload -Uz surround
@@ -196,17 +325,17 @@ bindkey -M visual S add-surround
 autoload -U select-quoted
 zle -N select-quoted
 for m in visual viopp; do
-    for c in {a,i}{\',\",\`}; do
-        bindkey -M $m $c select-quoted
-    done
+  for c in {a,i}{\',\",\`}; do
+    bindkey -M $m $c select-quoted
+  done
 done
 
 autoload -U select-bracketed
 zle -N select-bracketed
 for m in visual viopp; do
-   for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
-       bindkey -M $m $c select-bracketed
-   done
+  for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
+    bindkey -M $m $c select-bracketed
+  done
 done
 
 bindkey -M vicmd ' ' edit-command-line
@@ -230,75 +359,41 @@ bindkey -M menuselect '^[[Z' reverse-menu-complete
 # Ctr-P and Ctrl-N to move in complete menus.
 bindkey -M menuselect '^P' up-line-or-history
 bindkey -M menuselect '^N' down-line-or-history
+#--------------------------------End KeyBindings-------------------------------#
+#}}}
 
-# Change cursor shape for different vi modes.
-function zle-keymap-select {
-    if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]]; then
-        echo -ne '\e[1 q'
+#--------------------------------Prompt----------------------------------------# {{{
+if [[ -z "$RPS1" && -z "$RPROMPT" ]]; then
+  RPS1='$(check_last_exit_code)$(vi_mode_prompt_info)'
+  RPS2=$RPS1
+fi
+#--------------------------------End Prompt------------------------------------#
+#}}}
 
-    elif [[ ${KEYMAP} == main ]] || [[ ${KEYMAP} == viins ]] || [[ ${KEYMAP} = '' ]] || [[ $1 = 'beam' ]]; then
-        echo -ne '\e[5 q'
-    fi
+#--------------------------------Variables-------------------------------------# {{{
+# zsh autosugestions plugin settings
 
-    zle reset-prompt
-    zle -R
-}
-zle -N zle-keymap-select
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=1'
+ZSH_AUTOSUGGEST_STRATEGY=match_prev_cmd
 
-# Use beam shape cursor on startup.
-echo -ne '\e[5 q'
+# Remove forward-char widgets from ACCEPT
+ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${(@)ZSH_AUTOSUGGEST_ACCEPT_WIDGETS:#forward-char}")
+ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=("${(@)ZSH_AUTOSUGGEST_ACCEPT_WIDGETS:#vi-forward-char}")
 
-# Use beam shape cursor for each new prompt.
-preexec() {
-    echo -ne '\e[5 q'
-}
+# Add forward-char widgets to PARTIAL_ACCEPT
+ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(forward-char)
+ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(vi-forward-char)
 
-# Use like this: git log -- file GHFZF file
-gh() {
-    myVar=$(</dev/stdin)
-    originalFile=$1
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+#--------------------------------End Variables---------------------------------#
+#}}}
 
-    echo -e $myVar | fzf --ansi --no-sort --reverse --multi --bind 'ctrl-s:toggle-sort' \
-        --header 'Press CTRL-S to toggle sort' \
-        --preview "grep -o \"[a-f0-9]\{7,\}\" <<< {} | xargs -I % sh -c \"git show % --color=always -- $originalFile\" | head -"$LINES |
-        grep -o "[a-f0-9]\{7,\}"
+#--------------------------------General---------------------------------------# {{{
+# Reload completions.
+autoload -U compinit && compinit
 
-}
-
-alias -g GHFZF='| gh'
-
-alias -g lastbranch='$(cat .git/lastbranch)'
-
-# Terminal color scheme
-# function terminal-scheme() {
-#   alacritty_config_file=~/dotfiles/alacritty/alacritty.yml
-#   sed -i "s/\(^colors: \*\).*/\1$1/g" $alacritty_config_file
-#   nvim_config_file=~/dotfiles/neovim/init-mini.vim
-#   sed -i "s/\(^set background=\).*/\1$1/g" $nvim_config_file
-#   wiki_config_file=~/dotfiles/neovim/wiki-init.vim
-#   sed -i "s/\(^set background=\).*/\1$1/g" $wiki_config_file
-#   vim_config_file=~/dotfiles/vim/.vimrc-mini
-#   sed -i "s/\(^source \/home\/neuromante\/dotfiles\/vim\/flattened_\).*/\1$1.vim/g" $vim_config_file
-#   bat_config_file=~/dotfiles/bat/config
-#   if [[ $1 == 'light' ]]; then
-#     echo '--theme="OneHalfLight"' > $bat_config_file
-#   else
-#     echo '--theme="OneHalfDark"' > $bat_config_file
-#   fi
-#   kitty_config_file=~/dotfiles/kitty/kitty.conf
-#   sed -i "s#^\(include\s\./kitty-themes/gruvbox_*\).*#\1$1.conf#g" $kitty_config_file
-#   kitty @ set-colors ~/dotfiles/kitty/kitty-themes/gruvbox_$1.conf
-# }
-
-function ol() {
-  ag -il --nocolor --nogroup --path-to-ignore ~/.agignore --skip-vcs-ignores --hidden -g "" \
-    | fzf --bind "::execute(awk '{print \"+\"NR\" \"FILENAME}' {} | fzf)+abort" \
-    | xargs bash -c '</dev/tty nvim "$@"' ignoreme
-}
-
-# Completion for kitty
-# kitty + complete setup zsh | source /dev/stdin
-# History size.
+# enable completition for hidden files.
+_comp_options+=(globdots)
 
 HISTSIZE=10000000
 SAVEHIST=10000000
@@ -325,3 +420,36 @@ CORRECT_IGNORE='_*'
 
 # Disable ctrl-s and ctrl-q (in tty?).
 stty -ixon
+#--------------------------------End General-----------------------------------#
+#}}}
+
+# dircolors
+#eval "$(dircolors /home/neuromante/dotfiles/dir_colors/dircolors.256dark)"
+
+# Change cursor shape for different vi modes.
+# function zle-keymap-select {
+#     if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]]; then
+#         echo -ne '\e[1 q'
+
+#     elif [[ ${KEYMAP} == main ]] || [[ ${KEYMAP} == viins ]] || [[ ${KEYMAP} = '' ]] || [[ $1 = 'beam' ]]; then
+#         echo -ne '\e[5 q'
+#     fi
+
+#     zle reset-prompt
+#     zle -R
+# }
+# zle -N zle-keymap-select
+
+# Use beam shape cursor on startup.
+# echo -ne '\e[5 q'
+
+# Use beam shape cursor for each new prompt.
+# preexec() {
+#     echo -ne '\e[5 q'
+# }
+
+# Completion for kitty
+# kitty + complete setup zsh | source /dev/stdin
+# History size.
+
+# vim: set fdm=marker fmr={{{,}}} fdl=0 :

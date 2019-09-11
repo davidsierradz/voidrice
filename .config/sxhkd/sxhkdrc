@@ -6,7 +6,9 @@ super + Return
 super + d
 	rofi -m primary -location 2 -show run
 super + shift + d
-	rofi -modi lpass:rofi-lpass -location 2 -show lpass
+	lastpass-rofi davidsierradz@gmail.com -t 9 -m password
+super + control + d
+	lastpass-rofi davidsierradz@gmail.com -t 9 -m username
 #super + r
 #	$TERMINAL -e $FILE
 #super + e

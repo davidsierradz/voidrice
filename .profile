@@ -16,6 +16,8 @@ export REFER="$HOME/Documents/referbib"
 export SUDO_ASKPASS="$HOME/.local/bin/tools/dmenupass"
 export NOTMUCH_CONFIG="$HOME/.config/notmuch-config"
 export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
+export LPASS_DISABLE_PINENTRY=1
+export LPASS_ASKPASS=.local/bin/tools/dmenupass 
 # More responsive toggle from normal to insert mode in vi-mode.
 # We need a value not so low, to give surround commands time to fire.
 export KEYTIMEOUT=40
