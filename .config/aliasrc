@@ -1,48 +1,51 @@
 #!/usr/bin/env sh
+
+# yt="youtube-dl --add-metadata -i -o '%(upload_date)s-%(title)s.%(ext)s'" \
+
 alias ka="killall" \
-  mkd="mkdir -pv" \
-  mpv="mpv --input-ipc-server=/tmp/mpvsoc$(date +%s)" \
-  calcurse="calcurse -D ~/.config/calcurse" \
-  magit="nvim -c MagitOnly" \
-  p="sudo pacman" \
   SS="sudo systemctl" \
-  f="$FILE" \
-  g="git" \
-  trem="transmission-remote" \
-  e="$EDITOR" \
-  v="$EDITOR" \
-  x="sxiv -ft *" \
-  sdn="sudo shutdown -h now" \
-  gua="git remote | xargs -L1 git push --all" \
-  ls="ls -hN --color=auto --group-directories-first" \
-  grep="grep --color=auto" \
-  diff="diff --color=auto" \
-  ccat="highlight --out-format=ansi" \
-  yt="youtube-dl --add-metadata -i -o '%(upload_date)s-%(title)s.%(ext)s'" \
-  yta="yt -x -f bestaudio/best" \
   YT="youtube-viewer" \
-  ref="shortcuts >/dev/null; source ~/.config/shortcutrc" \
-  upc="sudo pacman -Syu; pkill -RTMIN+8 i3blocks" \
-  lsp="pacman -Qett --color=always | less" \
+  b='bat' \
+  calcurse="calcurse -D ~/.config/calcurse" \
+  ccat="highlight --out-format=ansi" \
+  d='docker' \
+  diff="diff --color=auto" \
+  e="$EDITOR" \
+  f="$FILE" \
   ffmpeg="ffmpeg -hide_banner" \
-  y="yarn" \
-  vw="nvim -u ~/.config/nvim/wiki-init.vim -c VimwikiIndex" \
+  g="git" \
+  grep="grep --color=auto" \
+  gua="git remote | xargs -L1 git push --all" \
   ll='ls -lAFh --group-directories-first' \
   llt='ls -lAFht --group-directories-first' \
-  d='docker' \
-  b='bat' \
+  ls="ls -hN --color=auto --group-directories-first" \
+  lsp="pacman -Qett --color=always | less" \
+  magit="nvim -c MagitOnly" \
+  mkd="mkdir -pv" \
+  mpv="mpv --input-ipc-server=/tmp/mpvsoc$(date +%s)" \
+  p="sudo pacman" \
+  ref="shortcuts >/dev/null; source ~/.config/shortcutrc" \
+  sdn="sudo shutdown -h now" \
+  trem="transmission-remote" \
+  upc="sudo pacman -Syu; pkill -RTMIN+8 i3blocks" \
+  v="$EDITOR" \
+  vw="nvim -u ~/.config/nvim/wiki-init.vim -c VimwikiIndex" \
+  x="sxiv -ft *" \
+  y="yarn" \
+  ytw="yarn test --watch" \
+  yta="yt -x -f bestaudio/best"
 
-  if [ -n "$ZSH_VERSION" ]; then
-    alias -g J='| python -m json.tool'
-    alias -g X='| xsel -bi'
-    alias -g B='| /usr/bin/bat --style="plain"'
-    alias -g L='| /usr/bin/less'
-    alias -g F='| fx'
-    alias -g N='&& dunstify "done"'
-  elif [ -n "$BASH_VERSION" ]; then
-    _xfunc git __git_complete g _git
-    complete -F _yarn y
-  fi
+if [ -n "$ZSH_VERSION" ]; then
+  alias -g J='| python -m json.tool'
+  alias -g X='| xsel -bi'
+  alias -g B='| /usr/bin/bat --style="plain"'
+  alias -g L='| /usr/bin/less'
+  alias -g F='| fx'
+  alias -g N='&& dunstify "done"'
+elif [ -n "$BASH_VERSION" ]; then
+  _xfunc git __git_complete g _git
+  complete -F _yarn y
+fi
 
 command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d" # Use neovim for vim if present.
 

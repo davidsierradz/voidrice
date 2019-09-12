@@ -584,6 +584,7 @@ let g:UltiSnipsExpandTrigger        = "<Plug>(ultisnips_expand)"
 let g:UltiSnipsJumpForwardTrigger   = "<M-n>"
 let g:UltiSnipsJumpBackwardTrigger  = "<M-p>"
 let g:UltiSnipsRemoveSelectModeMappings = 0
+let g:UltiSnipsListSnippets = "<S-Tab>"
 
 " Expand the snippet.
 imap <M-u> <Plug>(ultisnips_expand)

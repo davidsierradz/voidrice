@@ -61,7 +61,7 @@ bindkey -v
 
 # allow ctrl-h, ctrl-w, ctrl-? for char and word deletion (standard behaviour)
 # bindkey '^?' backward-delete-char
-# bindkey '^h' backward-delete-char
+bindkey '^h' backward-delete-char
 # bindkey '^w' backward-kill-word
 
 # allow ctrl-r and ctrl-s to search the history
@@ -367,6 +367,12 @@ if [[ -z "$RPS1" && -z "$RPROMPT" ]]; then
   RPS1='$(check_last_exit_code)$(vi_mode_prompt_info)'
   RPS2=$RPS1
 fi
+
+# Ensure that the prompt is redrawn when the terminal size changes.
+TRAPWINCH() {
+  zle reset-prompt
+  zle && zle -R
+}
 #--------------------------------End Prompt------------------------------------#
 #}}}
 

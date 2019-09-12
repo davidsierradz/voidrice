@@ -1,6 +1,8 @@
 # Basic binds
 super + Return
 	$TERMINAL -1
+alt + Tab
+	rofi -m primary -location 2 -show window& sleep 0.30 && xdotool key Down
 #super + d
 #	dmenu_run
 super + d
@@ -41,12 +43,12 @@ super + shift + m
 #	dmenuunicode
 #super + Scroll_Lock
 #	killall screenkey || screenkey
-super + Insert
-	showclip
-super + shift + x
-	prompt "Shutdown computer?" "sudo -A shutdown -h now"
-super + shift + BackSpace
-	prompt "Reboot computer?" "sudo -A shutdown -r now"
+#super + Insert
+#	showclip
+#super + shift + x
+#	prompt "Shutdown computer?" "sudo -A shutdown -h now"
+#super + shift + BackSpace
+#	prompt "Reboot computer?" "sudo -A shutdown -r now"
 super + x
 	mpc pause; pauseallmpv; i3lock -e -f -c 1d2021; xset dpms force off
 XF86Launch1
@@ -87,11 +89,11 @@ Print
 shift + Print
 	maimpick
 # Record audio or video
-super + Print
-	dmenurecord
+#super + Print
+#	dmenurecord
 # kill active recording
-super + Delete
-	dmenurecord kill
+#super + Delete
+#	dmenurecord kill
 
 # Pause audio
 super + {_,shift +} p
@@ -117,15 +119,15 @@ super + {_,shift +} bracketleft
 
 # Function keys
 # Show readme
-super + F1
-	groff -mom $HOME/.local/share/larbs/readme.mom -Tpdf | zathura -
+#super + F1
+#	groff -mom $HOME/.local/share/larbs/readme.mom -Tpdf | zathura -
 # F2 is restart in i3 right now.
 # Change display
 super + F3
 	displayselect
 # Hibernate
-super + F4
-	prompt 'Hibernate computer?' 'sudo systemctl suspend'
+#super + F4
+#	prompt 'Hibernate computer?' 'sudo systemctl suspend'
 # Restart/rescan wifi/eth networks
 super + F5
 	sudo -A systemctl restart NetworkManager
