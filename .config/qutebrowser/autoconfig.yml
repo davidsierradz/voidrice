@@ -22,6 +22,7 @@ settings:
     '*://*.liquipedia.net/*': true
     '*://*.mail.google.com/*': true
     '*://*.news.ycombinator.com/*': true
+    '*://*.player.twitch.tv/*': true
     '*://*.pse.todo1.com/*': true
     '*://*.registro.pse.com.co/*': true
     '*://*.www.npmjs.com/*': true

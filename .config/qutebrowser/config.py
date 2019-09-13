@@ -1793,7 +1793,7 @@ config.bind('k', 'scroll-px 0 -40')
 # config.bind('ss', 'set-cmd-text -s :set')
 # config.bind('tIH', 'config-cycle -p -u *://*.{url:host}/* content.images ;; reload')
 # Right Shift
-config.bind('ä', 'config-cycle -t tabs.show always never ;; config-cycle -t statusbar.hide false true')
+config.bind('€', 'config-cycle -t tabs.show always never ;; config-cycle -t statusbar.hide false true')
 # config.bind('tIh', 'config-cycle -p -u *://{url:host}/* content.images ;; reload')
 # config.bind('tIu', 'config-cycle -p -u {url} content.images ;; reload')
 # config.bind('tPH', 'config-cycle -p -u *://*.{url:host}/* content.plugins ;; reload')
