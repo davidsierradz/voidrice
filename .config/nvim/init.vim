@@ -4,6 +4,7 @@ if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
   echo "Downloading junegunn/vim-plug to manage plugins..."
   silent !mkdir -p ~/.config/nvim/autoload/
   silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ~/.config/nvim/autoload/plug.vim
+  autocmd VimEnter * PlugInstall
 endif
 
 call plug#begin('~/.config/nvim/plugged')
@@ -389,6 +390,9 @@ inoremap <M-BS> <Right><BS>
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
       \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+" Save file as sudo on files that require root permission.
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 "--------------------------------End General Mappings--------------------------"
 "}}}
 
