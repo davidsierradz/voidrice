@@ -849,5 +849,4 @@ colorscheme plain
 set nohlsearch
 "--------------------------------End Colors------------------------------------"
 "}}}
-
 " vim: set fdm=marker fmr={{{,}}} fdl=0 :

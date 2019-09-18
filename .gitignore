@@ -13,6 +13,8 @@ code/
 .config/qutebrowser/bookmarks/
 .config/qutebrowser/quickmarks
 .bash_history
+.w3m/cookie
+.w3m/history
 .local/share/*
 !.local/share/larbs
 !.local/share/applications

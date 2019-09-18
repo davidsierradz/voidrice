@@ -7,8 +7,8 @@ sxhkd &	# Bind keys
 # Properties button extra Mod/Escape
 xset r rate 300 50 &	# Speed xrate up
 unclutter --ignore-scrolling --timeout 2 --jitter 15 --exclude-root --fork &
-xcompmgr &		# xcompmgr for transparency
+# xcompmgr &		# xcompmgr for transparency
 dunst &			# dunst for notifications
-mpdupdate &
+# mpdupdate &
 libinput-gestures-setup start &
 greenclip daemon &

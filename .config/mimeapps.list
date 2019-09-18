@@ -11,3 +11,4 @@ application/rss+xml=rss.desktop
 x-scheme-handler/postman=Postman.desktop
 x-scheme-handler/http=org.qutebrowser.qutebrowser.desktop
 x-scheme-handler/https=org.qutebrowser.qutebrowser.desktop
+text/html=org.qutebrowser.qutebrowser.desktop

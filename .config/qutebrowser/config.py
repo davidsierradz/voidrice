@@ -951,7 +951,7 @@ c.fonts.web.family.serif = 'Noto Serif'
 
 ## Font family for standard fonts.
 ## Type: FontFamily
-# c.fonts.web.family.standard = ''
+c.fonts.web.family.standard = 'Noto Sans'
 
 ## Default font size (in pixels) for regular text.
 ## Type: Int
@@ -1640,6 +1640,7 @@ c.url.start_pages = ['about:blank']
 # config.bind('-', 'zoom-out')
 config.bind('zi', 'run-with-count 2 zoom-in')
 config.bind('zo', 'run-with-count 2 zoom-out')
+config.bind(',r', 'spawn --userscript readability-js')
 # config.bind('.', 'repeat-command')
 # config.bind('/', 'set-cmd-text /')
 # config.bind(':', 'set-cmd-text :')

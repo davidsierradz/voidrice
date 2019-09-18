@@ -3,7 +3,7 @@
 
 # Adds `~/.local/bin/` and all subdirectories to $PATH
 export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
-export PATH="$PATH:/home/neuromante/.npm-global/bin/"
+export NODE_PATH="$NODE_PATH:/home/neuromante/.local/lib/node_modules"
 export EDITOR="nvim"
 export VISUAL=$EDITOR
 export USE_EDITOR=$EDITOR
@@ -23,7 +23,7 @@ export LPASS_ASKPASS=.local/bin/tools/dmenupass
 export KEYTIMEOUT=40
 
 # less/man colors
-export LESS=-R
+export LESS=-RS
 export LESS_TERMCAP_mb="$(printf '%b' '[1;31m')"; a="${a%_}"
 export LESS_TERMCAP_md="$(printf '%b' '[1;36m')"; a="${a%_}"
 export LESS_TERMCAP_me="$(printf '%b' '[0m')"; a="${a%_}"
