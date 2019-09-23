@@ -59,8 +59,8 @@ bindkey -v
 # bindkey '^P' up-history
 # bindkey '^N' down-history
 
-# allow ctrl-h, ctrl-w, ctrl-? for char and word deletion (standard behaviour)
-# bindkey '^?' backward-delete-char
+# allow ctrl-h, ctrl-w, backspace for char and word deletion (standard behaviour)
+bindkey '^?' backward-delete-char
 bindkey '^h' backward-delete-char
 # bindkey '^w' backward-kill-word
 
@@ -204,39 +204,39 @@ function ol() {
     | xargs bash -c '</dev/tty nvim "$@"' ignoreme
 }
 
-function select_cursor() {
-  case $KEYMAP in
-    # Block cursor in normal and visual mode
-    vicmd) echo -ne "\e[2 q";;
-    # Line cursor in insert mode
-    main|viins) echo -ne "\e[5 q";;
-    # Else Block cursor
-    *) echo -ne "\e[2 q";;
-  esac
-}
+# function select_cursor() {
+#   case $KEYMAP in
+#     # Block cursor in normal and visual mode
+#     vicmd) echo -ne "\e[2 q";;
+#     # Line cursor in insert mode
+#     main|viins) echo -ne "\e[5 q";;
+#     # Else Block cursor
+#     *) echo -ne "\e[2 q";;
+#   esac
+# }
 
 # Updates editor information when the keymap changes.
 function zle-keymap-select() {
   zle reset-prompt
   zle -R
-  select_cursor
+  # select_cursor
 }
 zle -N zle-keymap-select
 
 function zle-line-init() {
   echoti smkx
   zle reset-prompt
-  select_cursor
+  # select_cursor
 }
 zle -N zle-line-init
 
 # Reset to block cursor when executing a command,
 # else it would be line cursor
-function zle-line-finish() {
-  echoti rmkx
-  echo -ne "\e[2 q"
-}
-zle -N zle-line-finish
+# function zle-line-finish() {
+#   echoti rmkx
+#   echo -ne "\e[2 q"
+# }
+# zle -N zle-line-finish
 
 # From spectrum.zsh
 # FX=(
