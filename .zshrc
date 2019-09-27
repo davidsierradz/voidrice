@@ -249,7 +249,7 @@ zle -N zle-line-init
 #   )
 function vi_mode_prompt_info() {
   if [[ -z "$NORMAL_MODE_INDICATOR" ]]; then
-    NORMAL_MODE_INDICATOR="%{$FX[bold]$FG[012]%}NORMAL%{$FX[reset]%}"
+    NORMAL_MODE_INDICATOR="%{$FX[bold]$FG[001]%}NORMAL%{$FX[reset]%}"
   fi
   if [[ -z "$INSERT_MODE_INDICATOR" ]]; then
     INSERT_MODE_INDICATOR="%{$FX[bold]$FG[008]%}INSERT%{$FX[reset]%}"

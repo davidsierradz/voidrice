@@ -16,6 +16,7 @@ alias ka="killall" \
   g="git" \
   grep="grep --color=auto" \
   gua="git remote | xargs -L1 git push --all" \
+  gss="git status -sb" \
   ll='ls -lAFh --group-directories-first' \
   llt='ls -lAFht --group-directories-first' \
   ls="ls -hN --color=auto --group-directories-first" \
@@ -64,7 +65,7 @@ function terminal-scheme() {
       nvr --servername $i  --remote-send ':set background=dark<cr>'
     fi
   done
-  # bat_config_file=~/dotfiles/bat/config
+  # bat_config_file=~/.config/bat/config
   # if [[ $1 == 'light' ]]; then
   #   echo '--theme="OneHalfLight"' > $bat_config_file
   # else

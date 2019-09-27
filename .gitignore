@@ -15,6 +15,7 @@ code/
 .bash_history
 .w3m/cookie
 .w3m/history
+.local/lib/*
 .local/share/*
 !.local/share/larbs
 !.local/share/applications

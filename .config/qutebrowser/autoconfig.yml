@@ -10,27 +10,24 @@ settings:
     '*://*.account.live.com/*': true
     '*://*.accounts.google.com/*': true
     '*://*.aws.amazon.com/*': true
-    '*://*.bitbucket.org/*': true
     '*://*.coderadio.freecodecamp.org/*': true
     '*://*.confluence.atlassian.com/*': true
     '*://*.developer.atlassian.com/*': true
     '*://*.docs.google.com/*': true
     '*://*.docs.mongodb.com/*': true
     '*://*.drive.google.com/*': true
-    '*://*.forum.manjaro.org/*': true
-    '*://*.gist.github.com/*': true
     '*://*.gitlab.com/*': true
     '*://*.hckrnews.com/*': true
     '*://*.hub.docker.com/*': true
     '*://*.lastpass.com/*': true
     '*://*.liquipedia.net/*': true
     '*://*.login.live.com/*': true
-    '*://*.mail.google.com/*': true
-    '*://*.news.ycombinator.com/*': true
+    '*://*.old.reddit.com/*': true
     '*://*.outlook.live.com/*': true
     '*://*.player.twitch.tv/*': true
     '*://*.pse.todo1.com/*': true
     '*://*.registro.pse.com.co/*': true
+    '*://*.www.google.com/*': true
     '*://*.www.linkedin.com/*': true
     '*://*.www.npmjs.com/*': true
     '*://*.www.reddit.com/*': true

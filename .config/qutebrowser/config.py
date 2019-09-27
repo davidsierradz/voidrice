@@ -655,13 +655,15 @@ c.content.default_encoding = 'utf-8'
 c.content.javascript.enabled = False
 
 js_whitelist = [
-        "*://localhost/*",
-        "*://127.0.0.1/*",
+        "*://*.bitbucket.org/*",
         "*://*.github.com/*",
-        "*://news.ycombinator.com/*",
-        "*://*.youtube.com/*",
-        "*://translate.google.com/*",
+        "*://*.mail.google.com/*",
         "*://*.qutebrowser.org/*",
+        "*://*.youtube.com/*",
+        "*://127.0.0.1/*",
+        "*://localhost/*",
+        "*://news.ycombinator.com/*",
+        "*://translate.google.com/*",
         ]
 
 for site in js_whitelist:
@@ -1641,6 +1643,9 @@ c.url.start_pages = ['about:blank']
 config.bind('zi', 'run-with-count 2 zoom-in')
 config.bind('zo', 'run-with-count 2 zoom-out')
 config.bind(',r', 'spawn --userscript readability-js')
+config.bind(',t', 'hint links spawn nohup mpv --ytdl-format=360p {hint-url}')
+config.bind(',,', "hint all run jseval -q let q = document.querySelector('[src*=\"{hint-url}\"],[href*=\"{hint-url}\"]');q.setAttribute('tabIndex', '-1');q.focus()")
+# config.bind(',;', "hint all run jseval -q console.log(this)")
 # config.bind('.', 'repeat-command')
 # config.bind('/', 'set-cmd-text /')
 # config.bind(':', 'set-cmd-text :')

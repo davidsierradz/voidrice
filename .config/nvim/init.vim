@@ -66,6 +66,11 @@ Plug 'haya14busa/vim-asterisk'
 
 " Make the yanked region apparent.
 Plug 'machakann/vim-highlightedyank'
+
+Plug 'itchyny/lightline.vim'
+Plug 'davidsierradz/lightline-gruvbox.vim'
+Plug 'maximbaz/lightline-trailing-whitespace'
+Plug 'maximbaz/lightline-ale'
 "}}}
 
 "-------------Integrations-------------- {{{
@@ -177,41 +182,41 @@ let mapleader = " "
 set foldlevel=3
 
 set laststatus=2
-set statusline=
-" Relative file path
-set statusline=%f
-" Separator
-set statusline+=\ 
-" Filetype of the file
-set statusline+=%y
-" Separator
-set statusline+=\ 
-" Format of the file Unix or DOS
-set statusline+=[%{&ff}
-" Separator
-set statusline+=\ 
-"file encoding
-set statusline+=%{strlen(&fenc)?&fenc:'none'}]
-" Separator
-set statusline+=\ 
-" Help, Modified and Read Only flags
-set statusline+=%h%m%r%w%q
-" Separation point between left and right items
-set statusline+=%=
-" Space Separator
-set statusline+=\ 
-" Foldlevel
-set statusline+=%{strlen(&foldlevel)?&foldlevel:''}
-" Space Separator
-set statusline+=\ 
-" Column number and Virtual Column number
-set statusline+=%P
-" Space Separator
-set statusline+=\ 
-" Current line count, max and percentage
-set statusline+=%([%l-%c%V]%)
-" ALE Errors
-set statusline+=%{LinterStatus()}
+"set statusline=
+"" Relative file path
+"set statusline=%f
+"" Separator
+"set statusline+=\ 
+"" Filetype of the file
+"set statusline+=%y
+"" Separator
+"set statusline+=\ 
+"" Format of the file Unix or DOS
+"set statusline+=[%{&ff}
+"" Separator
+"set statusline+=\ 
+""file encoding
+"set statusline+=%{strlen(&fenc)?&fenc:'none'}]
+"" Separator
+"set statusline+=\ 
+"" Help, Modified and Read Only flags
+"set statusline+=%h%m%r%w%q
+"" Separation point between left and right items
+"set statusline+=%=
+"" Space Separator
+"set statusline+=\ 
+"" Foldlevel
+"set statusline+=%{strlen(&foldlevel)?&foldlevel:''}
+"" Space Separator
+"set statusline+=\ 
+"" Column number and Virtual Column number
+"set statusline+=%P
+"" Space Separator
+"set statusline+=\ 
+"" Current line count, max and percentage
+"set statusline+=%([%l-%c%V]%)
+"" ALE Errors
+"set statusline+=%{LinterStatus()}
 
 " Allow local .nvimrc files.
 set exrc
@@ -461,7 +466,6 @@ let g:EditorConfig_max_line_indicator = "none"
 "}}}
 ""/ fzf.vim {{{
 "/
-
 function! s:goto_def(lines) abort
   silent! exe 'e +BTags '.a:lines[0]
   call timer_start(10, {-> execute('startinsert') })
@@ -504,6 +508,55 @@ nnoremap <A-c> :Snippets<CR><C-\><C-n>0i
 nnoremap <A-b> :Buffers<CR><C-\><C-n>0i
 nnoremap <Space><Space> :Buffers<CR><C-\><C-n>0i
 nnoremap <C-p> :Files<CR><C-\><C-n>0i
+"}}}
+""/ lightline.vim {{{
+"/
+let g:lightline = {
+      \ 'active': {
+      \   'left': [
+      \     ['mode', 'paste'],
+      \     ['readonly', 'relativefilename', 'modified'],
+      \   ],
+      \   'right': [
+      \     ['trailing'],
+      \     ['linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok'],
+      \     ['virtuallineinfo', 'percentage'],
+      \     ['foldlevel', 'fileformat', 'fileencoding', 'filetype']
+      \   ]
+      \ },
+      \ 'inactive': {
+      \   'left': [
+      \     ['readonly', 'relativefilename', 'modified'],
+      \   ],
+      \   'right': []
+      \ },
+      \ 'component': {
+      \   'relativefilename': '%f',
+      \   'percentage': '%p%%',
+      \   'virtuallineinfo': '%l-%c%V',
+      \ },
+      \ 'component_function': {
+      \   'foldlevel': 'FoldLevel'
+      \ },
+      \ 'component_expand': {
+      \   'trailing': 'lightline#trailing_whitespace#component',
+      \   'linter_checking': 'lightline#ale#checking',
+      \   'linter_warnings': 'lightline#ale#warnings',
+      \   'linter_errors': 'lightline#ale#errors',
+      \   'linter_ok': 'lightline#ale#ok',
+      \ },
+      \ 'component_type': {
+      \   'linter_checking': 'left',
+      \   'linter_warnings': 'warning',
+      \   'linter_errors': 'error',
+      \   'linter_ok': 'left',
+      \   'trailing': 'warning',
+      \ },
+      \ }
+function! FoldLevel()
+  return &foldlevel && strlen(&foldlevel) !=# '0' ? &foldlevel : ''
+endfunction
+let g:lightline#trailing_whitespace#indicator='•'
 "}}}
 ""/ markdown-preview.nvim {{{
 "/
@@ -821,7 +874,7 @@ function! LinterStatus() abort
     let l:all_non_errors = l:counts.total - l:all_errors
 
     return l:counts.total == 0 ? '' : printf(
-    \   ' %dW %dE',
+    \   '%dW %dE',
     \   all_non_errors,
     \   all_errors
     \)
@@ -837,6 +890,10 @@ function! MyHighlights() abort
   highlight ErrorMsg gui=reverse guifg=#dc322f guibg=#fdf6e3
   highlight CursorLine guibg=NONE
   " highlight clear Normal
+  if exists('g:loaded_lightline')
+    runtime plugin/lightline-gruvbox.vim
+    call lightline#colorscheme()
+  endif
 endfunction
 
 augroup MyColors
@@ -846,6 +903,7 @@ augroup END
 
 set background=dark
 colorscheme plain
+let g:lightline.colorscheme = 'gruvbox'
 set nohlsearch
 "--------------------------------End Colors------------------------------------"
 "}}}
