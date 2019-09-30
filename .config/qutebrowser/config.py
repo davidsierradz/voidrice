@@ -957,7 +957,7 @@ c.fonts.web.family.standard = 'Noto Sans'
 
 ## Default font size (in pixels) for regular text.
 ## Type: Int
-c.fonts.web.size.default = 20
+c.fonts.web.size.default = 19
 
 ## Default font size (in pixels) for fixed-pitch text.
 ## Type: Int
@@ -965,7 +965,7 @@ c.fonts.web.size.default_fixed = 17
 
 ## Hard minimum font size (in pixels).
 ## Type: Int
-c.fonts.web.size.minimum = 13
+c.fonts.web.size.minimum = 15
 
 ## Minimum logical font size (in pixels) that is applied when zooming
 ## out.

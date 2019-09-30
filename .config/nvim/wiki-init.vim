@@ -545,8 +545,8 @@ augroup initvim
   " Update the auto read of a file after 4 seconds.
   autocmd CursorHold * silent! checktime
 
-  " Surround ** with ä (Right Shift).
-  autocmd FileType vimwiki let b:surround_228 = "**\r**"
+  " Surround ** with € (Right Control).
+  autocmd FileType vimwiki let b:surround_8364 = "**\r**"
 augroup END
 "--------------------------------End Auto Commands-----------------------------"
 "}}}
