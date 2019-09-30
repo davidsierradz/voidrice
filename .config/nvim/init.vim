@@ -398,6 +398,13 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 
 " Save file as sudo on files that require root permission.
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+
+" Toggles Comment highlight guifg color, TODO: change colors based on background.
+" See https://vi.stackexchange.com/questions/3738/toggle-bold-highlighting-for-comments-in-term-gui
+nmap yo1 :<C-R>=GetHighlight("Comment")["guifg"] ==# "#CCCCCC" ? "hi Comment guifg=#999999" : "hi Comment guifg=#CCCCCC"<CR><CR>
+
+" Toggles formatoptions to add comment after <CR> or o (and O).
+nmap yo2 :<C-R>=&formatoptions ==# "jql" ? "setlocal formatoptions+=cro" : "setlocal formatoptions-=cro"<CR><CR>
 "--------------------------------End General Mappings--------------------------"
 "}}}
 
@@ -738,7 +745,7 @@ highlight link HighlightedyankRegion ErrorMsg
 ""/ vim-matchup {{{
 "/
 
-let g:matchup_matchparen_enabled = 0
+" let g:matchup_matchparen_enabled = 0
 
 " To enable the delete surrounding (ds%) and change surrounding (cs%) maps.
 let g:matchup_surround_enabled = 1
@@ -879,6 +886,20 @@ function! LinterStatus() abort
     \   all_errors
     \)
 endfunction
+
+" Return some highlight group as a dictionary.
+function! GetHighlight(group)
+  let output = execute('hi ' . a:group)
+  let list = split(output, '\s\+')
+  let dict = {}
+  for item in list
+    if match(item, '=') > 0
+      let splited = split(item, '=')
+      let dict[splited[0]] = splited[1]
+    endif
+  endfor
+  return dict
+endfunction
 "--------------------------------End Functions---------------------------------"
 "}}}
 
@@ -886,7 +907,7 @@ endfunction
 "--------------------------------Colors----------------------------------------"{{{
 " Custom Highlight groups.
 function! MyHighlights() abort
-  highlight MatchParen guibg=NONE
+  highlight MatchParen guibg=NONE gui=bold
   highlight ErrorMsg gui=reverse guifg=#dc322f guibg=#fdf6e3
   highlight CursorLine guibg=NONE
   " highlight clear Normal

@@ -33,6 +33,7 @@ settings:
     '*://*.www.reddit.com/*': true
     '*://*.www.twitch.tv/*': true
     '*://*.www.zonapagos.com/*': true
+    '*://*.www13.epm.com.co/*': true
   content.notifications:
     https://www.reddit.com: false
     https://www.youtube.com: false
