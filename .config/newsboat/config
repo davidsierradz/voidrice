@@ -2,6 +2,7 @@
 auto-reload yes
 
 external-url-viewer "urlscan -dc -r 'linkhandler {}'"
+max-items 0
 
 bind-key j down
 bind-key k up
