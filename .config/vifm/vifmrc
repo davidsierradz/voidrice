@@ -47,8 +47,9 @@ nmap q ZQ
 fileview */ tree %c -L 1 --dirsfirst
 fileview ../ tree %c -L 1 --dirsfirst
 fileviewer *.html w3m -dump %c
-filextype *.html,*.htm firefox %f 2>/dev/null &
+filextype *.html,*.htm qutebrowser %f 2>/dev/null &
 
+filextype *.docx libreoffice %f 2>/dev/null &
 fileviewer *.docx docx2txt %c -
 fileviewer *.odt odt2txt %c -
 

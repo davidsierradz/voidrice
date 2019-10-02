@@ -296,7 +296,7 @@ nnoremap <expr> k v:count ? 'k' : 'gk'
 set pastetoggle=<F2>
 
 " Use <Alt-L> to clear the highlighting of :set hlsearch.
-nnoremap <A-l> :syntax sync fromstart<CR>:nohlsearch<CR>:diffupdate<CR>:echo<CR>
+nnoremap <C-l> :syntax sync fromstart<CR>:nohlsearch<CR>:diffupdate<CR>:echo<CR>
 
 " Reloads a buffer.
 nnoremap <leader>r :e!<CR>
@@ -313,10 +313,26 @@ nnoremap <leader>bw :call DeleteWindowIfNotLast()<CR>
 nnoremap <BS> <C-^>
 
 "Better window navigation.
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
+tnoremap <A-h> <C-\><C-N><C-w>h
+tnoremap <A-j> <C-\><C-N><C-w>j
+tnoremap <A-k> <C-\><C-N><C-w>k
+tnoremap <A-l> <C-\><C-N><C-w>l
+inoremap <A-h> <C-\><C-N><C-w>h
+inoremap <A-j> <C-\><C-N><C-w>j
+inoremap <A-k> <C-\><C-N><C-w>k
+inoremap <A-l> <C-\><C-N><C-w>l
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
+tnoremap <A-q> <C-\><C-N>
+inoremap <A-q> <C-\><C-N>
+nnoremap <C-A-j> gT
+tnoremap <C-A-j> <C-\><C-N>gT
+inoremap <C-A-j> <C-\><C-N>gT
+nnoremap <C-A-k> gt
+tnoremap <C-A-k> <C-\><C-N>gt
+inoremap <C-A-k> <C-\><C-N>gt
 
 " Y yanks from current cursor position to end of line, more logical.
 nnoremap Y y$
@@ -396,7 +412,7 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
       \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
-" Save file as sudo on files that require root permission.
+" Save file as sudo on files that require root permission. (NOT WORKING)
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " Toggles Comment highlight guifg color, TODO: change colors based on background.
@@ -496,17 +512,17 @@ let g:fzf_action = {
 " FZF position.
 let g:fzf_layout = { 'window': '-tabnew' }
 
-" Show preview window with "?".
+" Show preview window with '?'.
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>,
     \ <bang>0 ? fzf#vim#with_preview('up:60%')
     \         : fzf#vim#with_preview('right:50%:hidden', '?'),
     \ <bang>0)
 
-" Show preview window with "?".
+" Show preview window with '?'
 command! -bang -nargs=* Ag
     \ call fzf#vim#ag(<q-args>,
-    \ '--color-path 400 --color-line-number 400 --color-match 400 --skip-vcs-ignores --hidden',
+    \ '--color-path 400 --color-line-number 400 --color-match 400 --hidden',
     \ <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
     \         : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
     \ <bang>0)
@@ -838,6 +854,8 @@ augroup initvim
 
   " Set folding method
   autocmd FileType json setlocal foldmethod=syntax
+  autocmd TermEnter * setlocal scrolloff=0
+  autocmd TermLeave * setlocal scrolloff=1
 augroup END
 "--------------------------------End Auto Commands-----------------------------"
 "}}}

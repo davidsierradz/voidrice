@@ -12,3 +12,4 @@ dunst &			# dunst for notifications
 # mpdupdate &
 libinput-gestures-setup start &
 greenclip daemon &
+remaps &
