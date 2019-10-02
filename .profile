@@ -33,7 +33,8 @@ export LESS_TERMCAP_se="$(printf '%b' '[0m')"; a="${a%_}"
 export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"; a="${a%_}"
 export LESS_TERMCAP_ue="$(printf '%b' '[0m')"; a="${a%_}"
 
-export FZF_DEFAULT_COMMAND='ag -il --nocolor --nogroup --path-to-ignore ~/.ignore --skip-vcs-ignores --hidden -g ""'
+# export FZF_DEFAULT_COMMAND='ag -il --nocolor --nogroup --path-to-ignore ~/.ignore --skip-vcs-ignores --hidden -g ""'
+export FZF_DEFAULT_COMMAND='ag -il --nocolor --nogroup --unrestricted --hidden -g ""'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 mpd >/dev/null 2>&1 &

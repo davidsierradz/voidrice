@@ -48,7 +48,7 @@ set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
 set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
 set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 set $mode_spotify p: play/pause j: next k: previous ; Caps to also quit
-set $mode_run Run a:htop s:vifm d:calc f:cal
+set $mode_run Run a:htop s:vifm d:calc f:cal g:rss
 
 
 
@@ -125,6 +125,8 @@ mode "$mode_run" {
   bindsym Shift+d       exec $term -1 dropdowncalc, mode "default"
   bindsym f             exec --no-startup-id ddspawn 'calcurse' '-1' '-D ~/.config/calcurse', mode "default"
   bindsym Shift+f       exec $term -1 calcurse -D ~/.config/calcurse, mode "default"
+  bindsym g             exec --no-startup-id ddspawn 'newsboat' '-1', mode "default"
+  bindsym Shift+g       exec $term -1 newsboat, mode "default"
 
   bindsym Return        mode "default"
   bindsym Escape        mode "default"

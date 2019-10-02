@@ -17,6 +17,7 @@ alias ka="killall" \
   grep="grep --color=auto" \
   gua="git remote | xargs -L1 git push --all" \
   gss="git status -sb" \
+  icat="kitty +kitten icat" \
   ll='ls -lAFh --group-directories-first' \
   llt='ls -lAFht --group-directories-first' \
   ls="ls -hN --color=auto --group-directories-first" \

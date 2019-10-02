@@ -473,6 +473,9 @@ let g:EditorConfig_max_line_indicator = "none"
 "}}}
 ""/ fzf.vim {{{
 "/
+
+let $FZF_DEFAULT_COMMAND = 'ag -il --nocolor --nogroup --path-to-ignore ~/.ignore --skip-vcs-ignores --hidden -g ""'
+
 function! s:goto_def(lines) abort
   silent! exe 'e +BTags '.a:lines[0]
   call timer_start(10, {-> execute('startinsert') })
@@ -503,7 +506,7 @@ command! -bang -nargs=? -complete=dir Files
 " Show preview window with "?".
 command! -bang -nargs=* Ag
     \ call fzf#vim#ag(<q-args>,
-    \ '--color-path 400 --color-line-number 400 --color-match 400 --hidden',
+    \ '--color-path 400 --color-line-number 400 --color-match 400 --skip-vcs-ignores --hidden',
     \ <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
     \         : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
     \ <bang>0)

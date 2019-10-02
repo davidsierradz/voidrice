@@ -1,10 +1,1 @@
-http://lukesmith.xyz/rss.xml
-https://notrelated.libsyn.com/rss
-https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA "~Luke Smith (YouTube)"
-https://www.archlinux.org/feeds/news/ "tech"
-https://hnrss.org/frontpage
-http://feeds.arstechnica.com/arstechnica/index?format=xml
-https://lwn.net/headlines/newrss
-https://feeds.feedburner.com/codinghorror
-https://www.youtube.com/feeds/videos.xml?channel_id=UCYO_jab_esuFRV4b17AJtAw "3Blue1Brown (YouTube)"
-https://betterexplained.com/feed/
+/home/neuromante/syncthing/.config/newsboat/urls
