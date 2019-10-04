@@ -221,9 +221,9 @@ bindsym $mod+a                     mode "$mode_run"
 #bindsym $mod+b                    bar mode toggle
 bindsym $mod+Shift+b               floating toggle; sticky toggle; exec --no-startup-id hover left
 
-#bindsym $mod+c                    exec --no-startup-id cabl
 bindsym $mod+c                     move position center
 bindsym $mod+Shift+c               reload
+bindsym $mod+Ctrl+c                exec --no-startup-id cabl
 
 #bindsym $mod+Shift+d              gaps inner current set 0; gaps outer current set 0
 

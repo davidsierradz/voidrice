@@ -80,7 +80,7 @@ Plug 'junegunn/fzf.vim'
 " Editorconfig.
 Plug 'editorconfig/editorconfig-vim'
 
-Plug 'jreybert/vimagit'
+" Plug 'jreybert/vimagit'
 
 Plug 'vifm/vifm.vim'
 "}}}
@@ -313,20 +313,20 @@ nnoremap <leader>bw :call DeleteWindowIfNotLast()<CR>
 nnoremap <BS> <C-^>
 
 "Better window navigation.
-tnoremap <A-h> <C-\><C-N><C-w>h
-tnoremap <A-j> <C-\><C-N><C-w>j
-tnoremap <A-k> <C-\><C-N><C-w>k
-tnoremap <A-l> <C-\><C-N><C-w>l
-inoremap <A-h> <C-\><C-N><C-w>h
-inoremap <A-j> <C-\><C-N><C-w>j
-inoremap <A-k> <C-\><C-N><C-w>k
-inoremap <A-l> <C-\><C-N><C-w>l
-nnoremap <A-h> <C-w>h
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-nnoremap <A-l> <C-w>l
-tnoremap <A-q> <C-\><C-N>
-inoremap <A-q> <C-\><C-N>
+tnoremap <M-h> <C-\><C-N><C-w>h
+tnoremap <M-j> <C-\><C-N><C-w>j
+tnoremap <M-k> <C-\><C-N><C-w>k
+tnoremap <M-l> <C-\><C-N><C-w>l
+inoremap <M-h> <C-\><C-N><C-w>h
+inoremap <M-j> <C-\><C-N><C-w>j
+inoremap <M-k> <C-\><C-N><C-w>k
+inoremap <M-l> <C-\><C-N><C-w>l
+nnoremap <M-h> <C-w>h
+nnoremap <M-j> <C-w>j
+nnoremap <M-k> <C-w>k
+nnoremap <M-l> <C-w>l
+tnoremap <M-`> <C-\><C-N>
+inoremap <M-`> <C-\><C-N>
 nnoremap <C-A-j> gT
 tnoremap <C-A-j> <C-\><C-N>gT
 inoremap <C-A-j> <C-\><C-N>gT
@@ -344,10 +344,10 @@ nnoremap Q <nop>
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 
 " Change à (Alt-`) to -> in insert mode.
-inoremap <A-`> ->
+inoremap <M-1> ->
 
 " Change <Alt-1> to => in insert mode.
-inoremap <A-1> =>
+inoremap <M-2> =>
 
 " Use <AltGr-Q>(right shift) to save current file.
 nnoremap ä :w<CR>

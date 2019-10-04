@@ -22,6 +22,7 @@ bind-key N prev-unread
 bind-key D pb-download
 bind-key U show-urls
 bind-key x pb-delete
+bind-key € delete-article
 
 color listnormal cyan default
 color listfocus black yellow standout bold
