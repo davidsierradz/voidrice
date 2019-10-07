@@ -267,11 +267,11 @@ function vi_mode_prompt_info() {
 function check_last_exit_code() {
   local LAST_EXIT_CODE=$?
   if [[ $LAST_EXIT_CODE -ne 0 ]]; then
-    local EXIT_CODE_PROMPT=' '
+    local EXIT_CODE_PROMPT=''
     EXIT_CODE_PROMPT+="%{$fg[red]%}-%{$reset_color%}"
     EXIT_CODE_PROMPT+="%{$fg_bold[red]%}$LAST_EXIT_CODE%{$reset_color%}"
     EXIT_CODE_PROMPT+="%{$fg[red]%}-%{$reset_color%}"
-    echo "$EXIT_CODE_PROMPT"
+    echo "$EXIT_CODE_PROMPT "
   fi
 }
 #--------------------------------End Functions---------------------------------#
@@ -363,10 +363,10 @@ bindkey -M menuselect '^N' down-line-or-history
 #}}}
 
 #--------------------------------Prompt----------------------------------------# {{{
-if [[ -z "$RPS1" && -z "$RPROMPT" ]]; then
-  RPS1='$(check_last_exit_code)'
-  RPS2=$RPS1
-fi
+# if [[ -z "$RPS1" && -z "$RPROMPT" ]]; then
+#   RPS1='$(check_last_exit_code)'
+#   RPS2=$RPS1
+# fi
 
 # Ensure that the prompt is redrawn when the terminal size changes.
 TRAPWINCH() {
