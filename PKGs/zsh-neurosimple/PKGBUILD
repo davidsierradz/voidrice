@@ -1,0 +1,26 @@
+# Maintainer: David Sierra DiazGranados <davidsierradz at gmail dot com>
+_name='neurosimple-oh-my-zsh-theme'
+pkgname="${_name}-git"
+pkgver=1
+pkgrel=1
+pkgdesc='Neuro simple theme'
+url='https://github.com/davidsierradz/neurosimple-oh-my-zsh-theme'
+arch=('any')
+groups=('modified')
+license=(GPL)
+depends=('zsh' 'oh-my-zsh-git')
+makedepends=('git')
+provides=('neurosimple-oh-my-zsh-theme')
+source=("${_name}::${url//https/git}")
+md5sums=('SKIP')
+
+pkgver() {
+   cd "${srcdir}/${_name}"
+   git rev-list --count HEAD
+}
+
+package() {
+	cd "${srcdir}/${_name}"
+  install -d "${pkgdir}/usr/share/oh-my-zsh/custom/themes"
+	install -m 644 "neurosimple.zsh-theme" "${pkgdir}/usr/share/oh-my-zsh/custom/themes"
+}

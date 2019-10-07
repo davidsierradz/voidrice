@@ -239,8 +239,8 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 set showmatch
 
 " Scroll options.
-set scrolloff=1
-set sidescrolloff=5
+set scrolloff=0
+set sidescrolloff=0
 
 " Enable true color support
 set termguicolors
@@ -854,8 +854,8 @@ augroup initvim
 
   " Set folding method
   autocmd FileType json setlocal foldmethod=syntax
-  autocmd TermEnter * setlocal scrolloff=0
-  autocmd TermLeave * setlocal scrolloff=1
+  " autocmd TermEnter * setlocal scrolloff=0
+  " autocmd TermLeave * setlocal scrolloff=1
 augroup END
 "--------------------------------End Auto Commands-----------------------------"
 "}}}

@@ -1,0 +1,13 @@
+[Unit]
+Description=Run a bash script at start
+After=network.target systemd-user-sessions.service network-online.target
+RequiresMountsFor=/home
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/home/neuromante/.local/bin/tools/runonstart
+User=neuromante
+
+[Install]
+WantedBy=multi-user.target

@@ -2,7 +2,7 @@
 # Path to your oh-my-zsh installation.
 ZSH=/usr/share/oh-my-zsh
 
-ZSH_THEME="simple"
+ZSH_THEME="neurosimple"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 DISABLE_AUTO_UPDATE="true"
@@ -271,7 +271,7 @@ function check_last_exit_code() {
     EXIT_CODE_PROMPT+="%{$fg[red]%}-%{$reset_color%}"
     EXIT_CODE_PROMPT+="%{$fg_bold[red]%}$LAST_EXIT_CODE%{$reset_color%}"
     EXIT_CODE_PROMPT+="%{$fg[red]%}-%{$reset_color%}"
-    echo "$EXIT_CODE_PROMPT|"
+    echo "$EXIT_CODE_PROMPT"
   fi
 }
 #--------------------------------End Functions---------------------------------#
@@ -364,7 +364,7 @@ bindkey -M menuselect '^N' down-line-or-history
 
 #--------------------------------Prompt----------------------------------------# {{{
 if [[ -z "$RPS1" && -z "$RPROMPT" ]]; then
-  RPS1='$(check_last_exit_code)$(vi_mode_prompt_info)'
+  RPS1='$(check_last_exit_code)'
   RPS2=$RPS1
 fi
 
