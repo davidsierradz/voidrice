@@ -361,6 +361,7 @@ keymap M-r      REINIT
 keymap :q       QUIT
 #Quit w3m without confirmation.
 keymap ZZ       EXIT
+keymap Q        EXIT
 #Reload current page.
 keymap r        RELOAD
 keymap C-r      RELOAD

@@ -14,6 +14,8 @@ alias ka="killall" \
   f="$FILE" \
   ffmpeg="ffmpeg -hide_banner" \
   g="git" \
+  glg="git log --graph --date-order --date=format-local:'%F %R' --full-history --color --decorate --pretty=format:'%x08%x09%C(red)%h %C(cyan)%ad %C(bold blue)%aN%C(reset)%C(bold yellow)%d %C(reset)%s'" \
+  glga="git log --graph --date-order --date=format-local:'%F %R' --full-history --all --color --decorate --pretty=format:'%x08%x09%C(red)%h %C(cyan)%ad %C(bold blue)%aN%C(reset)%C(bold yellow)%d %C(reset)%s'" \
   grep="grep --color=auto" \
   gua="git remote | xargs -L1 git push --all" \
   gss="git status -sb" \
