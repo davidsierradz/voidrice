@@ -14,7 +14,7 @@ ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-plugins=(common-aliases docker docker-compose git gitfast yarn zsh-autopair zsh-autosuggestions zsh-completions zsh-system-clipboard zsh-syntax-highlighting)
+plugins=(common-aliases docker docker-compose git gitfast yarn zsh-autosuggestions zsh-completions zsh-system-clipboard zsh-syntax-highlighting)
 
 # User configuration
 DEFAULT_USER=neuromante
@@ -97,6 +97,8 @@ bindkey -M viins "^u" kill-whole-line
 [ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
 [ -f /usr/share/fzf/completion.zsh ] && source /usr/share/fzf/completion.zsh
 [ -f /usr/share/fzf/key-bindings.zsh ] && source /usr/share/fzf/key-bindings.zsh
+# For some reason bindkey -v breaks this plugin, so we source it after.
+[ -f /usr/share/oh-my-zsh/custom/plugins/zsh-autopair/autopair.zsh ] && source /usr/share/oh-my-zsh/custom/plugins/zsh-autopair/autopair.zsh
 #--------------------------------End Sourcings---------------------------------#
 #}}}
 
