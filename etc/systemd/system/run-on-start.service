@@ -1,6 +1,7 @@
 [Unit]
 Description=Run a bash script at start
-After=network.target systemd-user-sessions.service network-online.target
+After=network.target systemd-user-sessions.service NetworkManager-wait-online.service
+Requires=network.target systemd-user-sessions.service NetworkManager-wait-online.service
 RequiresMountsFor=/home
 
 [Service]

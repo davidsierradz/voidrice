@@ -22,6 +22,7 @@ smart_gaps on
 workspace_auto_back_and_forth yes
 workspace_layout tabbed
 client.focused #4c7899 #285577 #ffffff #2e9ef4 #cc24id
+focus_on_window_activation focus
 
 
 
@@ -177,7 +178,7 @@ bindsym $mod+shift+Return          exec --no-startup-id /usr/bin/kitty -1 --inst
 bindsym $mod+space                 focus mode_toggle
 bindsym $mod+Shift+space           floating toggle
 
-#bindsym $mod+Escape               workspace prev
+bindsym $mod+Escape                [urgent=latest] focus
 #bindsym $mod+Shift+Escape         exec --no-startup-id prompt "Exit i3?" "i3-msg exit"
 
 #STOP/HIDE EVERYTHING:
@@ -216,7 +217,7 @@ bindcode $mod+Ctrl+49              workspace $ws9
 
 
 bindsym $mod+a                     mode "$mode_run"
-#bindsym $mod+a                    focus parent
+bindsym $mod+Ctrl+a                focus parent
 
 #bindsym $mod+b                    bar mode toggle
 bindsym $mod+Shift+b               floating toggle; sticky toggle; exec --no-startup-id hover left
