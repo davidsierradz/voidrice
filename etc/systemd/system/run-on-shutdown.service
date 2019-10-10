@@ -2,6 +2,8 @@
 Description=Run a bash script at shutdown
 DefaultDependencies=no
 Before=shutdown.target halt.target
+After=network.target systemd-user-sessions.service NetworkManager-wait-online.service
+Requires=network.target systemd-user-sessions.service NetworkManager-wait-online.service
 RequiresMountsFor=/home
 
 [Service]
@@ -9,6 +11,7 @@ Type=oneshot
 RemainAfterExit=yes
 ExecStart=/home/neuromante/.local/bin/tools/runonshutdown
 User=neuromante
+TimeoutSec=30
 
 [Install]
 WantedBy=halt.target shutdown.target
