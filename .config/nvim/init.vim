@@ -67,6 +67,7 @@ Plug 'haya14busa/vim-asterisk'
 " Make the yanked region apparent.
 Plug 'machakann/vim-highlightedyank'
 
+" Lightline (statusbar) plugins.
 Plug 'itchyny/lightline.vim'
 Plug 'davidsierradz/lightline-gruvbox.vim'
 Plug 'maximbaz/lightline-trailing-whitespace'
@@ -113,7 +114,7 @@ Plug 'w0rp/ale'
 Plug 'pangloss/vim-javascript'
 
 " React JSX syntax highlighting and indenting for vim.
-" Plug 'maxmellon/vim-jsx-pretty'
+Plug 'maxmellon/vim-jsx-pretty'
 
 Plug 'PotatoesMaster/i3-vim-syntax'
 
@@ -230,6 +231,11 @@ set guioptions=a
 
 " Disables automatic commenting on newline:
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+let g:loaded_node_provider = 0
+let g:loaded_ruby_provider = 0
+let g:loaded_python_provider = 0
+let g:python3_host_prog = '/usr/bin/python3'
 "--------------------------------End General-----------------------------------"
 "}}}
 
@@ -313,25 +319,27 @@ nnoremap <leader>bw :call DeleteWindowIfNotLast()<CR>
 nnoremap <BS> <C-^>
 
 "Better window navigation.
-tnoremap <M-h> <C-\><C-N><C-w>h
-tnoremap <M-j> <C-\><C-N><C-w>j
-tnoremap <M-k> <C-\><C-N><C-w>k
-tnoremap <M-l> <C-\><C-N><C-w>l
-inoremap <M-h> <C-\><C-N><C-w>h
-inoremap <M-j> <C-\><C-N><C-w>j
-inoremap <M-k> <C-\><C-N><C-w>k
-inoremap <M-l> <C-\><C-N><C-w>l
 nnoremap <M-h> <C-w>h
 nnoremap <M-j> <C-w>j
 nnoremap <M-k> <C-w>k
 nnoremap <M-l> <C-w>l
-tnoremap <M-`> <C-\><C-N>
-inoremap <M-`> <C-\><C-N>
 nnoremap <C-A-j> gT
-tnoremap <C-A-j> <C-\><C-N>gT
-inoremap <C-A-j> <C-\><C-N>gT
 nnoremap <C-A-k> gt
+
+tnoremap <M-h> <C-\><C-N><C-w>h
+tnoremap <M-j> <C-\><C-N><C-w>j
+tnoremap <M-k> <C-\><C-N><C-w>k
+tnoremap <M-l> <C-\><C-N><C-w>l
+tnoremap <M-`> <C-\><C-N>
+tnoremap <C-A-j> <C-\><C-N>gT
 tnoremap <C-A-k> <C-\><C-N>gt
+
+inoremap <M-h> <C-\><C-N><C-w>h
+inoremap <M-j> <C-\><C-N><C-w>j
+inoremap <M-k> <C-\><C-N><C-w>k
+inoremap <M-l> <C-\><C-N><C-w>l
+inoremap <M-`> <C-\><C-N>
+inoremap <C-A-j> <C-\><C-N>gT
 inoremap <C-A-k> <C-\><C-N>gt
 
 " Y yanks from current cursor position to end of line, more logical.
@@ -402,7 +410,7 @@ nnoremap <silent> K i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w:delmarks w<c
 nnoremap <silent> J mzJ`z:delmarks z<cr>
 
 " Expand spaces from (|) to ( | ).
-inoremap <M-Space> <Space><Space><Left>
+" inoremap <M-Space> <Space><Space><Left>
 
 " (|) -> (|.
 inoremap <M-BS> <Right><BS>
@@ -421,6 +429,13 @@ nmap yo1 :<C-R>=GetHighlight("Comment")["guifg"] ==# "#CCCCCC" ? "hi Comment gui
 
 " Toggles formatoptions to add comment after <CR> or o (and O).
 nmap yo2 :<C-R>=&formatoptions ==# "jql" ? "setlocal formatoptions+=cro" : "setlocal formatoptions-=cro"<CR><CR>
+
+" Choose one block in a 3-way merge resolution.
+if &diff
+  nnoremap <leader>1 :diffget LOCAL<CR>
+  nnoremap <leader>2 :diffget BASE<CR>
+  nnoremap <leader>3 :diffget REMOTE<CR>
+endif
 "--------------------------------End General Mappings--------------------------"
 "}}}
 
@@ -654,9 +669,16 @@ let g:pear_tree_pairs = {
       \ }
 
 let g:pear_tree_repeatable_expand = 0
+let g:pear_tree_map_special_keys = 0
+let g:pear_tree_smart_openers = 1
+let g:pear_tree_smart_closers = 1
+let g:pear_tree_smart_backspace = 1
 
+imap <BS> <Plug>(PearTreeBackspace)
+imap <CR> <Plug>(PearTreeExpand)
+imap <Esc> <Plug>(PearTreeFinishExpansion)
+imap <M-Space> <Plug>(PearTreeSpace)
 imap <C-g><C-g> <Plug>(PearTreeJump)
-"imap <Space> <Plug>(PearTreeSpace)
 "}}}
 ""/ Ultisnips.vim {{{
 "/
@@ -931,7 +953,6 @@ function! MyHighlights() abort
   highlight MatchParen guibg=NONE gui=bold
   highlight ErrorMsg gui=reverse guifg=#dc322f guibg=#fdf6e3
   highlight CursorLine guibg=NONE
-  " highlight clear Normal
   if exists('g:loaded_lightline')
     runtime plugin/lightline-gruvbox.vim
     call lightline#colorscheme()

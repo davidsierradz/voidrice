@@ -14,8 +14,9 @@
 [difftool]
   tool = vimdiff
   prompt = false
+  trustExitCode = true
 [difftool "vimdiff"]
-  cmd = nvim -d $LOCAL $REMOTE
+  cmd = nvim -d $LOCAL $REMOTE $BASE -c '$wincmd w' -c 'wincmd J' -c 'wincmd k' -c 'wincmd _'
 [alias]
 	lg = log --graph --date-order --date=format-local:'%F %R' --full-history --color --decorate --pretty=format:'%x08%x09%C(red)%h %C(cyan)%ad %C(bold blue)%aN%C(reset)%C(bold yellow)%d %C(reset)%s'
   lga = log --graph --date-order --date=format-local:'%F %R' --full-history --all --color --decorate --pretty=format:'%x08%x09%C(red)%h %C(cyan)%ad %C(bold blue)%aN%C(reset)%C(bold yellow)%d %C(reset)%s'

@@ -5,7 +5,8 @@ shopt -s histappend
 HISTCONTROL=ignoreboth
 PROMPT_COMMAND='history -a'
 HISTSIZE= HISTFILESIZE= # Infinite history.
-export PS1="\W \\$ "
+[ -f /usr/share/git/git-prompt.sh ] && source /usr/share/git/git-prompt.sh
+PS1='[\W$(__git_ps1 " (%s)")]\$ '
 
 [ -f /usr/share/fzf/completion.bash ] && source /usr/share/fzf/completion.bash
 [ -f /usr/share/fzf/key-bindings.bash ] && source /usr/share/fzf/key-bindings.bash

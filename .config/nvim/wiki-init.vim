@@ -7,6 +7,9 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'andymass/vim-matchup'
 let g:loaded_matchit = 1
 
+" Jump anywhere in current screen.
+Plug 'easymotion/vim-easymotion'
+
 " Visualize your Vim undo tree.
 Plug 'simnalamburt/vim-mundo'
 
@@ -44,7 +47,7 @@ Plug 'reedes/vim-lexical'
 "}}}
 
 "--------------Interface---------------- {{{
-" Colorscheme.
+" Minimal colorscheme for vim.
 Plug 'davidsierradz/vim-colors-pencil'
 
 " Smart close of buffers.
@@ -157,8 +160,8 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 set showmatch
 
 " Scroll options.
-set scrolloff=1
-set sidescrolloff=5
+set scrolloff=0
+set sidescrolloff=0
 
 " Enable true color support
 set termguicolors
@@ -211,7 +214,7 @@ nnoremap <expr> k v:count ? 'k' : 'gk'
 set pastetoggle=<F2>
 
 " Use <Alt-L> to clear the highlighting of :set hlsearch.
-nnoremap <A-l> :syntax sync fromstart<CR>:nohlsearch<CR>:diffupdate<CR>:echo<CR>
+nnoremap <C-l> :syntax sync fromstart<CR>:nohlsearch<CR>:diffupdate<CR>:echo<CR>
 
 " Reloads a buffer.
 nnoremap <leader>r :e!<CR>
@@ -228,10 +231,10 @@ nnoremap <leader>bw :call DeleteWindowIfNotLast()<CR>
 nnoremap <BS> <C-^>
 
 "Better window navigation.
-"nnoremap <C-j> <C-w>j
-"nnoremap <C-k> <C-w>k
-nnoremap <C-h> zh
-nnoremap <C-l> zl
+nnoremap <M-h> zh
+"nnoremap <M-j> <C-w>j
+"nnoremap <M-k> <C-w>k
+nnoremap <M-l> zl
 
 " Y yanks from current cursor position to end of line, more logical.
 nnoremap Y y$
@@ -243,10 +246,10 @@ nnoremap Q <nop>
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 
 " Change à (Alt-`) to -> in insert mode.
-inoremap <A-`> ->
+inoremap <M-1> ->
 
 " Change <Alt-1> to => in insert mode.
-inoremap <A-1> =>
+inoremap <M-2> =>
 
 " Use <AltGr-Q>(right shift) to save current file.
 nnoremap ä :w<CR>
@@ -305,6 +308,18 @@ inoremap <M-Space> <Space><Space><Left>
 
 " (|) -> (|.
 inoremap <M-BS> <Right><BS>
+
+" Echo syntax group of word under cursor.
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+      \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+      \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+" Toggles Comment highlight guifg color, TODO: change colors based on background.
+" See https://vi.stackexchange.com/questions/3738/toggle-bold-highlighting-for-comments-in-term-gui
+nmap yo1 :<C-R>=GetHighlight("Comment")["guifg"] ==# "#CCCCCC" ? "hi Comment guifg=#999999" : "hi Comment guifg=#CCCCCC"<CR><CR>
+
+" Toggles formatoptions to add comment after <CR> or o (and O).
+nmap yo2 :<C-R>=&formatoptions ==# "jql" ? "setlocal formatoptions+=cro" : "setlocal formatoptions-=cro"<CR><CR>
 "--------------------------------End General Mappings--------------------------"
 "}}}
 
@@ -378,6 +393,7 @@ let g:pear_tree_repeatable_expand = 0
 
 imap <C-g><C-g> <Plug>(PearTreeJump)
 imap <M-CR> <Plug>(PearTreeExpand)
+"imap <Space> <Plug>(PearTreeSpace)
 "}}}
 ""/ Pencil {{{
 "/
@@ -409,6 +425,7 @@ let g:UltiSnipsExpandTrigger        = "<Plug>(ultisnips_expand)"
 let g:UltiSnipsJumpForwardTrigger   = "<M-n>"
 let g:UltiSnipsJumpBackwardTrigger  = "<M-p>"
 let g:UltiSnipsRemoveSelectModeMappings = 0
+" let g:UltiSnipsListSnippets = "<S-Tab>"
 
 " Expand the snippet.
 imap <M-u> <Plug>(ultisnips_expand)
@@ -450,6 +467,30 @@ xnoremap x d
 nnoremap xx dd
 nnoremap X D
 "}}}
+""/ vim-easymotion {{{
+"/
+" Disable default mappings.
+let g:EasyMotion_do_mapping=0
+
+" One char search.
+nmap <C-Space> <Plug>(easymotion-s)
+vmap <C-Space> <Plug>(easymotion-s)
+omap <C-Space> <Plug>(easymotion-s)
+nmap å <Plug>(easymotion-s)
+vmap å <Plug>(easymotion-s)
+omap å <Plug>(easymotion-s)
+
+let g:EasyMotion_smartcase = 1
+
+let g:EasyMotion_use_upper = 1
+
+let g:EasyMotion_keys = 'ASDGHKLQWERTYUIOPZXCVBNMFJ;'
+
+" Search last motion used and disable highlight.
+let g:EasyMotion_move_highlight = 0
+nmap <leader>; <Plug>(easymotion-next)
+nmap <leader>, <Plug>(easymotion-prev)
+"}}}
 ""/ vim-highlightedyank {{{
 "/
 highlight link HighlightedyankRegion ErrorMsg
@@ -457,7 +498,7 @@ highlight link HighlightedyankRegion ErrorMsg
 ""/ vim-matchup {{{
 "/
 
-let g:matchup_matchparen_enabled = 0
+" let g:matchup_matchparen_enabled = 0
 
 " To enable the delete surrounding (ds%) and change surrounding (cs%) maps.
 let g:matchup_surround_enabled = 1
@@ -583,6 +624,20 @@ function! DeleteWindowIfNotLast()
 
   echo "Only one window or buffer."
   return 0
+endfunction
+
+" Return some highlight group as a dictionary.
+function! GetHighlight(group)
+  let output = execute('hi ' . a:group)
+  let list = split(output, '\s\+')
+  let dict = {}
+  for item in list
+    if match(item, '=') > 0
+      let splited = split(item, '=')
+      let dict[splited[0]] = splited[1]
+    endif
+  endfor
+  return dict
 endfunction
 "--------------------------------End Functions---------------------------------"
 "}}}

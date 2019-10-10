@@ -65,7 +65,7 @@
     force_xinerama = false
 
     mouse_left_click = close_current
-    mouse_middle_click = none
+    # mouse_middle_click = none
     mouse_right_click = do_action
 [experimental]
     per_monitor_dpi = false

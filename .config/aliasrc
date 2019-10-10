@@ -6,6 +6,7 @@ alias ka="killall" \
   SS="sudo systemctl" \
   YT="youtube-viewer" \
   b='bat' \
+  c='clear' \
   calcurse="calcurse -D ~/.config/calcurse" \
   ccat="highlight --out-format=ansi" \
   d='docker' \
