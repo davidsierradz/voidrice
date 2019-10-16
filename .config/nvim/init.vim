@@ -585,13 +585,11 @@ if has('nvim') && exists('&winblend') && &termguicolors
   endif
 
   function! FloatingFZF()
-    let width = float2nr(&columns * 0.99)
-    let height = float2nr(&lines * 0.99)
     let opts = { 'relative': 'editor',
-               \ 'row': (&lines - height) / 2,
-               \ 'col': (&columns - width) / 2,
-               \ 'width': width,
-               \ 'height': height }
+               \ 'row': 0,
+               \ 'col': 0,
+               \ 'width': &columns,
+               \ 'height': &lines }
 
     let win = nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
     call setwinvar(win, '&winhighlight', 'NormalFloat:Normal')

@@ -5,6 +5,7 @@ set vicmd=$EDITOR
 set syscalls
 set nofollowlinks
 set sortnumbers
+set sort=-mtime,+name
 set undolevels=100
 set wildmenu
 set wildstyle=popup
@@ -14,6 +15,8 @@ set smartcase
 set nohlsearch
 set incsearch
 set suggestoptions=normal,visual,view,otherpane,keys,marks,registers
+set statusline="  %t %15s%= %20d %{&sort} %A %10u:%-7g "
+set timefmt="%F %H:%M"
 " set dotfiles
 colorscheme luke
 

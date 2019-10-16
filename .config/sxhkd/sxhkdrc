@@ -77,8 +77,15 @@ XF86AudioStop
 	lmc toggle
 XF86MonBrightnessDown
 	xbacklight -dec 1
+
 XF86MonBrightnessUp
 	xbacklight -inc 1
+
+shift+XF86MonBrightnessDown
+	xbacklight -dec 10
+
+shift+XF86MonBrightnessUp
+	xbacklight -inc 10
 
 
 # Recording
