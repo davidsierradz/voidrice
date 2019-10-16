@@ -504,13 +504,15 @@ let g:EditorConfig_max_line_indicator = "none"
 "}}}
 ""/ fzf.vim {{{
 "/
-
 let $FZF_DEFAULT_COMMAND = 'ag -il --nocolor --nogroup --path-to-ignore ~/.ignore --skip-vcs-ignores --hidden -g ""'
+
+let $FZF_PREVIEW_COMMAND = 'cat {}'
 
 function! s:goto_def(lines) abort
   silent! exe 'e +BTags '.a:lines[0]
   call timer_start(10, {-> execute('startinsert') })
 endfunction
+
 function! s:goto_line(lines) abort
   silent! exe 'e '.a:lines[0]
   call timer_start(10, {-> feedkeys(':') })
@@ -523,9 +525,6 @@ let g:fzf_action = {
   \ 'ctrl-g': function('s:goto_def'),
   \ 'ctrl-f': function('s:goto_line')
   \  }
-
-" FZF position.
-let g:fzf_layout = { 'window': '-tabnew' }
 
 " Show preview window with '?'.
 command! -bang -nargs=? -complete=dir Files
@@ -549,6 +548,60 @@ nnoremap <A-c> :Snippets<CR><C-\><C-n>0i
 nnoremap <A-b> :Buffers<CR><C-\><C-n>0i
 nnoremap <Space><Space> :Buffers<CR><C-\><C-n>0i
 nnoremap <C-p> :Files<CR><C-\><C-n>0i
+
+if has('nvim') || has('gui_running')
+  let $FZF_DEFAULT_OPTS .= ' --inline-info'
+endif
+
+" let g:fzf_colors =
+" \ { 'fg':      ['fg', 'Normal'],
+"   \ 'bg':      ['bg', 'Normal'],
+"   \ 'hl':      ['fg', 'Comment'],
+"   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+"   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+"   \ 'hl+':     ['fg', 'Statement'],
+"   \ 'info':    ['fg', 'PreProc'],
+"   \ 'border':  ['fg', 'Ignore'],
+"   \ 'prompt':  ['fg', 'Conditional'],
+"   \ 'pointer': ['fg', 'Exception'],
+"   \ 'marker':  ['fg', 'Keyword'],
+"   \ 'spinner': ['fg', 'Label'],
+"   \ 'header':  ['fg', 'Comment'] }
+
+" Terminal buffer options for fzf
+
+autocmd! FileType fzf
+autocmd  FileType fzf set noshowmode noruler nonu
+
+if has('nvim') && exists('&winblend') && &termguicolors
+  " set winblend=10
+
+  if exists('g:fzf_colors.bg')
+    call remove(g:fzf_colors, 'bg')
+  endif
+
+  if stridx($FZF_DEFAULT_OPTS, '--border') == -1
+    let $FZF_DEFAULT_OPTS .= ' --border --margin=0,2'
+  endif
+
+  function! FloatingFZF()
+    let width = float2nr(&columns * 0.99)
+    let height = float2nr(&lines * 0.99)
+    let opts = { 'relative': 'editor',
+               \ 'row': (&lines - height) / 2,
+               \ 'col': (&columns - width) / 2,
+               \ 'width': width,
+               \ 'height': height }
+
+    let win = nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
+    call setwinvar(win, '&winhighlight', 'NormalFloat:Normal')
+  endfunction
+
+  let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+else
+  " FZF position.
+  let g:fzf_layout = { 'window': '-tabnew' }
+endif
 "}}}
 ""/ lightline.vim {{{
 "/

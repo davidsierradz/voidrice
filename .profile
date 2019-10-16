@@ -33,16 +33,18 @@ export LESS_TERMCAP_se="$(printf '%b' '[0m')"; a="${a%_}"
 export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"; a="${a%_}"
 export LESS_TERMCAP_ue="$(printf '%b' '[0m')"; a="${a%_}"
 
-# export FZF_DEFAULT_COMMAND='ag -il --nocolor --nogroup --path-to-ignore ~/.ignore --skip-vcs-ignores --hidden -g ""'
 export FZF_DEFAULT_COMMAND='ag -il --nocolor --nogroup --unrestricted --hidden -g ""'
+export FZF_DEFAULT_OPTS='--no-height --no-reverse'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_OPTS="--preview-window hidden:wrap --preview '(cat {} || tree -aC {}) 2> /dev/null | head -200' --bind '?:toggle-preview'"
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
+export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
 # git prompt
-# export GIT_PS1_SHOWDIRTYSTATE=1
-# export GIT_PS1_SHOWSTASHSTATE=1
-# export GIT_PS1_SHOWUNTRACKEDFILES=1
-# export GIT_PS1_SHOWUPSTREAM="verbose"
-# export GIT_PS1_SHOWCOLORHINTS=1
+export GIT_PS1_SHOWDIRTYSTATE=1
+export GIT_PS1_SHOWSTASHSTATE=1
+export GIT_PS1_SHOWUNTRACKEDFILES=1
+export GIT_PS1_SHOWUPSTREAM="verbose"
 
 # mpd >/dev/null 2>&1 &
 
