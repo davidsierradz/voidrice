@@ -23,6 +23,8 @@ workspace_auto_back_and_forth yes
 workspace_layout tabbed
 client.focused #4c7899 #285577 #ffffff #2e9ef4 #cc24id
 focus_on_window_activation focus
+floating_minimum_size 75 x 50
+floating_maximum_size -1 x -1
 
 
 
@@ -145,7 +147,10 @@ for_window [instance="dropdown_tmuxdd"] resize set 925 450
 for_window [instance="dropdown_dropdowncalc"] resize set 800 300
 for_window [instance="dropdown_tmuxdd"] border pixel 3
 for_window [instance="dropdown_dropdowncalc"] border pixel 2
-for_window [instance="dropdown_*"] move position center
+for_window [instance="dropdown_nvim"] resize set 90 ppt 70 ppt
+for_window [instance="dropdown_nvim"] border pixel 3
+for_window [instance="dropdown_zsh"] resize set 90 ppt 70 ppt
+for_window [instance="dropdown_zsh"] border pixel 3
 for_window [class="Pinentry"] sticky enable
 for_window [class="sent"] border pixel 0px
 for_window [title="GIMP Startup"] move workspace $ws5
@@ -159,6 +164,7 @@ for_window [title="mpvfloat"] border pixel 0
 for_window [class="kitty" title="floating_kitty$"] floating enable, move absolute position center
 for_window [class="kitty" title="floating_kitty$"] move scratchpad, scratchpad show
 for_window [urgent=latest] focus
+for_window [instance="dropdown_*"] move position center
 no_focus   [title="mpvfloat"]
 
 

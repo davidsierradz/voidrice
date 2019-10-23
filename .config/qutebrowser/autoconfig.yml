@@ -12,6 +12,7 @@ settings:
     '*://*.aws.amazon.com/*': true
     '*://*.coderadio.freecodecamp.org/*': true
     '*://*.confluence.atlassian.com/*': true
+    '*://*.stackexchange.com/*': true
     '*://*.developer.atlassian.com/*': true
     '*://*.docs.google.com/*': true
     '*://*.docs.mongodb.com/*': true
