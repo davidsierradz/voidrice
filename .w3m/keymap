@@ -257,7 +257,7 @@ keymap C-i NEXT
 #Close current tab and save it to be able to restore it.
 #keymap d        COMMAND  "EXTERN 'env printf '\''%s\n'\'' >> ~/.w3m/RestoreTab.txt' ; CLOSE_TAB"
 keymap x        COMMAND  "EXTERN 'echo %s >> ~/.w3m/RestoreTab.txt' ; CLOSE_TAB"
-keymap C-w        COMMAND  "EXTERN 'echo %s >> ~/.w3m/RestoreTab.txt' ; CLOSE_TAB"
+keymap C-w      CLOSE_TAB					#Close current tab
 #Home go to www.foobar.com
 keymap gh      GOTO http://www.google.com/en
 keymap gH      TAB_GOTO http://www.google.com/en
@@ -307,6 +307,7 @@ keymap }        NEXT_RIGHT_DOWN
 keymap C-n NEXT_LINK
 keymap C-p PREV_LINK
 keymap TAB NEXT_LINK
+keymap ^[[Z PREV_LINK
 
 #-history navigation...........................................................
 #Go forward in history

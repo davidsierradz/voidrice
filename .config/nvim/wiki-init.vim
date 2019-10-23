@@ -320,6 +320,9 @@ nmap yo1 :<C-R>=GetHighlight("Comment")["guifg"] ==# "#CCCCCC" ? "hi Comment gui
 
 " Toggles formatoptions to add comment after <CR> or o (and O).
 nmap yo2 :<C-R>=&formatoptions ==# "jql" ? "setlocal formatoptions+=cro" : "setlocal formatoptions-=cro"<CR><CR>
+
+" Toggles conceallevel 0 to 3.
+nmap yo3 :<C-R>=&conceallevel ==# "0" ? "setlocal conceallevel=3" : "setlocal conceallevel=0"<CR><CR>
 "--------------------------------End General Mappings--------------------------"
 "}}}
 

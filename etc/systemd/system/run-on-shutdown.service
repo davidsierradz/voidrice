@@ -9,7 +9,7 @@ RequiresMountsFor=/home
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=/home/neuromante/.local/bin/tools/runonshutdown
+ExecStart=/home/neuromante/.local/bin/tools/rs
 User=neuromante
 TimeoutSec=30
 

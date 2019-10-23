@@ -48,9 +48,9 @@ export GIT_PS1_SHOWUPSTREAM="verbose"
 
 # mpd >/dev/null 2>&1 &
 
-[ ! -f ~/.config/shortcutrc ] && shortcuts >/dev/null 2>&1
+# [ ! -f ~/.config/shortcutrc ] && shortcuts >/dev/null 2>&1
 
-echo "$0" | grep "bash$" >/dev/null && [ -f ~/.bashrc ] && source "$HOME/.bashrc"
+# echo "$0" | grep "bash$" >/dev/null && [ -f ~/.bashrc ] && source "$HOME/.bashrc"
 
 # Start graphical server if i3 not already running.
 [ "$(tty)" = "/dev/tty1" ] && ! pgrep -x i3 >/dev/null && exec startx

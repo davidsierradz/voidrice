@@ -7,7 +7,7 @@ RequiresMountsFor=/home
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=/home/neuromante/.local/bin/tools/runonstart
+ExecStart=/home/neuromante/.local/bin/tools/ro
 User=neuromante
 
 [Install]
