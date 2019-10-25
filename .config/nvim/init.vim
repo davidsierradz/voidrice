@@ -83,7 +83,11 @@ Plug 'editorconfig/editorconfig-vim'
 
 " Plug 'jreybert/vimagit'
 
-Plug 'vifm/vifm.vim'
+" Plug 'vifm/vifm.vim'
+
+Plug 'tpope/vim-fugitive'
+
+Plug 'lambdalisue/suda.vim'
 "}}}
 
 "-------Completions and omnifuncs------- {{{
@@ -416,7 +420,7 @@ nnoremap <silent> J mzJ`z:delmarks z<cr>
 inoremap <M-BS> <Right><BS>
 
 " Echo syntax group of word under cursor.
-map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+nnoremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
       \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
@@ -425,10 +429,10 @@ cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " Toggles Comment highlight guifg color, TODO: change colors based on background.
 " See https://vi.stackexchange.com/questions/3738/toggle-bold-highlighting-for-comments-in-term-gui
-nmap yo1 :<C-R>=GetHighlight("Comment")["guifg"] ==# "#CCCCCC" ? "hi Comment guifg=#999999" : "hi Comment guifg=#CCCCCC"<CR><CR>
+nnoremap yo1 :<C-R>=GetHighlight("Comment")["guifg"] ==# "#CCCCCC" ? "hi Comment guifg=#999999" : "hi Comment guifg=#CCCCCC"<CR><CR>
 
 " Toggles formatoptions to add comment after <CR> or o (and O).
-nmap yo2 :<C-R>=&formatoptions ==# "jql" ? "setlocal formatoptions+=cro" : "setlocal formatoptions-=cro"<CR><CR>
+nnoremap yo2 :<C-R>=&formatoptions ==# "jql" ? "setlocal formatoptions+=cro" : "setlocal formatoptions-=cro"<CR><CR>
 
 " Choose one block in a 3-way merge resolution.
 if &diff
@@ -436,6 +440,14 @@ if &diff
   nnoremap <leader>2 :diffget BASE<CR>
   nnoremap <leader>3 :diffget REMOTE<CR>
 endif
+
+" Use U as redo.
+nnoremap U <c-r>
+
+nnoremap ; :
+nnoremap : ;
+vnoremap ; :
+vnoremap : ;
 "--------------------------------End General Mappings--------------------------"
 "}}}
 
@@ -1008,6 +1020,20 @@ function! MyHighlights() abort
     runtime plugin/lightline-gruvbox.vim
     call lightline#colorscheme()
   endif
+  " highlight clear
+  " if exists("syntax_on")
+  "   syntax reset
+  " endif
+  " hi Comment    guifg=#CCCCCC guibg=NONE
+  " hi String     guifg=#008EC4 guibg=NONE
+  " hi Constant   guifg=NONE guibg=NONE
+  " hi Identifier guifg=NONE guibg=NONE
+  " hi Function   guifg=NONE guibg=NONE
+  " hi Statement  guifg=NONE guibg=NONE
+  " hi PreProc    guifg=NONE guibg=NONE
+  " hi Type	      guifg=NONE guibg=NONE
+  " hi Special    guifg=NONE guibg=NONE
+  " hi Delimiter  guifg=NONE guibg=NONE
 endfunction
 
 augroup MyColors
