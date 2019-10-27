@@ -151,6 +151,11 @@ set guioptions=a
 
 " Disables automatic commenting on newline:
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+let g:loaded_node_provider = 0
+let g:loaded_ruby_provider = 0
+let g:loaded_python_provider = 0
+let g:python3_host_prog = '/usr/bin/python3'
 "--------------------------------End General-----------------------------------"
 "}}}
 
@@ -304,25 +309,33 @@ nnoremap <silent> K i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w:delmarks w<c
 nnoremap <silent> J mzJ`z:delmarks z<cr>
 
 " Expand spaces from (|) to ( | ).
-inoremap <M-Space> <Space><Space><Left>
+" inoremap <M-Space> <Space><Space><Left>
 
 " (|) -> (|.
 inoremap <M-BS> <Right><BS>
 
 " Echo syntax group of word under cursor.
-map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+nnoremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
       \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 " Toggles Comment highlight guifg color, TODO: change colors based on background.
 " See https://vi.stackexchange.com/questions/3738/toggle-bold-highlighting-for-comments-in-term-gui
-nmap yo1 :<C-R>=GetHighlight("Comment")["guifg"] ==# "#CCCCCC" ? "hi Comment guifg=#999999" : "hi Comment guifg=#CCCCCC"<CR><CR>
+nnoremap yo1 :<C-R>=GetHighlight("Comment")["guifg"] ==# "#CCCCCC" ? "hi Comment guifg=#999999" : "hi Comment guifg=#CCCCCC"<CR><CR>
 
 " Toggles formatoptions to add comment after <CR> or o (and O).
-nmap yo2 :<C-R>=&formatoptions ==# "jql" ? "setlocal formatoptions+=cro" : "setlocal formatoptions-=cro"<CR><CR>
+nnoremap yo2 :<C-R>=&formatoptions ==# "jql" ? "setlocal formatoptions+=cro" : "setlocal formatoptions-=cro"<CR><CR>
 
 " Toggles conceallevel 0 to 3.
-nmap yo3 :<C-R>=&conceallevel ==# "0" ? "setlocal conceallevel=3" : "setlocal conceallevel=0"<CR><CR>
+nnoremap yo3 :<C-R>=&conceallevel ==# "0" ? "setlocal conceallevel=3" : "setlocal conceallevel=0"<CR><CR>
+
+" Use U as redo.
+nnoremap U <c-r>
+
+nnoremap ; :
+nnoremap : ;
+vnoremap ; :
+vnoremap : ;
 "--------------------------------End General Mappings--------------------------"
 "}}}
 
@@ -394,10 +407,16 @@ let g:pear_tree_pairs = {
       \ }
 
 let g:pear_tree_repeatable_expand = 0
+let g:pear_tree_map_special_keys = 0
+let g:pear_tree_smart_openers = 1
+let g:pear_tree_smart_closers = 1
+let g:pear_tree_smart_backspace = 1
 
+imap <BS> <Plug>(PearTreeBackspace)
+imap <CR> <Plug>(PearTreeExpand)
+imap <Esc> <Plug>(PearTreeFinishExpansion)
+imap <M-Space> <Plug>(PearTreeSpace)
 imap <C-g><C-g> <Plug>(PearTreeJump)
-imap <M-CR> <Plug>(PearTreeExpand)
-"imap <Space> <Plug>(PearTreeSpace)
 "}}}
 ""/ Pencil {{{
 "/

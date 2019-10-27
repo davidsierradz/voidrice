@@ -1,5 +1,7 @@
 #show-read-feeds no
 auto-reload yes
+article-sort-order date-desc
+goto-next-feed no
 
 external-url-viewer "urlscan -dc -r 'linkhandler {}'"
 max-items 0

@@ -83,7 +83,7 @@ Plug 'editorconfig/editorconfig-vim'
 
 " Plug 'jreybert/vimagit'
 
-" Plug 'vifm/vifm.vim'
+Plug 'vifm/vifm.vim'
 
 Plug 'tpope/vim-fugitive'
 
