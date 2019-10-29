@@ -489,6 +489,7 @@ let g:ale_linters = {
 
 let g:ale_fixers = {
       \ 'css': ['prettier'],
+      \ 'scss': ['prettier'],
       \ 'html': ['prettier'],
       \ 'yaml': ['prettier'],
       \ 'javascript': ['prettier'],
@@ -939,6 +940,17 @@ augroup initvim
 
   " Set folding method
   autocmd FileType json setlocal foldmethod=syntax
+
+  " Formatters.
+  autocmd FileType javascript setlocal formatprg=prettier\ --parser\ babel
+  autocmd FileType javascript.jsx setlocal formatprg=prettier\ --parser\ babel
+  autocmd FileType json setlocal formatprg=prettier\ --parser\ json
+  autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
+  autocmd FileType html setlocal formatprg=prettier\ --parser\ html
+  autocmd FileType scss setlocal formatprg=prettier\ --parser\ scss
+  autocmd FileType css setlocal formatprg=prettier\ --parser\ css
+  autocmd FileType yaml setlocal formatprg=prettier\ --parser\ yaml
+
   " autocmd TermEnter * setlocal scrolloff=0
   " autocmd TermLeave * setlocal scrolloff=1
 augroup END

@@ -27,3 +27,36 @@ highlight   CmdLine      cterm=none                ctermfg=16    ctermbg=default
 
 highlight   ErrorMsg     cterm=bold                ctermfg=196   ctermbg=default
 highlight   Border       cterm=none                ctermfg=16    ctermbg=255
+
+
+" SuggestBox
+" Win
+" Directory
+" Link
+
+" BrokenLink
+" Socket
+" Device
+
+" Fifo
+" Executable
+" Selected
+
+" CurrLine
+" TopLine
+" TopLineSel
+
+" StatusLine
+" WildMenu
+" CmdLine
+
+" ErrorMsg
+" Border
+
+" AuxWin
+" OtherWin
+" TabLine
+" TabLineSel
+" JobLine
+" OtherLine
+" CmpMismatch

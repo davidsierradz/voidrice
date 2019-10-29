@@ -12,7 +12,6 @@ settings:
     '*://*.aws.amazon.com/*': true
     '*://*.coderadio.freecodecamp.org/*': true
     '*://*.confluence.atlassian.com/*': true
-    '*://*.stackexchange.com/*': true
     '*://*.developer.atlassian.com/*': true
     '*://*.docs.google.com/*': true
     '*://*.docs.mongodb.com/*': true
@@ -28,6 +27,8 @@ settings:
     '*://*.player.twitch.tv/*': true
     '*://*.pse.todo1.com/*': true
     '*://*.registro.pse.com.co/*': true
+    '*://*.stackexchange.com/*': true
+    '*://*.stackoverflow.com/*': true
     '*://*.www.google.com/*': true
     '*://*.www.linkedin.com/*': true
     '*://*.www.npmjs.com/*': true

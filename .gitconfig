@@ -34,5 +34,8 @@
   rb = rebase
   files = "!f() { git diff --name-only $(git merge-base HEAD \"${1:-master}\") ; }; f"
   stat = "!f () { git diff --stat $(git merge-base HEAD \"${1:-master}\") ; }; f"
+  rl = reflog --pretty=reflog
+[pretty]
+  reflog = %C(auto)%h %<|(20)%gd %C(blue)%ci%C(reset) %gs (%s)
 [pull]
   ff = only

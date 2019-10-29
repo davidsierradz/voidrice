@@ -232,6 +232,10 @@ function zle-line-init() {
 }
 zle -N zle-line-init
 
+function glofzf() {
+  glo -- $1 | gh $1
+}
+
 # Reset to block cursor when executing a command,
 # else it would be line cursor
 # function zle-line-finish() {

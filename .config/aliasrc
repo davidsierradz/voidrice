@@ -37,6 +37,7 @@ alias ka="killall" \
   vw="nvim -u ~/.config/nvim/wiki-init.vim -c VimwikiIndex" \
   x="sxiv -ft *" \
   y="yarn" \
+  yl="yarn lint" \
   ytw="yarn test --watch" \
   yta="yt -x -f bestaudio/best"
 
