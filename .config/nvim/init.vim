@@ -57,6 +57,7 @@ Plug 'kkoomen/gfi.vim'
 "--------------Interface---------------- {{{
 " Minimal colorscheme for vim.
 Plug 'davidsierradz/vim-colors-plain'
+Plug 'davidsierradz/vim-colors-off'
 
 " Smart close of buffers.
 Plug 'Asheq/close-buffers.vim'
@@ -427,15 +428,15 @@ nnoremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> 
 " Save file as sudo on files that require root permission. (NOT WORKING)
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
-" Toggles Comment highlight guifg color, TODO: change colors based on background.
 " See https://vi.stackexchange.com/questions/3738/toggle-bold-highlighting-for-comments-in-term-gui
-nnoremap yo1 :<C-R>=GetHighlight("Comment")["guifg"] ==# "#CCCCCC" ? "hi Comment guifg=#999999" : "hi Comment guifg=#CCCCCC"<CR><CR>
+nnoremap yo1 :<C-R>=GetHighlight("Comment")["guifg"] ==# "#CCCCCC" ? "hi Comment guifg=#777777" : "hi Comment guifg=#CCCCCC"<CR><CR>
 
 " Toggles formatoptions to add comment after <CR> or o (and O).
 nnoremap yo2 :<C-R>=&formatoptions ==# "jql" ? "setlocal formatoptions+=cro" : "setlocal formatoptions-=cro"<CR><CR>
 
 " Choose one block in a 3-way merge resolution.
 if &diff
+  syntax off
   nnoremap <leader>1 :diffget LOCAL<CR>
   nnoremap <leader>2 :diffget BASE<CR>
   nnoremap <leader>3 :diffget REMOTE<CR>
@@ -953,6 +954,9 @@ augroup initvim
   autocmd FileType css setlocal formatprg=prettier\ --parser\ css
   autocmd FileType yaml setlocal formatprg=prettier\ --parser\ yaml
 
+  autocmd FilterWritePost * if &diff | syntax off | else | syntax on | endif
+  autocmd DiffUpdated * if &diff | syntax off | else | syntax on | endif
+
   " autocmd TermEnter * setlocal scrolloff=0
   " autocmd TermLeave * setlocal scrolloff=1
 augroup END
@@ -1056,7 +1060,7 @@ augroup MyColors
 augroup END
 
 set background=dark
-colorscheme plain
+colorscheme off
 let g:lightline.colorscheme = 'gruvbox'
 set nohlsearch
 "--------------------------------End Colors------------------------------------"
