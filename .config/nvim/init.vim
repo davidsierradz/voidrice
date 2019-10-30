@@ -381,7 +381,8 @@ noremap L g_
 vnoremap L g_
 
 " Swap join lines behaviour.
-nnoremap gJ J
+nnoremap <silent> gJ mzJ`zldiw:delmarks z<cr>
+
 
 " Toggle highlighting the search string.
 nnoremap <silent> <F1> :set hlsearch!<cr>
