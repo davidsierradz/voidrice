@@ -681,7 +681,7 @@ augroup MyColors
   autocmd ColorScheme * call MyHighlights()
 augroup END
 
-set background=dark
+set background=light
 colorscheme pencil
 "--------------------------------End Colors------------------------------------"
 "}}}

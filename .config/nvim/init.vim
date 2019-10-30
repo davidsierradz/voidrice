@@ -1060,7 +1060,7 @@ augroup MyColors
   autocmd ColorScheme * call MyHighlights()
 augroup END
 
-set background=dark
+set background=light
 colorscheme off
 let g:lightline.colorscheme = 'gruvbox'
 set nohlsearch

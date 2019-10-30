@@ -1,4 +1,4 @@
-rofi.theme: /usr/share/rofi/themes/gruvbox-dark-soft.rasi
+rofi.theme: /usr/share/rofi/themes/gruvbox-light-soft.rasi
 rofi.modi: combi,run,window
 rofi.matching: normal
 rofi.kb-remove-to-eol: Control+Shift+k

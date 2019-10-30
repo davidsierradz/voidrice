@@ -21,7 +21,7 @@ set suggestoptions=normal,visual,view,otherpane,keys,marks,registers
 set statusline="  %t %15s%= %20d %{&sort} %A %10u:%-7g "
 set timefmt="%F %H:%M"
 " set dotfiles
-colorscheme dark
+colorscheme light
 
 map <C-h> <C-w>h
 map <C-j> <C-w>j
