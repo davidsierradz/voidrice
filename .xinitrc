@@ -40,8 +40,14 @@ fi
 
 [ -f "$HOME/.xprofile" ] && . ~/.xprofile
 
-sleep 3
+sleep 8
+
+setbg &		# Set the background
+
+sleep 1
 
 rinit &
+
+sleep 1
 
 exec i3

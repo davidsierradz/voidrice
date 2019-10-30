@@ -75,8 +75,8 @@
 (projectile-mode +1)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
-(load-theme (quote gruvbox-dark-medium) t t)
-(load-theme (quote gruvbox-light-medium) t)
+(load-theme (quote gruvbox-dark-medium) t)
+(load-theme (quote gruvbox-light-medium) t t)
 
 ;; JavaScript
 (setq js-indent-level 2)

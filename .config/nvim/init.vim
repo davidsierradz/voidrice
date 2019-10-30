@@ -129,6 +129,30 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'PotatoesMaster/i3-vim-syntax'
 
 Plug 'kovetskiy/sxhkd-vim'
+
+Plug 'HiPhish/guile.vim'
+
+" Plug 'jpalardy/vim-slime'
+" let g:slime_target = "neovim"
+" Plug 'kassio/neoterm'
+Plug 'mtikekar/nvim-send-to-term'
+let g:send_disable_mapping = 1
+autocmd FileType scheme.guile nmap ,, <Plug>SendLine
+autocmd FileType scheme.guile nmap , <Plug>Send
+autocmd FileType scheme.guile vmap , <Plug>Send
+" autocmd FileType scheme.guile nmap < s$
+autocmd FileType scheme.guile set scrolloff=0
+" autocmd FileType scheme.guile let b:matchup_matchparen_enabled = 0
+Plug 'luochen1990/rainbow'
+let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
+let g:rainbow_conf = {
+      \   'separately': {
+      \       '*': 0,
+      \       'guile': {}
+      \   }
+      \}
+" Plug 'guns/vim-sexp'
+" let g:sexp_filetypes = ''
 "}}}
 
 " Initialize plugin system
