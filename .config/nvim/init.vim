@@ -448,6 +448,8 @@ nnoremap ; :
 nnoremap : ;
 vnoremap ; :
 vnoremap : ;
+
+nnoremap <F12> mzgggqG`z:delmarks z<cr>
 "--------------------------------End General Mappings--------------------------"
 "}}}
 
