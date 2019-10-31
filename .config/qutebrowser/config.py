@@ -1053,8 +1053,6 @@ config.bind('<Ctrl-2>', 'jseval javascript:[...document.querySelectorAll(\'tr.at
 config.bind('<Ctrl-3>', 'jseval javascript:document.getElementById("hnmain").width = "100%"; [...document.querySelectorAll(\'tr.athing.comtr:not(.noshow):not(.coll)\')].filter(e => e.querySelector(\'td.ind img\').attributes.width.value === \'80\').forEach(e => setTimeout(() => {e.querySelector(\'.togg\').click()}, 1));')
 #var style = document.createElement('style'); style.innerText = ''; document.head.appendChild(style)
 
-# For YouTube
-config.bind(',m', 'spawn nohup mpv --ytdl-format="bestvideo[height<=480]+bestaudio/best[height<=480]" {url}')
 
 
 #with config.pattern('*://news.ycombinator.com/item') as p:
@@ -1645,6 +1643,10 @@ config.bind('zo', 'run-with-count 3 zoom-out')
 config.bind(',r', 'spawn --userscript readability-js')
 config.bind(',t', 'hint links spawn nohup mpv --ytdl-format="bestvideo[height<=480]+bestaudio/best[height<=480]" {hint-url}')
 config.bind(',,', "hint all run jseval -q let q = document.querySelector('[src*=\"{hint-url}\"],[href*=\"{hint-url}\"]');q.setAttribute('tabIndex', '-1');q.focus()")
+# For YouTube
+config.bind(',m', 'spawn nohup mpv --ytdl-format="bestvideo[height<=480]+bestaudio/best[height<=480]" {url}')
+config.bind(',w', 'spawn nohup i3 "exec --no-startup-id $TERMINAL -- w3m {url}"')
+config.bind(',W', 'hint links spawn nohup i3 "exec --no-startup-id $TERMINAL -- w3m {hint-url}"')
 # config.bind(',;', "hint all run jseval -q console.log(this)")
 # config.bind('.', 'repeat-command')
 # config.bind('/', 'set-cmd-text /')

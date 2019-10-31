@@ -16,7 +16,7 @@ use_dictcommand 1
 dictcommand file:///$LIB/w3mdict.cgi
 multicol 0
 alt_entity 1
-graphic_char 0
+graphic_char 1
 display_borders 1
 fold_textarea 0
 display_ins_del 1
@@ -75,7 +75,7 @@ index_file
 mime_types ~/.mime.types, /usr/etc/mime.types
 mailcap ~/.w3m/mailcap, /usr/etc/w3m/mailcap
 urimethodmap ~/.w3m/urimethodmap, /usr/etc/w3m/urimethodmap
-editor /usr/bin/vi
+editor /usr/bin/nvim
 mailto_options 1
 mailer /usr/bin/mail
 extbrowser /usr/bin/qutebrowser

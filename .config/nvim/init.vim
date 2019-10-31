@@ -472,15 +472,12 @@ let g:ale_lint_delay = 0
 " Set gorgeous colors for marked lines to sane, readable combinations
 " working with any colorscheme.
 au VimEnter,BufEnter,ColorScheme *
-      \ exec "hi! ALEInfoLine
-      \ guifg=".(&background=='light'?'#808000':'#ffff00')."
-      \ guibg=".(&background=='light'?'#ffff00':'#555500') |
-      \ exec "hi! ALEWarningLine
-      \ guifg=".(&background=='light'?'#808000':'#ffff00')."
-      \ guibg=".(&background=='light'?'#ffff00':'#555500') |
-      \ exec "hi! ALEErrorLine
-      \ guifg=".(&background=='light'?'#ff0000':'#ff0000')."
-      \ guibg=".(&background=='light'?'#ffcccc':'#550000')
+      \ exec "hi! ALEInfoLine guifg=".(&background=='light'?'#808000':'#ffff00')." guibg=".(&background=='light'?'#ffff00':'#555500') |
+      \ exec "hi! ALEWarningLine guifg=".(&background=='light'?'#808000':'#ffff00')." guibg=".(&background=='light'?'#ffff00':'#555500') |
+      \ exec "hi! ALEErrorLine guifg=".(&background=='light'?'#ff0000':'#ff0000')." guibg=".(&background=='light'?'#ffcccc':'#550000') |
+      \ exec "hi! link ALEInfo ALEInfoLine" |
+      \ exec "hi! link ALEWarning ALEWarningLine" |
+      \ exec "hi! link ALEError ALEErrorLine"
 
 let g:ale_echo_msg_format = "%s - %linter%"
 
@@ -959,7 +956,7 @@ augroup initvim
   autocmd DiffUpdated * if &diff | syntax off | else | syntax on | endif
 
   autocmd filetype markdown setl iskeyword+=-
-        \ | setl spell spl=es,en noru nu rnu cul spf=~/.config/nvim/spell/es.utf-8.add
+        \ | setl spell spl=es,en noru nu rnu cul wrap spf=~/.config/nvim/spell/es.utf-8.add
         \ | setl dictionary+=/usr/share/dict/words,/usr/share/dict/spanish complete+=kspell
 
   " autocmd TermEnter * setlocal scrolloff=0

@@ -218,7 +218,7 @@ keymap G        END
 #Av. Pag = M-[6~    Re. Pag = M-[5~
 keymap  M-[6~   NEXT_PAGE
 keymap  M-[5~   PREV_PAGE
-keymap  SPCe     PEEK_LINK
+keymap  SPCf    PEEK_LINK
 keymap  SPCSPC  PEEK
 keymap  C-d     NEXT_PAGE
 keymap  C-u     PREV_PAGE
@@ -405,6 +405,8 @@ keymap M-m	MOUSE_TOGGLE
 #pendant change SC.View image in extern viewer
 keymap M-i      VIEW_IMAGE
 keymap M-I DISPLAY_IMAGE
+keymap C-c  STOP_IMAGE
+keymap `   COMMAND  "SET_OPTION  display_image=toggle ; RESHAPE"
 #Show Context menu. It has specific option for links under the cursor.
 keymap M-c      MENU
 
