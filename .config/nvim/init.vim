@@ -958,6 +958,10 @@ augroup initvim
   autocmd FilterWritePost * if &diff | syntax off | else | syntax on | endif
   autocmd DiffUpdated * if &diff | syntax off | else | syntax on | endif
 
+  autocmd filetype markdown setl iskeyword+=-
+        \ | setl spell spl=es,en noru nu rnu cul spf=~/.config/nvim/spell/es.utf-8.add
+        \ | setl dictionary+=/usr/share/dict/words,/usr/share/dict/spanish complete+=kspell
+
   " autocmd TermEnter * setlocal scrolloff=0
   " autocmd TermLeave * setlocal scrolloff=1
 augroup END

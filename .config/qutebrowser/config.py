@@ -1700,6 +1700,7 @@ config.bind('u', 'scroll-page 0 -0.6')
 # config.bind('<Ctrl-Tab>', 'tab-focus last')
 # config.bind('<Ctrl-U>', 'scroll-page 0 -0.5')
 # config.bind('<Ctrl-V>', 'enter-mode passthrough')
+config.bind('<Alt-`>', 'enter-mode passthrough')
 config.bind('x', 'tab-close')
 # config.bind('<Ctrl-W>', 'tab-close')
 # config.bind('<Ctrl-X>', 'navigate decrement')
@@ -1923,6 +1924,7 @@ config.bind('tsH', 'config-cycle -p -u *://*.{url:host}/* content.javascript.ena
 
 ## Bindings for passthrough mode
 # config.bind('<Shift-Escape>', 'leave-mode', mode='passthrough')
+config.bind('<Alt-`>', 'leave-mode', mode='passthrough')
 config.bind('<Alt-k>', 'tab-next', mode='passthrough')
 config.bind('<Alt-j>', 'tab-prev', mode='passthrough')
 config.bind('<Ctrl-t>', 'open -t', mode='passthrough')
