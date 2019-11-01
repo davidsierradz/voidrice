@@ -404,6 +404,7 @@ keymap M-u	LIST
 keymap M-m	MOUSE_TOGGLE
 #pendant change SC.View image in extern viewer
 keymap M-i      VIEW_IMAGE
+keymap SPCi      VIEW_IMAGE
 keymap M-I DISPLAY_IMAGE
 keymap C-c  STOP_IMAGE
 keymap `   COMMAND  "SET_OPTION  display_image=toggle ; RESHAPE"

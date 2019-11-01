@@ -430,7 +430,7 @@ nnoremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> 
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " See https://vi.stackexchange.com/questions/3738/toggle-bold-highlighting-for-comments-in-term-gui
-nnoremap yo1 :<C-R>=GetHighlight("Comment")["guifg"] ==# "#CCCCCC" ? "hi Comment guifg=#777777" : "hi Comment guifg=#CCCCCC"<CR><CR>
+" nnoremap yo1 :<C-R>=GetHighlight('Comment')['guifg'] ==# '#CCCCCC' ? 'hi Comment guifg=#777777' : 'hi Comment guifg=#CCCCCC'<CR><CR>
 
 " Toggles formatoptions to add comment after <CR> or o (and O).
 nnoremap yo2 :<C-R>=&formatoptions ==# "jql" ? "setlocal formatoptions+=cro" : "setlocal formatoptions-=cro"<CR><CR>
@@ -944,7 +944,6 @@ augroup initvim
 
   " Formatters.
   autocmd FileType javascript setlocal formatprg=prettier\ --parser\ babel
-  autocmd FileType javascript.jsx setlocal formatprg=prettier\ --parser\ babel
   autocmd FileType json setlocal formatprg=prettier\ --parser\ json
   autocmd FileType typescript setlocal formatprg=prettier\ --parser\ typescript
   autocmd FileType html setlocal formatprg=prettier\ --parser\ html
@@ -1054,6 +1053,11 @@ function! MyHighlights() abort
   " hi Type	      guifg=NONE guibg=NONE
   " hi Special    guifg=NONE guibg=NONE
   " hi Delimiter  guifg=NONE guibg=NONE
+  if &background ==# 'light'
+    nnoremap yo1 :<C-R>=GetHighlight("Comment")["guifg"] ==# "#CCCCCC" ? "hi Comment guifg=#777777" : "hi Comment guifg=#CCCCCC"<CR><CR>
+  else
+    nnoremap yo1 :<C-R>=GetHighlight("Comment")["guifg"] ==# "#777777" ? "hi Comment guifg=#333333" : "hi Comment guifg=#777777"<CR><CR>
+  endif
 endfunction
 
 augroup MyColors

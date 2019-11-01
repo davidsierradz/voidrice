@@ -180,6 +180,7 @@ bar {
 
 #bindsym $mod+Shift+Return         exec --no-startup-id samedir
 bindsym $mod+shift+Return          exec --no-startup-id /usr/bin/kitty -1 --instance-group "light-ones" -c ~/.config/kitty/kitty.conf -c ~/.config/kitty/light.conf
+bindsym $mod+mod1+Return           exec --no-startup-id /usr/bin/kitty -1 --instance-group "free-ones" -c ~/.config/kitty/kitty.conf
 
 bindsym $mod+space                 focus mode_toggle
 bindsym $mod+Shift+space           floating toggle

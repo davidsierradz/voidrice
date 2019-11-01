@@ -105,3 +105,8 @@ function terminal-scheme() {
     fi
   done
 }
+
+# Change background color of current (and child) kitty instance.
+function kbg() {
+  kitty @ set-colors --all --configured  ~/.config/kitty/kitty-themes/gruvbox_$1.conf
+}
