@@ -201,9 +201,9 @@ gh() {
 }
 
 function ol() {
-  ag -il --nocolor --nogroup --path-to-ignore ~/.agignore --skip-vcs-ignores --hidden -g "" \
+  rg --smart-case --files-with-matches --color never --no-heading --no-ignore --hidden '' \
     | fzf --bind "::execute(awk '{print \"+\"NR\" \"FILENAME}' {} | fzf)+abort" \
-    | xargs bash -c '</dev/tty nvim "$@"' ignoreme
+    | xargs "$SHELL" -c '</dev/tty nvim "$@"' ignoreme
 }
 
 # function select_cursor() {

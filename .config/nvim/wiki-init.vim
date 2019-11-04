@@ -321,13 +321,13 @@ nnoremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> 
 
 " Toggles Comment highlight guifg color, TODO: change colors based on background.
 " See https://vi.stackexchange.com/questions/3738/toggle-bold-highlighting-for-comments-in-term-gui
-nnoremap yo1 :<C-R>=GetHighlight("Comment")["guifg"] ==# "#CCCCCC" ? "hi Comment guifg=#999999" : "hi Comment guifg=#CCCCCC"<CR><CR>
+" nnoremap yo1 :<C-R>=GetHighlight('Comment')['guifg'] is# '#CCCCCC' ? 'hi Comment guifg=#999999' : 'hi Comment guifg=#CCCCCC'<CR><CR>
 
 " Toggles formatoptions to add comment after <CR> or o (and O).
-nnoremap yo2 :<C-R>=&formatoptions ==# "jql" ? "setlocal formatoptions+=cro" : "setlocal formatoptions-=cro"<CR><CR>
+nnoremap yo2 :<C-R>=&formatoptions !~# "cro" ? "setlocal formatoptions+=cro" : "setlocal formatoptions-=cro"<CR><CR>
 
 " Toggles conceallevel 0 to 3.
-nnoremap yo3 :<C-R>=&conceallevel ==# "0" ? "setlocal conceallevel=3" : "setlocal conceallevel=0"<CR><CR>
+nnoremap yo3 :<C-R>=&conceallevel is# 0 ? "set conceallevel=3" : "set conceallevel=0"<CR><CR>
 
 " Use U as redo.
 nnoremap U <c-r>
@@ -367,7 +367,7 @@ endfunction
 
 function! s:goyo_leave()
   " Quit Vim if this is the only remaining buffer
-  if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
+  if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) is# 1
     if b:quitting_bang
       qa!
     else
@@ -674,6 +674,11 @@ function! MyHighlights() abort
   highlight VimwikiLink guifg=#cb4b16
   highlight CursorLine ctermbg=NONE guibg=NONE
   highlight CursorLineNr ctermbg=NONE guibg=NONE
+  if &background is# 'light'
+    nnoremap yo1 :<C-R>=GetHighlight("Comment")["guifg"] is# "#CCCCCC" ? "hi Comment guifg=#777777" : "hi Comment guifg=#CCCCCC"<CR><CR>
+  else
+    nnoremap yo1 :<C-R>=GetHighlight("Comment")["guifg"] is# "#777777" ? "hi Comment guifg=#333333" : "hi Comment guifg=#777777"<CR><CR>
+  endif
 endfunction
 
 augroup MyColors

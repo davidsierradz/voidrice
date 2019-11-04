@@ -33,8 +33,9 @@ export LESS_TERMCAP_se="$(printf '%b' '[0m')"; a="${a%_}"
 export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"; a="${a%_}"
 export LESS_TERMCAP_ue="$(printf '%b' '[0m')"; a="${a%_}"
 
-export FZF_DEFAULT_COMMAND='ag -il --nocolor --nogroup --unrestricted --hidden -g ""'
-export FZF_DEFAULT_OPTS='--no-height --no-reverse'
+# export FZF_DEFAULT_COMMAND='ag -il --nocolor --nogroup --unrestricted --hidden -g ""'
+export FZF_DEFAULT_COMMAND='rg --smart-case --files-with-matches --color never --no-heading --no-ignore --hidden ""'
+export FZF_DEFAULT_OPTS='--no-height --no-reverse --bind "€:execute-silent(notify-send {})"'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS="--preview-window hidden:wrap --preview '(cat {} || tree -aC {}) 2> /dev/null | head -200' --bind '?:toggle-preview'"
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"

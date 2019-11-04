@@ -430,10 +430,10 @@ nnoremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> 
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " See https://vi.stackexchange.com/questions/3738/toggle-bold-highlighting-for-comments-in-term-gui
-" nnoremap yo1 :<C-R>=GetHighlight('Comment')['guifg'] ==# '#CCCCCC' ? 'hi Comment guifg=#777777' : 'hi Comment guifg=#CCCCCC'<CR><CR>
+" nnoremap yo1 :<C-R>=GetHighlight('Comment')['guifg'] is# '#CCCCCC' ? 'hi Comment guifg=#777777' : 'hi Comment guifg=#CCCCCC'<CR><CR>
 
 " Toggles formatoptions to add comment after <CR> or o (and O).
-nnoremap yo2 :<C-R>=&formatoptions ==# "jql" ? "setlocal formatoptions+=cro" : "setlocal formatoptions-=cro"<CR><CR>
+nnoremap yo2 :<C-R>=&formatoptions !~# "cro" ? "setlocal formatoptions+=cro" : "setlocal formatoptions-=cro"<CR><CR>
 
 " Choose one block in a 3-way merge resolution.
 if &diff
@@ -472,9 +472,9 @@ let g:ale_lint_delay = 0
 " Set gorgeous colors for marked lines to sane, readable combinations
 " working with any colorscheme.
 au VimEnter,BufEnter,ColorScheme *
-      \ exec "hi! ALEInfoLine guifg=".(&background=='light'?'#808000':'#ffff00')." guibg=".(&background=='light'?'#ffff00':'#555500') |
-      \ exec "hi! ALEWarningLine guifg=".(&background=='light'?'#808000':'#ffff00')." guibg=".(&background=='light'?'#ffff00':'#555500') |
-      \ exec "hi! ALEErrorLine guifg=".(&background=='light'?'#ff0000':'#ff0000')." guibg=".(&background=='light'?'#ffcccc':'#550000') |
+      \ exec "hi! ALEInfoLine guifg=".(&background is# 'light'?'#808000':'#ffff00')." guibg=".(&background is# 'light'?'#ffff00':'#555500') |
+      \ exec "hi! ALEWarningLine guifg=".(&background is# 'light'?'#808000':'#ffff00')." guibg=".(&background is# 'light'?'#ffff00':'#555500') |
+      \ exec "hi! ALEErrorLine guifg=".(&background is# 'light'?'#ff0000':'#ff0000')." guibg=".(&background is# 'light'?'#ffcccc':'#550000') |
       \ exec "hi! link ALEInfo ALEInfoLine" |
       \ exec "hi! link ALEWarning ALEWarningLine" |
       \ exec "hi! link ALEError ALEErrorLine"
@@ -518,7 +518,7 @@ let g:EditorConfig_max_line_indicator = "none"
 "}}}
 ""/ fzf.vim {{{
 "/
-let $FZF_DEFAULT_COMMAND = 'ag -il --nocolor --nogroup --path-to-ignore ~/.ignore --skip-vcs-ignores --hidden -g ""'
+let $FZF_DEFAULT_COMMAND = 'rg --smart-case --files-with-matches --color never --no-heading --no-ignore --hidden ""'
 
 let $FZF_PREVIEW_COMMAND = 'cat {}'
 
@@ -543,20 +543,32 @@ let g:fzf_action = {
 " Show preview window with '?'.
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>,
-    \ <bang>0 ? fzf#vim#with_preview('up:60%')
-    \         : fzf#vim#with_preview('right:50%:hidden', '?'),
+    \ fzf#vim#with_preview('right:50%:hidden', '?'),
     \ <bang>0)
 
 " Show preview window with '?'
 command! -bang -nargs=* Ag
     \ call fzf#vim#ag(<q-args>,
-    \ '--color-path 400 --color-line-number 400 --color-match 400 --hidden',
-    \ <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
-    \         : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
+    \ '--color-path 400 --color-line-number 400 --color-match 400 --hidden --path-to-ignore ~/.ignore --skip-vcs-ignores',
+    \ fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
     \ <bang>0)
 
+" rg --smart-case --files-with-matches --color never --no-heading --no-ignore --hidden ""
+command! -bang -nargs=* Rg
+    \ call fzf#vim#grep(
+    \   'rg --column --line-number --no-heading --color=always --smart-case --no-ignore '.shellescape(<q-args>), 1,
+    \   fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
+    \   <bang>0)
+
+command! -bang -nargs=* Rgg
+    \ call fzf#vim#grep(
+    \   'rg --column --line-number --no-heading --color=always --smart-case --no-ignore '.shellescape(<q-args>), 1,
+    \   fzf#vim#with_preview('right:50%:hidden', '?'),
+    \   <bang>0)
+
 " FZF mappings.
-nnoremap <A-t> :Ag<CR><C-\><C-n>0i
+nnoremap <A-t> :Rg<CR><C-\><C-n>0i
+nnoremap <A-S-t> :Rgg<CR><C-\><C-n>0i
 nnoremap <A-e> :History<CR><C-\><C-n>0i
 nnoremap <A-c> :Snippets<CR><C-\><C-n>0i
 nnoremap <A-b> :Buffers<CR><C-\><C-n>0i
@@ -594,7 +606,7 @@ if has('nvim') && exists('&winblend') && &termguicolors
     call remove(g:fzf_colors, 'bg')
   endif
 
-  if stridx($FZF_DEFAULT_OPTS, '--border') == -1
+  if stridx($FZF_DEFAULT_OPTS, '--border') is# -1
     let $FZF_DEFAULT_OPTS .= ' --border --margin=0,2'
   endif
 
@@ -1005,7 +1017,7 @@ function! LinterStatus() abort
     let l:all_errors = l:counts.error + l:counts.style_error
     let l:all_non_errors = l:counts.total - l:all_errors
 
-    return l:counts.total == 0 ? '' : printf(
+    return l:counts.total is# 0 ? '' : printf(
     \   '%dW %dE',
     \   all_non_errors,
     \   all_errors
@@ -1053,10 +1065,10 @@ function! MyHighlights() abort
   " hi Type	      guifg=NONE guibg=NONE
   " hi Special    guifg=NONE guibg=NONE
   " hi Delimiter  guifg=NONE guibg=NONE
-  if &background ==# 'light'
-    nnoremap yo1 :<C-R>=GetHighlight("Comment")["guifg"] ==# "#CCCCCC" ? "hi Comment guifg=#777777" : "hi Comment guifg=#CCCCCC"<CR><CR>
+  if &background is# 'light'
+    nnoremap yo1 :<C-R>=GetHighlight("Comment")["guifg"] is# "#CCCCCC" ? "hi Comment guifg=#777777" : "hi Comment guifg=#CCCCCC"<CR><CR>
   else
-    nnoremap yo1 :<C-R>=GetHighlight("Comment")["guifg"] ==# "#777777" ? "hi Comment guifg=#333333" : "hi Comment guifg=#777777"<CR><CR>
+    nnoremap yo1 :<C-R>=GetHighlight("Comment")["guifg"] is# "#777777" ? "hi Comment guifg=#333333" : "hi Comment guifg=#777777"<CR><CR>
   endif
 endfunction
 

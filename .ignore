@@ -22,3 +22,5 @@ manjaro/
 .cache/
 yarn.lock
 package-lock.json
+.npm/
+.cargo/
