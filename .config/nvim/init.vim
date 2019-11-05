@@ -88,6 +88,8 @@ Plug 'vifm/vifm.vim'
 
 Plug 'tpope/vim-fugitive'
 
+Plug 'rbong/vim-flog'
+
 Plug 'lambdalisue/suda.vim'
 "}}}
 
@@ -518,7 +520,7 @@ let g:EditorConfig_max_line_indicator = "none"
 "}}}
 ""/ fzf.vim {{{
 "/
-let $FZF_DEFAULT_COMMAND = 'rg --smart-case --files-with-matches --color never --no-heading --no-ignore --hidden ""'
+let $FZF_DEFAULT_COMMAND = 'rg --smart-case --files-with-matches --color never --no-heading --no-ignore-vcs --hidden ""'
 
 let $FZF_PREVIEW_COMMAND = 'cat {}'
 
@@ -556,7 +558,7 @@ command! -bang -nargs=* Ag
 " rg --smart-case --files-with-matches --color never --no-heading --no-ignore --hidden ""
 command! -bang -nargs=* Rg
     \ call fzf#vim#grep(
-    \   'rg --column --line-number --no-heading --color=always --smart-case --no-ignore '.shellescape(<q-args>), 1,
+    \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
     \   fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
     \   <bang>0)
 
@@ -626,6 +628,19 @@ else
   " FZF position.
   let g:fzf_layout = { 'window': '-tabnew' }
 endif
+"}}}
+""/ gfi.vim {{{
+"/
+" Open files in splits.
+function! GFI_split(type) abort
+  let g:gfi_open_file_command = a:type
+  call gfi#goto_file()
+  let g:gfi_open_file_command = 'edit'
+endf
+
+nnoremap gvf :call GFI_split('vsplit')<CR>
+nnoremap gsf :call GFI_split('split')<CR>
+nnoremap gtf :call GFI_split('tabnew')<CR>
 "}}}
 ""/ lightline.vim {{{
 "/
