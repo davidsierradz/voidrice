@@ -1,3 +1,4 @@
 #!/bin/bash
+
 cd /home/neuromante/notes/
-git pull
+git pull > >(systemd-cat -t rinit -p info) 2> >(systemd-cat -t rinit -p emerg)

@@ -1,13 +1,6 @@
 #!/bin/bash
-REBOOT=$( systemctl list-jobs | egrep -q 'reboot.target.*start' && echo "rebooting" || echo "not_rebooting" )
-if [ $REBOOT = "not_rebooting" ]; then
-  ########################################################################
-  # Put Bash commands here to be executed on shutdown but not on reboot. #
-  # For example, backup home directories to an external USB HDD.         #
-  ########################################################################
-  # ping -c 1 github.com | tee /home/neuromante/pinggithub 
-  cd /home/neuromante/notes/
-  git add --all
-  git commit --message="add notes $(date +%Y-%m-%d_%H:%M:%S)"
-  git push
-fi
+
+cd /home/neuromante/notes/
+git add --all
+git commit --message="add notes $(date +%Y-%m-%d_%H:%M:%S)"
+git push > >(systemd-cat -t ronshut -p info) 2> >(systemd-cat -t ronshut -p emerg)

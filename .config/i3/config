@@ -66,7 +66,7 @@ mode "$mode_system" {
   bindsym e             exec --no-startup-id i3-msg exit, mode "default"
   bindsym h             exec --no-startup-id i3exit hibernate, mode "default"
   bindsym r             exec --no-startup-id systemctl reboot, mode "default"
-  bindsym Shift+s       exec --no-startup-id systemctl poweroff, mode "default"
+  bindsym Shift+s       exec --no-startup-id ronshut && systemctl poweroff, mode "default"
   bindsym Return        mode "default"
   bindsym Escape        mode "default"
 }
@@ -228,6 +228,7 @@ bindsym $mod+a                     mode "$mode_run"
 bindsym $mod+Ctrl+a                focus parent
 
 #bindsym $mod+b                    bar mode toggle
+# bindsym $mod+Shift+b               floating toggle; sticky toggle; exec --no-startup-id "hover left &> /tmp/out"
 bindsym $mod+Shift+b               floating toggle; sticky toggle; exec --no-startup-id hover left
 
 bindsym $mod+c                     move position center

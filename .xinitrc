@@ -32,4 +32,8 @@ fi
 
 [ -f "$HOME/.xprofile" ] && . ~/.xprofile
 
+sleep 3
+
+rinit &
+
 exec i3
