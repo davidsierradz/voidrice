@@ -5,3 +5,11 @@ Xft.hinting: true
 Xft.hintstyle: hintlight
 Xft.lcdfilter: lcddefault
 Xft.rgba: rgb
+
+XTerm.termName: xterm-256color
+XTerm.vt100.locale: true
+XTerm.vt100.metaSendsEscape: true
+XTerm.vt100.faceName: Iosevka Term Extralight:size=20:antialias=true:hinting=true
+XTerm.vt100.boldFont: Iosevka Term Semibold:size=20:antialias=true:hinting=true
+
+#include ".config/xterm/light"

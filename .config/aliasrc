@@ -97,6 +97,9 @@ function terminal-scheme() {
   fi
   vifm_config_file=~/.config/vifm/vifmrc
   sed -i "s#^\(colorscheme\s\).*#\1$1#g" $vifm_config_file
+  xresources_config_file=~/.Xresources
+  sed -i "s#^\(\#include \".config/xterm/*\).*#\1$1\"#g" $xresources_config_file
+  xrdb -merge ~/.Xresources
   for i in $( nvr --serverlist ); do
     if [[ $1 == 'light' ]]; then
       nvr --servername $i  --remote-send '<c-\><c-n>;set background=light<cr>'

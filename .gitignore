@@ -72,6 +72,8 @@
 !.config/vifm/vifmrc
 !.config/wall.jpg
 !.config/wall.png.bak
+!.config/xterm/dark
+!.config/xterm/light
 !.config/zathura/zathurarc
 !.emacs.d/init.el
 !.gitconfig

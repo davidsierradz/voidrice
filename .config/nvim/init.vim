@@ -309,7 +309,7 @@ nnoremap <expr> k v:count ? 'k' : 'gk'
 set pastetoggle=<F2>
 
 " Use <Alt-L> to clear the highlighting of :set hlsearch.
-nnoremap <C-l> :syntax sync fromstart<CR>:nohlsearch<CR>:diffupdate<CR>:echo<CR>
+nnoremap <silent> <C-l> :syntax sync fromstart <bar> nohlsearch <bar> diffupdate <bar> call lightline#enable() <bar> echo<CR>
 
 " Reloads a buffer.
 nnoremap <leader>r :e!<CR>
@@ -845,6 +845,8 @@ augroup dirvish_events
         \ silent! unmap <buffer> <C-p>
   autocmd FileType dirvish
         \ nnoremap <nowait><buffer><silent> <M-n> <C-\><C-n>k:call feedkeys("p")<CR>
+  autocmd FileType dirvish
+        \ setlocal cursorline
 augroup END
 "}}}
 ""/ vim-easymotion {{{
@@ -1061,7 +1063,7 @@ endfunction
 function! MyHighlights() abort
   highlight MatchParen guibg=NONE gui=bold
   highlight ErrorMsg gui=reverse guifg=#dc322f guibg=#fdf6e3
-  highlight CursorLine guibg=NONE
+  " highlight CursorLine guibg=NONE
   if exists('g:loaded_lightline')
     runtime plugin/lightline-gruvbox.vim
     call lightline#colorscheme()
