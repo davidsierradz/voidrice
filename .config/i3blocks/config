@@ -60,7 +60,7 @@ interval=5
 
 [clock]
 label=📅
-interval=30
+interval=60
 
 [internet]
 interval=10
