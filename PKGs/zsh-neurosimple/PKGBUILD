@@ -1,7 +1,7 @@
 # Maintainer: David Sierra DiazGranados <davidsierradz at gmail dot com>
 _name='neurosimple-oh-my-zsh-theme'
 pkgname="${_name}-git"
-pkgver=2
+pkgver=3
 pkgrel=1
 pkgdesc='Neuro simple theme'
 url='https://github.com/davidsierradz/neurosimple-oh-my-zsh-theme'

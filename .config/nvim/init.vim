@@ -511,7 +511,7 @@ nmap <silent> ]c <Plug>(ale_next_wrap)
 ""/ close-buffers.vim {{{
 "/
 " Call close-buffers.vim plugin to list an options menu.
-nnoremap <silent> <leader>bd :CloseBuffersMenu<CR>
+nnoremap <silent> <leader>bd :Bwipeout menu<CR>
 "}}}
 ""/ editorconfig/editorconfig-vim {{{
 "/

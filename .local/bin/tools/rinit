@@ -2,3 +2,4 @@
 
 cd /home/neuromante/notes/
 git pull > >(systemd-cat -t rinit -p info) 2> >(systemd-cat -t rinit -p emerg)
+/usr/bin/notify-send "done updating notes!"
