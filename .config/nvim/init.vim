@@ -385,7 +385,6 @@ vnoremap L g_
 " Swap join lines behaviour.
 nnoremap <silent> gJ mzJ`zldiw:delmarks z<cr>
 
-
 " Toggle highlighting the search string.
 nnoremap <silent> <F1> :set hlsearch!<cr>
 
@@ -427,9 +426,6 @@ inoremap <M-BS> <Right><BS>
 nnoremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
       \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-
-" Save file as sudo on files that require root permission. (NOT WORKING)
-cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 " See https://vi.stackexchange.com/questions/3738/toggle-bold-highlighting-for-comments-in-term-gui
 " nnoremap yo1 :<C-R>=GetHighlight('Comment')['guifg'] is# '#CCCCCC' ? 'hi Comment guifg=#777777' : 'hi Comment guifg=#CCCCCC'<CR><CR>
@@ -486,9 +482,13 @@ let g:ale_echo_msg_format = "%s - %linter%"
 "let g:ale_set_quickfix = 1
 
 let g:ale_linters = {
+      \ 'markdown': ['markdownlint'],
+      \ 'vimwiki': ['markdownlint'],
       \ 'javascript': ['eslint'],
       \ 'css': ['stylelint'],
       \}
+
+let g:ale_linter_aliases = {'vimwiki': 'markdown'}
 
 let g:ale_fixers = {
       \ 'css': ['prettier'],
@@ -497,16 +497,22 @@ let g:ale_fixers = {
       \ 'yaml': ['prettier'],
       \ 'javascript': ['prettier'],
       \ 'json': ['prettier'],
-      \ 'typescript': ['prettier']
+      \ 'typescript': ['prettier'],
+      \ 'markdown': ['prettier'],
+      \ 'vimwiki': ['prettier']
       \ }
 
 let g:ale_fix_on_save = 0
+
+let g:ale_markdown_mdl_options = '--config ~/notes/.markdownlintrc'
 
 "let g:ale_javascript_prettier_options = '--single-quote --trailing-comma all --no-semi'
 
 " Navigate ALE errors.
 nmap <silent> [c <Plug>(ale_previous_wrap)
 nmap <silent> ]c <Plug>(ale_next_wrap)
+
+let g:ale_linters_explicit = 1
 "}}}
 ""/ close-buffers.vim {{{
 "/
@@ -762,9 +768,9 @@ let g:pear_tree_pairs = {
 
 let g:pear_tree_repeatable_expand = 0
 let g:pear_tree_map_special_keys = 0
-let g:pear_tree_smart_openers = 1
-let g:pear_tree_smart_closers = 1
-let g:pear_tree_smart_backspace = 1
+let g:pear_tree_smart_openers = 0
+let g:pear_tree_smart_closers = 0
+let g:pear_tree_smart_backspace = 0
 
 imap <BS> <Plug>(PearTreeBackspace)
 imap <CR> <Plug>(PearTreeExpand)
@@ -1068,20 +1074,6 @@ function! MyHighlights() abort
     runtime plugin/lightline-gruvbox.vim
     call lightline#colorscheme()
   endif
-  " highlight clear
-  " if exists("syntax_on")
-  "   syntax reset
-  " endif
-  " hi Comment    guifg=#CCCCCC guibg=NONE
-  " hi String     guifg=#008EC4 guibg=NONE
-  " hi Constant   guifg=NONE guibg=NONE
-  " hi Identifier guifg=NONE guibg=NONE
-  " hi Function   guifg=NONE guibg=NONE
-  " hi Statement  guifg=NONE guibg=NONE
-  " hi PreProc    guifg=NONE guibg=NONE
-  " hi Type	      guifg=NONE guibg=NONE
-  " hi Special    guifg=NONE guibg=NONE
-  " hi Delimiter  guifg=NONE guibg=NONE
   if &background is# 'light'
     nnoremap yo1 :<C-R>=GetHighlight("Comment")["guifg"] is# "#CCCCCC" ? "hi Comment guifg=#777777" : "hi Comment guifg=#CCCCCC"<CR><CR>
   else

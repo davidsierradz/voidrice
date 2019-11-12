@@ -71,7 +71,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
 
 " markdown preview plugin for (neo)vim.
-" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 "}}}
 
 "-------Completions and omnifuncs------- {{{
@@ -80,6 +80,9 @@ Plug 'SirVer/ultisnips'
 
 " List of snippets for Ultisnips.
 Plug 'honza/vim-snippets'
+
+" Syntax checker and linter.
+Plug 'w0rp/ale'
 "}}}
 
 " Initialize plugin system
@@ -219,7 +222,7 @@ nnoremap <expr> k v:count ? 'k' : 'gk'
 set pastetoggle=<F2>
 
 " Use <Alt-L> to clear the highlighting of :set hlsearch.
-nnoremap <C-l> :syntax sync fromstart<CR>:nohlsearch<CR>:diffupdate<CR>:echo<CR>
+nnoremap <silent> <C-l> :syntax sync fromstart <bar> nohlsearch <bar> diffupdate <bar> echo<CR>
 
 " Reloads a buffer.
 nnoremap <leader>r :e!<CR>
@@ -275,7 +278,7 @@ noremap L g_
 vnoremap L g_
 
 " Swap join lines behaviour.
-nnoremap gJ J
+nnoremap <silent> gJ mzJ`zldiw:delmarks z<cr>
 
 " Toggle highlighting the search string.
 nnoremap <silent> <F1> :set hlsearch!<cr>
@@ -319,7 +322,6 @@ nnoremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> 
       \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
       \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
-" Toggles Comment highlight guifg color, TODO: change colors based on background.
 " See https://vi.stackexchange.com/questions/3738/toggle-bold-highlighting-for-comments-in-term-gui
 " nnoremap yo1 :<C-R>=GetHighlight('Comment')['guifg'] is# '#CCCCCC' ? 'hi Comment guifg=#999999' : 'hi Comment guifg=#CCCCCC'<CR><CR>
 
@@ -336,11 +338,70 @@ nnoremap ; :
 nnoremap : ;
 vnoremap ; :
 vnoremap : ;
+
+nnoremap <F12> mzgggqG`z:delmarks z<cr>
 "--------------------------------End General Mappings--------------------------"
 "}}}
 
 
 "--------------------------------Plugins Configuration-------------------------"{{{
+""/ ale.vim {{{
+"/
+" Don't use the sign column/gutter for ALE.
+let g:ale_set_signs = 1
+set signcolumn=no
+
+" Lint always in Normal Mode.
+let g:ale_lint_on_text_changed = 'normal'
+
+" Set ALE's 200ms delay to zero.
+let g:ale_lint_delay = 0
+
+" Set gorgeous colors for marked lines to sane, readable combinations
+" working with any colorscheme.
+au VimEnter,BufEnter,ColorScheme *
+      \ exec "hi! ALEInfoLine guifg=".(&background is# 'light'?'#808000':'#ffff00')." guibg=".(&background is# 'light'?'#ffff00':'#555500') |
+      \ exec "hi! ALEWarningLine guifg=".(&background is# 'light'?'#808000':'#ffff00')." guibg=".(&background is# 'light'?'#ffff00':'#555500') |
+      \ exec "hi! ALEErrorLine guifg=".(&background is# 'light'?'#ff0000':'#ff0000')." guibg=".(&background is# 'light'?'#ffcccc':'#550000') |
+      \ exec "hi! link ALEInfo ALEInfoLine" |
+      \ exec "hi! link ALEWarning ALEWarningLine" |
+      \ exec "hi! link ALEError ALEErrorLine"
+
+let g:ale_echo_msg_format = "%s - %linter%"
+
+"let g:ale_set_quickfix = 1
+
+let g:ale_linters = {
+      \ 'markdown': ['markdownlint'],
+      \ 'vimwiki': ['markdownlint'],
+      \}
+
+let g:ale_linter_aliases = {'vimwiki': 'markdown'}
+
+let g:ale_fixers = {
+      \ 'css': ['prettier'],
+      \ 'scss': ['prettier'],
+      \ 'html': ['prettier'],
+      \ 'yaml': ['prettier'],
+      \ 'javascript': ['prettier'],
+      \ 'json': ['prettier'],
+      \ 'typescript': ['prettier'],
+      \ 'markdown': ['prettier'],
+      \ 'vimwiki': ['prettier']
+      \ }
+
+let g:ale_fix_on_save = 1
+
+let g:ale_markdown_mdl_options = '--config ~/notes/.markdownlintrc'
+
+"let g:ale_javascript_prettier_options = '--single-quote --trailing-comma all --no-semi'
+
+" Navigate ALE errors.
+nmap <silent> [c <Plug>(ale_previous_wrap)
+nmap <silent> ]c <Plug>(ale_next_wrap)
+
+let g:ale_linters_explicit = 1
+"}}}
 ""/ close-buffers.vim {{{
 "/
 " Call close-buffers.vim plugin to list an options menu.
@@ -408,9 +469,9 @@ let g:pear_tree_pairs = {
 
 let g:pear_tree_repeatable_expand = 0
 let g:pear_tree_map_special_keys = 0
-let g:pear_tree_smart_openers = 1
-let g:pear_tree_smart_closers = 1
-let g:pear_tree_smart_backspace = 1
+let g:pear_tree_smart_openers = 0
+let g:pear_tree_smart_closers = 0
+let g:pear_tree_smart_backspace = 0
 
 imap <BS> <Plug>(PearTreeBackspace)
 imap <CR> <Plug>(PearTreeExpand)
@@ -611,6 +672,9 @@ augroup initvim
 
   " Surround ** with € (Right Control).
   autocmd FileType vimwiki let b:surround_8364 = "**\r**"
+
+  " Formatters.
+  autocmd FileType vimwiki setlocal formatprg=prettier\ --parser\ markdown
 augroup END
 "--------------------------------End Auto Commands-----------------------------"
 "}}}

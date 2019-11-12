@@ -66,7 +66,7 @@ if [ "$status" = "Not logged in." ]; then
     lpass login "$EMAIL"
 fi
 
-line=$(lpass ls -l | cut -c 18- | rofi -dmenu -i -p "Select the $MODE to copy" "$@")
+line=$(lpass ls -l | cut -c 18- | rofi -m -1 -sidebar-mode -location 2 -dmenu -i -p "Select the $MODE to copy" "$@")
 
 if [ -n "$line" ]; then
     pass_id=$(echo "$line" | grep -Po '\[id: ([0-9]*)' | cut -d ' ' -f 2)

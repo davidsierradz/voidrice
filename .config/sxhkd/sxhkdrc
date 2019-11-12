@@ -2,11 +2,11 @@
 super + Return
 	$TERMINAL -1
 alt + Tab
-	rofi -m primary -location 2 -show window& sleep 0.30 && xdotool key Down
+	rofi -m -1 -sidebar-mode -location 2 -show window& sleep 0.30 && xdotool key Down
 #super + d
 #	dmenu_run
 super + d
-	rofi -m primary -location 2 -show run
+	rofi -m -1 -sidebar-mode -location 2 -show run
 super + shift + d
 	lastpass-rofi davidsierradz@gmail.com -t 9 -m password
 super + control + d
@@ -26,7 +26,7 @@ super + control + d
 super + shift + a
 	$TERMINAL -1 pulsemixer; pkill -RTMIN+10 i3blocks
 super + shift + m
-	rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
+	rofi -m -1 -sidebar-mode -location 2 -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
 #super + shift + c
 #	camtoggle
 #super + shift + e
