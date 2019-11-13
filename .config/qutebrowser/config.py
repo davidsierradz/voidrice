@@ -1645,8 +1645,8 @@ config.bind(',t', 'hint links spawn nohup mpv --ytdl-format="bestvideo[height<=4
 config.bind(',,', "hint all run jseval -q let q = document.querySelector('[src*=\"{hint-url}\"],[href*=\"{hint-url}\"]');q.setAttribute('tabIndex', '-1');q.focus()")
 # For YouTube
 config.bind(',m', 'spawn nohup mpv --ytdl-format="bestvideo[height<=480]+bestaudio/best[height<=480]" {url}')
-config.bind(',w', 'spawn nohup i3 "exec --no-startup-id $TERMINAL -- w3m {url}"')
-config.bind(',W', 'hint links spawn nohup i3 "exec --no-startup-id $TERMINAL -- w3m {hint-url}"')
+config.bind(',w', 'spawn nohup i3 "exec --no-startup-id xterm -e w3m {url}"')
+config.bind(',W', 'hint links spawn nohup i3 "exec --no-startup-id xterm -e w3m {hint-url}"')
 # config.bind(',;', "hint all run jseval -q console.log(this)")
 # config.bind('.', 'repeat-command')
 # config.bind('/', 'set-cmd-text /')

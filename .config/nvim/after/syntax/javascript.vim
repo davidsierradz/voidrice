@@ -1,15 +1,3 @@
-" syntax clear javascriptBOMWindowMethod
-" syntax keyword javascriptBOMWindowMethod alert atob blur btoa clearImmediate clearInterval nextgroup=javascriptFuncCallArg
-" syntax keyword javascriptBOMWindowMethod clearTimeout close confirm dispatchEvent nextgroup=javascriptFuncCallArg
-" syntax keyword javascriptBOMWindowMethod focus getAttention getAttentionWithCycleCount nextgroup=javascriptFuncCallArg
-" syntax keyword javascriptBOMWindowMethod getComputedStyle getDefaulComputedStyle getSelection nextgroup=javascriptFuncCallArg
-" syntax keyword javascriptBOMWindowMethod matchMedia maximize moveBy moveTo open openDialog nextgroup=javascriptFuncCallArg
-" syntax keyword javascriptBOMWindowMethod postMessage print prompt removeEventListener nextgroup=javascriptFuncCallArg
-" syntax keyword javascriptBOMWindowMethod requestAnimationFrame requestIdleCallback nextgroup=javascriptFuncCallArg
-" syntax keyword javascriptBOMWindowMethod resizeBy resizeTo restore scroll scrollBy nextgroup=javascriptFuncCallArg
-" syntax keyword javascriptBOMWindowMethod scrollByLines scrollByPages scrollTo setCursor nextgroup=javascriptFuncCallArg
-" syntax keyword javascriptBOMWindowMethod setImmediate setInterval setResizable setTimeout nextgroup=javascriptFuncCallArg
-" syntax keyword javascriptBOMWindowMethod showModalDialog sizeToContent stop updateCommands nextgroup=javascriptFuncCallArg
-" syntax cluster props add=javascriptBOMWindowMethod
-" if exists("did_javascript_hilink") | HiLink javascriptBOMWindowMethod Structure
-" endif
+syntax clear jsBuiltinValues
+syntax keyword jsBuiltinValues undefined null NaN true false Infinity globalThis global contained
+" syntax keyword jsBuiltinValues window document module require console arguments contained

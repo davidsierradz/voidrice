@@ -50,5 +50,16 @@ macro 6 set browser "w3m"; six ; set browser linkhandler
 macro 7 set browser "w3m"; seven ; set browser linkhandler
 macro 8 set browser "w3m"; eight ; set browser linkhandler
 macro 9 set browser "w3m"; nine ; set browser linkhandler
+macro W set browser "xterm -e w3m"; open-in-browser ; set browser linkhandler
+macro ) set browser "xterm -e w3m"; zero ; set browser linkhandler
+macro ! set browser "xterm -e w3m"; one ; set browser linkhandler
+macro @ set browser "xterm -e w3m"; two ; set browser linkhandler
+macro \# set browser "xterm -e w3m"; three ; set browser linkhandler
+macro $ set browser "xterm -e w3m"; four ; set browser linkhandler
+macro % set browser "xterm -e w3m"; five ; set browser linkhandler
+macro ^ set browser "xterm -e w3m"; six ; set browser linkhandler
+macro & set browser "xterm -e w3m"; seven ; set browser linkhandler
+macro * set browser "xterm -e w3m"; eight ; set browser linkhandler
+macro ( set browser "xterm -e w3m"; nine ; set browser linkhandler
 macro p set browser "dmenuhandler"; open-in-browser ; set browser linkhandler
 macro c set browser "xsel -b <<<" ; open-in-browser ; set browser linkhandler

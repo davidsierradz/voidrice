@@ -94,15 +94,15 @@ Plug 'lambdalisue/suda.vim'
 "}}}
 
 "-------Completions and omnifuncs------- {{{
-" " Autocompletion framework.
-" Plug 'ncm2/ncm2'
-" " ncm2 requires nvim-yarp
-" Plug 'roxma/nvim-yarp'
+" Autocompletion framework.
+Plug 'ncm2/ncm2'
+" ncm2 requires nvim-yarp
+Plug 'roxma/nvim-yarp'
 " " Some completions
-" Plug 'ncm2/ncm2-bufword'
-" Plug 'ncm2/ncm2-path'
-" Plug 'ncm2/ncm2-ultisnips'
-" Plug 'fgrsnau/ncm2-otherbuf', { 'branch': 'ncm2' }
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-ultisnips'
+Plug 'fgrsnau/ncm2-otherbuf'
 
 " Snippet Engine.
 Plug 'SirVer/ultisnips'
@@ -118,7 +118,8 @@ Plug 'w0rp/ale'
 
 "------Syntax files and Languages------- {{{
 " Yet Another JavaScript Syntax for Vim.
-Plug 'pangloss/vim-javascript'
+" Plug 'pangloss/vim-javascript'
+Plug 'yuezk/vim-js'
 
 " React JSX syntax highlighting and indenting for vim.
 Plug 'maxmellon/vim-jsx-pretty'
@@ -713,13 +714,13 @@ let g:lightline#trailing_whitespace#indicator='•'
 
 "call timer_start(500, function('s:ncm2_start'))
 
-"" note that must keep noinsert in completeopt, the others is optional
-""set completeopt=noinsert,menuone,noselect
+" note that must keep noinsert in completeopt, the others is optional
+" set completeopt=noinsert,menuone,noselect
 
-""set completeopt=menuone
+set completeopt=noinsert,menuone,noselect
 
-"au User Ncm2PopupOpen set completeopt=noinsert,menuone,noselect
-"au User Ncm2PopupClose set completeopt=menuone
+" au User Ncm2PopupOpen set completeopt=noinsert,menuone,noselect
+" au User Ncm2PopupClose set completeopt=menuone
 
 "" supress the annoying 'match x of y', 'The only match' and 'Pattern not
 "" found' messages
@@ -738,9 +739,9 @@ let g:lightline#trailing_whitespace#indicator='•'
 "" line.
 "imap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<Plug>(PearTreeExpand)")
 
-"" Use <TAB> to select the popup menu:
-"inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
-"inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+" Use <TAB> to select the popup menu:
+inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
 
 "" Open the popup menu completion.
 "imap <C-Space> <c-r>=ncm2#force_trigger()<cr>
@@ -995,6 +996,8 @@ augroup initvim
 
   " autocmd TermEnter * setlocal scrolloff=0
   " autocmd TermLeave * setlocal scrolloff=1
+  autocmd InsertEnter * set noignorecase
+  autocmd InsertLeave * set ignorecase
 augroup END
 "--------------------------------End Auto Commands-----------------------------"
 "}}}

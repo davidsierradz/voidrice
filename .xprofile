@@ -13,3 +13,4 @@ dunst &			# dunst for notifications
 libinput-gestures-setup start &
 greenclip daemon &
 remaps &
+xiccd &

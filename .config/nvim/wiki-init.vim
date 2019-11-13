@@ -533,6 +533,8 @@ inoremap <F4> <C-R>=strftime("%Y-%m-%d_%H:%M:%S")<CR>
 iab <expr> dts strftime("%Y-%m-%d_%H:%M:%S")
 
 autocmd FileType vimwiki setlocal fdm=marker fmr={{{,}}}
+
+let g:vimwiki_listsyms = ' .oOx'
 "}}}
 ""/ vim-boxdraw {{{
 " The cursor can go nuts.
