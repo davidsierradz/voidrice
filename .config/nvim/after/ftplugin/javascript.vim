@@ -1,5 +1,5 @@
-set foldmethod=syntax
-set foldlevel=15
+set foldmethod=indent
+set foldlevel=999
 
 let b:pear_tree_pairs = extend(deepcopy(g:pear_tree_pairs), {
       \ '`': {'closer': '`'},

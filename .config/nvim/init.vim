@@ -487,6 +487,8 @@ let g:ale_linters = {
       \ 'vimwiki': ['markdownlint'],
       \ 'javascript': ['eslint'],
       \ 'css': ['stylelint'],
+      \ 'sh': ['shell'],
+      \ 'bash': ['shell'],
       \}
 
 let g:ale_linter_aliases = {'vimwiki': 'markdown'}
