@@ -540,7 +540,7 @@ endfunction
 
 function! s:goto_line(lines) abort
   silent! exe 'e '.a:lines[0]
-  call timer_start(10, {-> feedkeys(':') })
+  call timer_start(10, {-> feedkeys(':', 'n') })
 endfunction
 
 let g:fzf_action = {
