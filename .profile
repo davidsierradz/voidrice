@@ -1,9 +1,12 @@
 #!/usr/bin/env sh
-# Profile file. Runs on login.
 
-# Adds `~/.local/bin/` and all subdirectories to $PATH
+# Profile file. Runs on login. Environmental variables are set here.
+
+# Adds `~/.local/bin` and all subdirectories to $PATH
 export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
 export NODE_PATH="$NODE_PATH:/home/neuromante/.local/lib/node_modules"
+
+# Default programs:
 export EDITOR="nvim"
 export VISUAL=$EDITOR
 export USE_EDITOR=$EDITOR
@@ -16,22 +19,19 @@ export REFER="$HOME/Documents/referbib"
 export SUDO_ASKPASS="$HOME/.local/bin/tools/dmenupass"
 export NOTMUCH_CONFIG="$HOME/.config/notmuch-config"
 export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
+export LESSHISTFILE="-"
+export INPUTRC="$HOME/.config/inputrc"
+# export ZDOTDIR="$HOME/.config/zsh"
+
 export LPASS_DISABLE_PINENTRY=1
 export LPASS_ASKPASS=.local/bin/tools/dmenupass
 export BAT_PAGER="less -RFS"
+
 # More responsive toggle from normal to insert mode in vi-mode.
 # We need a value not so low, to give surround commands time to fire.
 export KEYTIMEOUT=40
 
-# less/man colors
 export LESS=-RS
-export LESS_TERMCAP_mb="$(printf '%b' '[1;31m')"; a="${a%_}"
-export LESS_TERMCAP_md="$(printf '%b' '[1;36m')"; a="${a%_}"
-export LESS_TERMCAP_me="$(printf '%b' '[0m')"; a="${a%_}"
-export LESS_TERMCAP_so="$(printf '%b' '[01;44;33m')"; a="${a%_}"
-export LESS_TERMCAP_se="$(printf '%b' '[0m')"; a="${a%_}"
-export LESS_TERMCAP_us="$(printf '%b' '[1;32m')"; a="${a%_}"
-export LESS_TERMCAP_ue="$(printf '%b' '[0m')"; a="${a%_}"
 
 # export FZF_DEFAULT_COMMAND='ag -il --nocolor --nogroup --unrestricted --hidden -g ""'
 export FZF_DEFAULT_COMMAND='rg --smart-case --files-with-matches --color never --no-heading --no-ignore-vcs --hidden ""'

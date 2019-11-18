@@ -833,7 +833,7 @@ nnoremap X D
 "/
 
 " Put dirs first.
-let g:dirvish_mode = ':sort | sort ,^.*[^/]$, r'
+let g:dirvish_mode = ':sort ,^\v(.*[\/])|\ze,'
 
 " Doesnt work with g:dirvish_mode dirs first.
 let g:dirvish_relative_paths = 1
