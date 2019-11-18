@@ -7,6 +7,9 @@ ZSH_THEME="neurosimple"
 # Uncomment the following line to disable bi-weekly auto-update checks.
 DISABLE_AUTO_UPDATE="true"
 
+# Instant paste (careful with pasting urls).
+DISABLE_MAGIC_FUNCTIONS="true"
+
 # Uncomment the following line to enable command auto-correction.
 ENABLE_CORRECTION="true"
 
