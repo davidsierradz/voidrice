@@ -5,3 +5,4 @@ git add --all
 git commit --message="add notes $(date +%Y-%m-%d_%H:%M:%S)"
 git push > >(systemd-cat -t ronshut -p info) 2> >(systemd-cat -t ronshut -p emerg)
 /usr/bin/notify-send "done uploading notes!"
+sleep 1

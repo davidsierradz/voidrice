@@ -445,11 +445,15 @@ endif
 " Use U as redo.
 nnoremap U <c-r>
 
+" Colon-related mappings.
 nnoremap ; :
-nnoremap : ;
+nnoremap ;; ;
 vnoremap ; :
-vnoremap : ;
+vnoremap ;; ;
+nnoremap ,, ,
+vnoremap ,, ,
 
+" Run gq in all buffer and return to same place.
 nnoremap <F12> mzgggqG`z:delmarks z<cr>
 "--------------------------------End General Mappings--------------------------"
 "}}}
@@ -647,9 +651,10 @@ function! GFI_split(type) abort
   let g:gfi_open_file_command = 'edit'
 endf
 
-nnoremap gvf :call GFI_split('vsplit')<CR>
-nnoremap gsf :call GFI_split('split')<CR>
-nnoremap gtf :call GFI_split('tabnew')<CR>
+nnoremap gff :GFI<CR>
+nnoremap gfv :call GFI_split('vsplit')<CR>
+nnoremap gfs :call GFI_split('split')<CR>
+nnoremap gft :call GFI_split('tabnew')<CR>
 "}}}
 ""/ lightline.vim {{{
 "/
