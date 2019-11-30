@@ -73,6 +73,8 @@ Plug 'itchyny/lightline.vim'
 Plug 'davidsierradz/lightline-gruvbox.vim'
 Plug 'maximbaz/lightline-trailing-whitespace'
 Plug 'maximbaz/lightline-ale'
+
+" Plug 'psliwka/vim-smoothie'
 "}}}
 
 "-------------Integrations-------------- {{{
@@ -257,7 +259,11 @@ set scrolloff=0
 set sidescrolloff=0
 
 " Enable true color support
-set termguicolors
+if $TERM == 'linux' || $TERM == 'screen'
+  set notermguicolors
+else
+  set termguicolors
+endif
 
 " Live substitution
 set inccommand=nosplit
@@ -1092,7 +1098,11 @@ augroup END
 
 set background=light
 colorscheme off
-let g:lightline.colorscheme = 'gruvbox'
+if $TERM == 'linux' || $TERM == 'screen'
+  let g:lightline.colorscheme = '16color'
+else
+  let g:lightline.colorscheme = 'gruvbox'
+endif
 set nohlsearch
 "--------------------------------End Colors------------------------------------"
 "}}}

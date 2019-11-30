@@ -64,6 +64,8 @@ Plug 'gyim/vim-boxdraw', { 'for': 'markdown' }
 
 " Distraction-free writing in Vim.
 Plug 'junegunn/goyo.vim'
+
+" Plug 'psliwka/vim-smoothie'
 "}}}
 
 "-------------Integrations-------------- {{{

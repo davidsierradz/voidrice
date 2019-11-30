@@ -209,17 +209,6 @@ function ol() {
     | xargs "$SHELL" -c '</dev/tty nvim "$@"' ignoreme
 }
 
-# function select_cursor() {
-#   case $KEYMAP in
-#     # Block cursor in normal and visual mode
-#     vicmd) echo -ne "\e[2 q";;
-#     # Line cursor in insert mode
-#     main|viins) echo -ne "\e[5 q";;
-#     # Else Block cursor
-#     *) echo -ne "\e[2 q";;
-#   esac
-# }
-
 # Updates editor information when the keymap changes.
 function zle-keymap-select() {
   zle reset-prompt
@@ -229,60 +218,24 @@ function zle-keymap-select() {
 zle -N zle-keymap-select
 
 function zle-line-init() {
-  echoti smkx
+  if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
+    echoti smkx
+  fi
   zle reset-prompt
   # select_cursor
 }
 zle -N zle-line-init
 
+function zle-line-finish() {
+  if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
+    echoti rmkx
+  fi
+}
+zle -N zle-line-finish
+
 function glofzf() {
   glo -- $1 | gh $1
 }
-
-# Reset to block cursor when executing a command,
-# else it would be line cursor
-# function zle-line-finish() {
-#   echoti rmkx
-#   echo -ne "\e[2 q"
-# }
-# zle -N zle-line-finish
-
-# From spectrum.zsh
-# FX=(
-#   reset     "%{[00m%}"
-#   bold      "%{[01m%}" no-bold      "%{[22m%}"
-#   italic    "%{[03m%}" no-italic    "%{[23m%}"
-#   underline "%{[04m%}" no-underline "%{[24m%}"
-#   blink     "%{[05m%}" no-blink     "%{[25m%}"
-#   reverse   "%{[07m%}" no-reverse   "%{[27m%}"
-#   )
-# function vi_mode_prompt_info() {
-#   if [[ -z "$NORMAL_MODE_INDICATOR" ]]; then
-#     NORMAL_MODE_INDICATOR="%{$FX[bold]$FG[001]%}NORMAL%{$FX[reset]%}"
-#   fi
-#   if [[ -z "$INSERT_MODE_INDICATOR" ]]; then
-#     INSERT_MODE_INDICATOR="%{$FX[bold]$FG[008]%}INSERT%{$FX[reset]%}"
-#   fi
-#   if [[ -z "$VISUAL_MODE_INDICATOR" ]]; then
-#     VISUAL_MODE_INDICATOR="%{$FX[bold]$FG[214]%}VISUAL%{$FX[reset]%}"
-#   fi
-#   case $KEYMAP in
-#     vivis|vivli|visual|viopp) echo -n "$VISUAL_MODE_INDICATOR";;
-#     vicmd) echo -n "$NORMAL_MODE_INDICATOR";;
-#     main|viins) echo -n "$INSERT_MODE_INDICATOR";;
-#   esac
-# }
-
-# function check_last_exit_code() {
-#   local LAST_EXIT_CODE=$?
-#   if [[ $LAST_EXIT_CODE -ne 0 ]]; then
-#     local EXIT_CODE_PROMPT=''
-#     EXIT_CODE_PROMPT+="%{$fg[red]%}-%{$reset_color%}"
-#     EXIT_CODE_PROMPT+="%{$fg_bold[red]%}$LAST_EXIT_CODE%{$reset_color%}"
-#     EXIT_CODE_PROMPT+="%{$fg[red]%}-%{$reset_color%}"
-#     echo "$EXIT_CODE_PROMPT "
-#   fi
-# }
 #--------------------------------End Functions---------------------------------#
 #}}}
 
@@ -432,34 +385,5 @@ CORRECT_IGNORE='_*'
 stty -ixon
 #--------------------------------End General-----------------------------------#
 #}}}
-
-# dircolors
-#eval "$(dircolors /home/neuromante/dotfiles/dir_colors/dircolors.256dark)"
-
-# Change cursor shape for different vi modes.
-# function zle-keymap-select {
-#     if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]]; then
-#         echo -ne '\e[1 q'
-
-#     elif [[ ${KEYMAP} == main ]] || [[ ${KEYMAP} == viins ]] || [[ ${KEYMAP} = '' ]] || [[ $1 = 'beam' ]]; then
-#         echo -ne '\e[5 q'
-#     fi
-
-#     zle reset-prompt
-#     zle -R
-# }
-# zle -N zle-keymap-select
-
-# Use beam shape cursor on startup.
-# echo -ne '\e[5 q'
-
-# Use beam shape cursor for each new prompt.
-# preexec() {
-#     echo -ne '\e[5 q'
-# }
-
-# Completion for kitty
-# kitty + complete setup zsh | source /dev/stdin
-# History size.
 
 # vim: set fdm=marker fmr={{{,}}} fdl=0 :
