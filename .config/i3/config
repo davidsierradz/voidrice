@@ -250,6 +250,7 @@ bindsym $mod+Shift+h               move left 30
 bindsym $mod+Ctrl+h                move workspace to output left
 
 bindsym $mod+i                     exec --no-startup-id ddspawn 'nvim' '-o font_size=18 -1 --instance-group "float-ones" -d ~/notes' '-u /home/neuromante/.config/nvim/wiki-init.vim -c VimwikiIndex'
+bindsym $mod+Ctrl+i                exec --no-startup-id ddspawn 'zsh' '-o font_size=18 -1 --instance-group "float-ones"'
 bindsym $mod+Shift+i               exec --no-startup-id i3resize up
 
 bindsym $mod+j                     focus down
@@ -291,7 +292,7 @@ bindsym $mod+Shift+s               sticky toggle
 bindsym $mod+t                     split toggle
 #bindsym $mod+Shift+t              gaps inner current set 15; gaps outer current set 15
 
-bindsym $mod+u                     exec --no-startup-id ddspawn 'zsh' '-o font_size=18 -1 --instance-group "float-ones"'
+#bindsym $mod+u                    exec --no-startup-id ddspawn 'zsh' '-o font_size=18 -1 --instance-group "float-ones"'
 bindsym $mod+Shift+u               exec --no-startup-id i3resize down
 
 #bindsym $mod+v                    exec --no-startup-id $term -e $EDITOR -c "VimwikiIndex"

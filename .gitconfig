@@ -1,5 +1,6 @@
 [core]
   pager = "/usr/bin/bat --style=\"plain\" --color=\"never\""
+  excludesFile = "$HOME/.config/git/ignore"
 [user]
 	email = davidsierradz@gmail.com
 	name = davidsierradz

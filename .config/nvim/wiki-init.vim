@@ -476,7 +476,7 @@ let g:pear_tree_smart_closers = 0
 let g:pear_tree_smart_backspace = 0
 
 imap <BS> <Plug>(PearTreeBackspace)
-imap <CR> <Plug>(PearTreeExpand)
+" imap <CR> <Plug>(PearTreeExpand)
 imap <Esc> <Plug>(PearTreeFinishExpansion)
 imap <M-Space> <Plug>(PearTreeSpace)
 imap <C-g><C-g> <Plug>(PearTreeJump)

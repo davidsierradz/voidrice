@@ -8,7 +8,7 @@
 *.svg
 *.gif
 vendor/
-node_modules/
+node_modules
 tags
 storage/
 dist/
@@ -25,6 +25,3 @@ package-lock.json
 .npm/
 .cargo/
 go/
-code/third-party/
-.vscode-oss/
-mount/

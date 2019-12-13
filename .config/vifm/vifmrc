@@ -8,7 +8,7 @@ set vicmd=$EDITOR
 set syscalls
 set nofollowlinks
 set sortnumbers
-set sort=-mtime,+name
+set sort=+dir,+name,-mtime
 set undolevels=100
 set wildmenu
 set wildstyle=popup
@@ -18,10 +18,22 @@ set smartcase
 set nohlsearch
 set incsearch
 set suggestoptions=normal,visual,view,otherpane,keys,marks,registers
-set statusline="  %t %15s%= %20d %{&sort} %A %10u:%-7g "
+set statusline="  %t %15s%= %20d %{&sort} %{&dotfiles} %A %10u:%-7g "
 set timefmt="%F %H:%M"
+set viewcolumns=-50%{name}.,17.16{mtime}..,6.5{size}.,11.10{perms}..,6.5{gname}.,11.10{uname}.
 " set dotfiles
 colorscheme light
+
+command! togglesort
+  \ :if &sort == '+dir,-mtime,+name'
+  \ |    set sort=+dir,+name,-mtime
+  \ |    echo 'Sorted by name'
+  \ |else
+  \ |    set sort=+dir,-mtime,+name
+  \ |    echo 'Sorted by size'
+  \ |endif
+
+nnoremap S :togglesort<cr>
 
 map <C-h> <C-w>h
 map <C-j> <C-w>j

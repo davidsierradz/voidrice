@@ -1598,6 +1598,7 @@ c.url.searchengines = {
     'translatetoen': 'https://translate.google.com/?hl=en#view=home&op=translate&sl=es&tl=en&text={}',
     'definitiones': 'https://www.wordreference.com/definicion/{}',
     'definitionen': 'https://www.wordreference.com/definition/{}',
+    'mdn': 'https://developer.mozilla.org/en-US/search?q={}'
 }
 
 ## Page(s) to open at the start.

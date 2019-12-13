@@ -1,11 +1,11 @@
 rofi.theme: /usr/share/rofi/themes/gruvbox-light-soft.rasi
 rofi.modi: combi,run,window
-rofi.matching: fuzzy
+! rofi.matching: fuzzy
 rofi.kb-remove-to-eol: Control+Shift+k
 rofi.kb-accept-entry: Control+m,Return,KP_Enter
 rofi.kb-row-up: Up,Control+k,ISO_Left_Tab
 rofi.kb-row-down: Down,Control+j
-rofi.sorting-method: fzf
+! rofi.sorting-method: fzf
 rofi.sidebar-mode: true
 rofi.m: -1
 rofi.location: 2
